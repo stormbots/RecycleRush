@@ -1,0 +1,5 @@
+/bin
+/build
+
+#needed? Uncomment if causing conflicts
+#/dist
