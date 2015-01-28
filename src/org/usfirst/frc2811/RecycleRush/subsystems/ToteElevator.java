@@ -13,9 +13,10 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
-import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 
 
 /**

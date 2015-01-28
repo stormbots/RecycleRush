@@ -12,10 +12,12 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc2811.RecycleRush.Robot;
 
 /**
- *
+ *just moves it up a bit- dosn't use pid control
+ *do not use in autonomous 
  */
 public class  BidentUp extends Command {
 
@@ -33,6 +35,7 @@ public class  BidentUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.bident.Up();// just moves it up a bit
     }
 
     // Make this return true when this Command no longer needs to run execute()

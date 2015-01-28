@@ -12,8 +12,9 @@
 package org.usfirst.frc2811.RecycleRush;
     
 import edu.wpi.first.wpilibj.*;
-
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import java.util.Vector;
 
 /**
