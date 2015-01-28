@@ -41,7 +41,7 @@ public class RobotMap {
     
     public static IMU chassisGyro;
     public static SerialPort serialPort;
-    public static byte updateRate = 60;
+    public static byte updateRate = 50;
     
     public static SpeedController intakeRollerL;
     public static SpeedController intakeRollerR;

@@ -104,6 +104,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
         if(RobotMap.chassisGyro.isConnected()){
         	System.out.println(RobotMap.chassisGyro.getYaw());
         } else {
