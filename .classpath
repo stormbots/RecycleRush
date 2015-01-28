@@ -4,9 +4,10 @@
 	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/sunspotfrcsdk/lib/nav6.jar" sourcepath="C:/Users/Austin/sunspotfrcsdk/lib/nav6.jar">
+	<classpathentry kind="lib" path="C:/Users/Austin/Documents/GitHub/RecycleRush/lib/nav6.jar" sourcepath="src/com/kauailabs/nav6/frc">
 		<attributes>
-			<attribute name="javadoc_location" value="file:////c:/users/austin/documents/navx-mxp/crio/java/doc"/>
+			<attribute name="javadoc_location" value="file:/C:/Users/Austin/Documents/navx-mxp/crio/java/doc/"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RecycleRush/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

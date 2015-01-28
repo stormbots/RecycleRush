@@ -8,11 +8,11 @@
 /* in the root directory of the project.                                      */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc2811.RecycleRush.subsystems;
+package com.kauailabs.nav6.frc;
 
 import java.util.Arrays;
 
-import org.usfirst.frc2811.RecycleRush.subsystems.IMUProtocol;
+import com.kauailabs.nav6.IMUProtocol;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SensorBase;

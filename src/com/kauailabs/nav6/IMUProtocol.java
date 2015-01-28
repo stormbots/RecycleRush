@@ -21,7 +21,7 @@
  THE SOFTWARE.
  ===============================================
  */
-package org.usfirst.frc2811.RecycleRush.subsystems;
+package com.kauailabs.nav6;
 
 public class IMUProtocol {
 
