@@ -12,7 +12,7 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**这个是拿箱子的。猫恨狗。写古诗两首。 
+/**
  * translation:This is to take the totes in...
  *
  */
