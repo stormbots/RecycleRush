@@ -74,5 +74,6 @@ public class ToteIntake extends Subsystem {
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);
     }
+    
 }
 
