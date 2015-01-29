@@ -88,7 +88,7 @@ public class RobotMap {
         elevatorMotor = new CANTalon(7);
         //LiveWindow.addActuator("ToteElevator", "ToteLifterMotor", (TalonSRX) toteLifterMotor);
         
-        elevatorReadySwitch = new DigitalInput(2);
+        elevatorReadySwitch = new DigitalInput(4);
         LiveWindow.addSensor("ToteElevator", "ToteSwitch", elevatorReadySwitch);
         
         elevatorSonar = new AnalogInput(1);
