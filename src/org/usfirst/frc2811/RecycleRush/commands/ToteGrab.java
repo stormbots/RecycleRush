@@ -12,8 +12,8 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- * translation:This is to take the totes in...
+/**opens the intake system for tote and moves up and then when the tote is in the reach of the intake system, closes the intake arms and turns motors on to
+ * suck the totes toward the robot.
  *
  */
 public class ToteGrab extends CommandGroup {

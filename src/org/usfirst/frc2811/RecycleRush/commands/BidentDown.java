@@ -14,7 +14,7 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+/**Moves the bident arm down a tote, two or three or just down; This is only for manual control or just testing
  *
  */
 public class  BidentDown extends Command {

@@ -14,7 +14,7 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+/**Makes the bins move up one tote or just up; This is only for manual control or just testing
  *
  */
 public class  BidentUp extends Command {
