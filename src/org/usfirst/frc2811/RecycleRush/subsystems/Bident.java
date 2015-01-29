@@ -28,8 +28,8 @@ public class Bident extends Subsystem {
     Ultrasonic binSonarTop = RobotMap.bidentSonarIntake;
     Ultrasonic binSonarBottom = RobotMap.bidentSonarBumper;
     //TODO remove the ultrasonic sensors because they are declared in the code
-    public Ultrasonic binRangeTop = new Ultrasonic(0,1);
-    public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
+    //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
+    //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
     public boolean close = !open;
     //TODO fix port declaration binRangerTop and Bottom, port are for one wires and need to be two
