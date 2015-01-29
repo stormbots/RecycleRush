@@ -16,6 +16,7 @@ import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CANJaguar.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.CANTalon;
 
@@ -43,11 +44,12 @@ public class Bident extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public void init (){
+    	bidentMotor.changeControlMode(CANTalon.ControlMode.Position);
     	double p = 1;
     	double i = 0;
     	double d = 0;
     	double f = 0;
-    	int izone = 100; 
+    	int izone = 0; 
     	double ramprate = 36;// who knows what this will do
     	int profile = 0; 
     	bidentMotor.setPID(p,i,d,f,izone,ramprate,profile);
@@ -58,18 +60,19 @@ public class Bident extends Subsystem {
     	
     	return speed;
     }
-    public double Up(){
+    public void Up(){
     	
     	bidentMotor.getPosition();
-    	double up = bidentMotor.getPosition()+50;//TODO tune this
-    	return up;
+    	double up = bidentMotor.getPosition()+1000;//TODO tune this
+    	bidentMotor.set(up);
+    	
     	
     }
-    public double Down(){
+    public void Down(){
     	
     	bidentMotor.getPosition();
-    	double down = bidentMotor.getPosition()-400;//TODO tune this
-    	return down;
+    	double down = bidentMotor.getPosition()-1000;//TODO tune this
+    	bidentMotor.set(down);
     }
     
 public double get(){

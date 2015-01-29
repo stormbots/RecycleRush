@@ -95,7 +95,7 @@ public class RobotMap {
         elevatorSonar = new AnalogInput(1);
         LiveWindow.addSensor("ToteElevator", "ToteSonar", elevatorSonar);
         
-        bidentMotor = new CANTalon(8);
+        bidentMotor = new CANTalon(3);
         //LiveWindow.addActuator("Bident", "BinLifterMotor", (TalonSRX) binLifterMotor);
         
         bidentSolenoid = new Solenoid(0, 2);
