@@ -3,3 +3,4 @@
 
 #needed? Uncomment if causing conflicts
 #/dist
+*.jar

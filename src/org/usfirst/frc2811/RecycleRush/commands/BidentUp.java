@@ -41,13 +41,11 @@ public class  BidentUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.bident.Up();// just moves it up a little 
-    	System.out.println(RobotMap.bidentMotor.getOutputVoltage());
-    	//System.out.println(RobotMap.bidentMotor.getControlMode());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.bidentMotor.getOutputVoltage()>0;
+        return true;
     	//return false;
     }
 
