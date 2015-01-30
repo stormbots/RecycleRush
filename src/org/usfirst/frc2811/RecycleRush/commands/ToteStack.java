@@ -38,5 +38,43 @@ public class ToteStack extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	//TODO make command to find distance to tote in front of us
+    	/*Process
+    	check for tote in front
+    		quit if no tote
+		turn on rollers
+    	drive to tote
+    		stop when sensor is hit
+		--steps when already holding a tote
+			bring stack down
+			check for switch again
+		--end one tote steps
+    	lift stack
+    	turn rollers off
+    	*/
+    	
+    	
+    	/*
+    	if (tote in front of us?)
+    	{
+    		addSequential(rollers on);
+    		while(!switch)
+    		{
+    			addSequential(new drive forwards);
+    		}
+    		if (number of totes => 1)
+    		{
+    			addSequential(new ToteSet(0));
+    		}
+    		while(!switch)
+    		{
+    			addSequential(new drive forwards);
+    		}
+    		addSequential(new ToteSet(++number of totes));
+    		addSequential(rollers off);
+    	}
+    	*/
+    	
     }
 }
