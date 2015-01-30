@@ -14,7 +14,7 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+/**Backs up the robot to stack the bid on top of the tote that are stacked on the white strip
  *
  */
 public class  BidentLineUp extends Command {

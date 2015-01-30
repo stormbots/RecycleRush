@@ -15,10 +15,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc2811.RecycleRush.Robot;
 
+
 /**
- *just moves it up a bit- dosn't use pid control
- *do not use in autonomous 
- */
+  *just moves it up a bit- dosn't use pid control
+  *do not use in autonomous 
+  *Makes the bins move up one tote or just up; This is only for manual control or just testing
+  *
+  **/
 public class  BidentUp extends Command {
 
     public BidentUp() {

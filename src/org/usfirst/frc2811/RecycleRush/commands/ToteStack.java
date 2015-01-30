@@ -12,8 +12,12 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
+/**ONLY ONE TOTE:
+ * assume the hook is at the correct position, open claw intake, rollers on, Close intake, pull tote until switch is true,
+ * lift tote with the hook up distance of one tote
+ *MULTIPULE TOTES:
+ *(assume the hook is in the correct position)open claw intake, rollers on, close intake, pull tote on until switch for have/no have tote is true,
+ *lower tote on the one that you just got, lower more to pick up bottom tote, intake until limit switch is true, lift tote up distance one(tote)
  */
 public class ToteStack extends CommandGroup {
     

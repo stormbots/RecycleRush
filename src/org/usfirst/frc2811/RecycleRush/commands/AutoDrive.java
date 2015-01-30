@@ -14,7 +14,7 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+/**revoke drivers control of the drive train and gives programmers control
  *
  */
 public class  AutoDrive extends Command {
@@ -29,6 +29,7 @@ public class  AutoDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//TODO add timeout/ time limit
     }
 
     // Called repeatedly when this Command is scheduled to run

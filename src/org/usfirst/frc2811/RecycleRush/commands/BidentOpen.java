@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
 /**
- *
+ *opens the bident jaw
  */
 public class  BidentOpen extends Command {
 
