@@ -13,11 +13,13 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * translation:This is to take the totes in...
  *
  */
 public class ToteGrab extends CommandGroup {
     
     public  ToteGrab() {
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
