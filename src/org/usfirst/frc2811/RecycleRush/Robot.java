@@ -112,27 +112,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-<<<<<<< HEAD
         System.out.println(Robot.chassis.adjustedYaw());
-        /*if(RobotMap.chassisGyro.isConnected()){
-        	System.out.println(RobotMap.chassisGyro.getYaw());
-        } else {
-        	System.out.println("ERROR!!!!!");
-        }*/
-=======
-        /*SmartDashboard.putNumber("Temperature", RobotMap.powerPanel.getTemperature());	
-    	SmartDashboard.putNumber("TotalCurrent", RobotMap.powerPanel.getTotalCurrent());
-    	SmartDashboard.putNumber("TotalPower", RobotMap.powerPanel.getTotalPower());
-    	SmartDashboard.putNumber("Voltage", RobotMap.powerPanel.getVoltage());
-    	SmartDashboard.putNumber("Current1", RobotMap.powerPanel.getCurrent(0));
-    	SmartDashboard.putNumber("Current2", RobotMap.powerPanel.getCurrent(1));
-    	SmartDashboard.putNumber("Current3", RobotMap.powerPanel.getCurrent(2));
-    	SmartDashboard.putNumber("Current4", RobotMap.powerPanel.getCurrent(3));
-    	*/
-        RobotMap.test++;
-        SmartDashboard.putNumber("test", RobotMap.test);
-    	System.out.println(RobotMap.powerPanel.getCurrent(1));
->>>>>>> origin/master
+        
     }
 
     /**
