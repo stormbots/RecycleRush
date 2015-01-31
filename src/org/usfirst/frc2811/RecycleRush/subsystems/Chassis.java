@@ -53,12 +53,12 @@ public class Chassis extends Subsystem {
     	} else {
     		changedYaw = rotationGyro.getYaw();
     	}
-    	return changedYaw;
+    	return -changedYaw;
     }
     
     public void joystickDrive(){
     	robotDrive41.mecanumDrive_Cartesian(-Robot.oi.joystick.getY(), -Robot.oi.joystick.getX(), 
-    		-Robot.oi.joystick.getZ(), -adjustedYaw());
+    		-Robot.oi.joystick.getZ(), adjustedYaw());
     		//0,0);
     }
 }
