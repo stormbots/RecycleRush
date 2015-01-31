@@ -46,9 +46,19 @@ public class Chassis extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public double adjustedYaw(){
+    	double changedYaw = rotationGyro.getYaw();
+    	if(rotationGyro.getYaw()<0){
+    		changedYaw=rotationGyro.getYaw()+360;
+    	} else {
+    		changedYaw = rotationGyro.getYaw();
+    	}
+    	return changedYaw;
+    }
+    
     public void joystickDrive(){
-    	robotDrive41.mecanumDrive_Cartesian(Robot.oi.joystick.getY(), Robot.oi.joystick.getX(), 
-    		Robot.oi.joystick.getZ(), rotationGyro.getYaw());
+    	robotDrive41.mecanumDrive_Cartesian(-Robot.oi.joystick.getY(), -Robot.oi.joystick.getX(), 
+    		-Robot.oi.joystick.getZ(), -adjustedYaw());
     		//0,0);
     }
 }
