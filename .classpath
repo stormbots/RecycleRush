@@ -5,7 +5,7 @@
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/nav6.jar" sourcepath="src/com/kauailabs/nav6/frc">
-	<classpathentry kind="docs" path="docs" sourcepath="docs/doc"/>
+	<classpathentry kind="docs" path="docs/doc"/>
 		<attributes>
 			<attribute name="javadoc_location" value="docs/doc"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RecycleRush/lib"/>
