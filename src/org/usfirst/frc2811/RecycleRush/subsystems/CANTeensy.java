@@ -74,13 +74,15 @@ public class CANTeensy extends Subsystem {
         a period in milliseconds to automatically send the message over
         and over again. */
 	    status.clear();
-	    CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
-	            MESSAGE1_ARB_ID | DEVICE_NUMBER,
-	            data,
-	            REPEAT_PERIOD,
-	            status
-	    );
-	    CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
+	    //try(exce e){
+		    CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
+		            MESSAGE1_ARB_ID | DEVICE_NUMBER,
+		            data,
+		            REPEAT_PERIOD,
+		            status
+		    );
+	    //CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
+	    //}//try?
     }
     protected void recieveCANData(){
         /* To receive a message, put the message ID you're looking for in this

@@ -5,3 +5,5 @@
 #/dist
 *.jar
 *.jar
+dist/FRCUserProgram.jar
+sysProps.xml

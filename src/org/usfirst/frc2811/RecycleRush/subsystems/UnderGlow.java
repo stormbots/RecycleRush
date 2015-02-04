@@ -15,6 +15,13 @@ import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.can.CANExceptionFactory;
+import edu.wpi.first.wpilibj.can.CANJNI;
+
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.Arrays;
 
 
 /** This system controls the lighting underneath the robot chassis
@@ -38,6 +45,7 @@ public class UnderGlow extends CANTeensy {
 
     
     public void setColor(){
+    	data.clear();
     	data.putChar('c');
     	data.putInt(1);
     	sendCANData();
