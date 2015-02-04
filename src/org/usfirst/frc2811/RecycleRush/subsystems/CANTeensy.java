@@ -23,7 +23,7 @@ public class CANTeensy extends Subsystem {
 	
 	/*  Device ID, from 0 to 63. This should match the CAN address or filter on the remote end 
 	 */
-	protected static final int DEVICE_NUMBER = 1;
+	protected static final int DEVICE_NUMBER = 55;
 	
 	
 	/*  Milliseconds in which to re-send the data. Can be set to CANJNI.CAN_SEND_PERIOD_NO_REPEAT to disable auto-resend*/

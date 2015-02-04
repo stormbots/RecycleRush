@@ -128,6 +128,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+        underGlow.setColor();
     }
     
 }

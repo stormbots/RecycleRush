@@ -40,6 +40,7 @@ public class UnderGlow extends CANTeensy {
     public void setColor(){
     	data.putChar('c');
     	data.putInt(1);
+    	sendCANData();
     	
     }
     
