@@ -30,8 +30,7 @@ public class RobotMap {
     public static SpeedController backLeftDrive;
     public static SpeedController backRightDrive;
     public static RobotDrive robotDrive41;
-    public static Gyro chassisGyro;
-    
+        
     public static SpeedController intakeRollerL;
     public static SpeedController intakeRollerR;
     public static Solenoid intakeSolenoidL;
@@ -73,10 +72,7 @@ public class RobotMap {
         robotDrive41.setMaxOutput(1.0);
         robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-
-        chassisGyro = new Gyro(0);
-        LiveWindow.addSensor("Chassis", "RotationGyro", chassisGyro);
-        chassisGyro.setSensitivity(0.007);
+        
         intakeRollerL = new Talon(5);
         LiveWindow.addActuator("ToteIntake", "ToteRollerL", (Talon) intakeRollerL);
         
