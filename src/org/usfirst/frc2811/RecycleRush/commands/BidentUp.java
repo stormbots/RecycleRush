@@ -13,10 +13,20 @@ package org.usfirst.frc2811.RecycleRush.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
+import org.usfirst.frc2811.RecycleRush.RobotMap;
+
 
 /**
+<<<<<<< HEAD
  *
  */
+/**
+  *just moves it up a bit- dosn't use pid control
+  *do not use in autonomous 
+  *Makes the bins move up one tote or just up; This is only for manual control or just testing
+  *
+  **/
+
 public class  BidentUp extends Command {
 
     public BidentUp() {
@@ -29,15 +39,18 @@ public class  BidentUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("moving up");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.bident.Up();// just moves it up a little 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
+    	//return false;
     }
 
     // Called once after isFinished returns true

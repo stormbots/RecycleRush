@@ -12,8 +12,12 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
+/**ONLY ONE TOTE:
+ * assume the hook is at the correct position, open claw intake, rollers on, Close intake, pull tote until switch is true,
+ * lift tote with the hook up distance of one tote
+ *MULTIPULE TOTES:
+ *(assume the hook is in the correct position)open claw intake, rollers on, close intake, pull tote on until switch for have/no have tote is true,
+ *lower tote on the one that you just got, lower more to pick up bottom tote, intake until limit switch is true, lift tote up distance one(tote)
  */
 public class ToteStack extends CommandGroup {
     
@@ -34,5 +38,43 @@ public class ToteStack extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	//TODO make command to find distance to tote in front of us
+    	/*Process
+    	check for tote in front
+    		quit if no tote
+		turn on rollers
+    	drive to tote
+    		stop when sensor is hit
+		--steps when already holding a tote
+			bring stack down
+			check for switch again
+		--end one tote steps
+    	lift stack
+    	turn rollers off
+    	*/
+    	
+    	
+    	/*
+    	if (tote in front of us?)
+    	{
+    		addSequential(rollers on);
+    		while(!switch)
+    		{
+    			addSequential(new drive forwards);
+    		}
+    		if (number of totes => 1)
+    		{
+    			addSequential(new ToteSet(0));
+    		}
+    		while(!switch)
+    		{
+    			addSequential(new drive forwards);
+    		}
+    		addSequential(new ToteSet(++number of totes));
+    		addSequential(rollers off);
+    	}
+    	*/
+    	
     }
 }
