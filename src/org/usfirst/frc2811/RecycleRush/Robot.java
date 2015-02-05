@@ -128,9 +128,9 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Current2", RobotMap.powerPanel.getCurrent(1));
     	SmartDashboard.putNumber("Current3", RobotMap.powerPanel.getCurrent(2));
     	SmartDashboard.putNumber("Current4", RobotMap.powerPanel.getCurrent(3));
-    	*/
+    	
         RobotMap.test++;
-        SmartDashboard.putNumber("test", RobotMap.test);
+        SmartDashboard.putNumber("test", RobotMap.test);*/
     	System.out.println(RobotMap.powerPanel.getCurrent(1));
     }
 
