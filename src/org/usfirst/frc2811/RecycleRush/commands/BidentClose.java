@@ -12,9 +12,11 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+import org.usfirst.frc2811.RecycleRush.Robot;
+import org.usfirst.frc2811.RecycleRush.RobotMap;
+
+/**Closes the Bident jaw
  *
  */
 public class  BidentClose extends Command {
@@ -33,6 +35,8 @@ public class  BidentClose extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	RobotMap.bidentSolenoid.set(false);
+    	//This is closes the bident Arm
     }
 
     // Make this return true when this Command no longer needs to run execute()
