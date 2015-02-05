@@ -45,7 +45,7 @@ public class RobotMap {
     public static IMU chassisGyro;
     public static SerialPort serialPort;
     public static byte updateRate = 50;
-    
+
     public static SpeedController intakeRollerL;
     public static SpeedController intakeRollerR;
     public static Solenoid intakeSolenoidL;
@@ -93,9 +93,10 @@ public class RobotMap {
         robotDrive41.setMaxOutput(1.0);
         robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-
+        
         chassisGyro = new IMU(serialPort,updateRate);
         LiveWindow.addSensor("Chassis", "RotationGyro", chassisGyro);
+
         
         intakeRollerL = new Talon(5);
         LiveWindow.addActuator("ToteIntake", "ToteRollerL", (Talon) intakeRollerL);
