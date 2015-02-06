@@ -12,7 +12,9 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc2811.RecycleRush.Robot;
+import org.usfirst.frc2811.RecycleRush.RobotMap;
 
 /**Moves the bident arm down a tote, two or three or just down; This is only for manual control or just testing
  *
@@ -34,11 +36,17 @@ public class  BidentDown extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     		Robot.bident.Down();
+    		System.out.println(RobotMap.bidentMotor.getPosition());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	if (Robot.bident.onTarget()){
+    		System.out.println("Down Command Exiting");
+   		 return true;
+   	}
+       return false;
+       
     }
 
     // Called once after isFinished returns true

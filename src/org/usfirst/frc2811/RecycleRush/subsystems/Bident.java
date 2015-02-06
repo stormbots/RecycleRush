@@ -69,10 +69,10 @@ public class Bident extends Subsystem {
     }
 
     
-    public double Down(){
+    public void Down(){
        	bidentMotor.getPosition();
-    	double down = bidentMotor.getPosition()-100;//TODO tune this
-    	return down;
+    	double down = bidentMotor.getPosition()-1000;//TODO tune this
+    	bidentMotor.set(down);
     }
     
     public void Up(){
@@ -124,6 +124,25 @@ public class Bident extends Subsystem {
     
     public void bidentClose(){
     	binSolenoid.set(close);
+    }
+    public boolean onTarget(){
+    	//find out where we are
+    	//find out where we want to go
+    	//find the absolute value of the difference
+    	// if it is less than 50, return true 
+    	// of it is greater than 50, return false
+    double setpoint = bidentMotor.getSetpoint();
+    double position =bidentMotor.getPosition();
+    double difference = Math.abs(setpoint - position);
+    System.out.println(difference);
+   if (difference<=50){
+    
+    	return true;
+   }
+   else {
+	   return false;
+   }
+
     }
 
 
