@@ -61,7 +61,7 @@ public class Bident extends Subsystem {
     	double ramprate = 36;// who knows what this will do
     	int profile = 0; 
     	bidentMotor.setPID(p,i,d,f,izone,ramprate,profile);
-    	binSonarBottom.setAutomaticMode(true);
+    	//binSonarBottom.setAutomaticMode(true);
     }
     
     public double BidentSpeed(){
@@ -108,17 +108,17 @@ public class Bident extends Subsystem {
     }
 
     public double getDistanceTop(){
-    	binSonarTop.setEnabled(true);
+    //	binSonarTop.setEnabled(true);
     	//FIXME Does not return correctly. Returns void, kills robot
     	//return binSonarTop.getRangeInches();
     	return 0;
     }
     
     public double getDistanceBumper(){
-    	binSonarBottom.setEnabled(true);
+    //	binSonarBottom.setEnabled(true);
     	//TODO calibrate range maybe...(limits)
     	//binSonarBottom.ping();
-    	return binSonarBottom.getRangeInches();
+    	return 0;
     }
     
     public void bidentOpen(){
