@@ -47,13 +47,6 @@ public class Bident extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
-        
-    
-
-    public void init (){
     	bidentMotor.changeControlMode(CANTalon.ControlMode.Position);
     	double p = 1;
     	double i = 0;
@@ -64,8 +57,19 @@ public class Bident extends Subsystem {
     	int profile = 0; 
     	bidentMotor.setPID(p,i,d,f,izone,ramprate,profile);
     	//binSonarBottom.setAutomaticMode(true);
+    	
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new BidentPIDUpdate());
     }
+        
     
+
+    public void init (){
+    	
+    }
+    public void Update(){
+    	bidentMotor.set(setpoint);
+    }
     public double BidentSpeed(){
     	double speed = bidentMotor.getSpeed(); // gives speed  in the sensor's native ticks per 100ms
       	return speed;
