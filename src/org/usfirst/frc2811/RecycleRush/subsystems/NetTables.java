@@ -21,7 +21,8 @@ public class NetTables extends Subsystem {
 			
 		}catch(TableKeyNotDefinedException ex)
 		{
-			
+			y=-1;
+			x=-1;
 		}
 		//set x
 		//set y
@@ -37,6 +38,7 @@ public class NetTables extends Subsystem {
 		return x;
 	}
 	public static double getY(){
+		update();
 		return y;
 	}
 	
