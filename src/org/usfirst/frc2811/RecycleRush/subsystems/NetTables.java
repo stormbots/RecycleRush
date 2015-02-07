@@ -1,5 +1,6 @@
 package org.usfirst.frc2811.RecycleRush.subsystems;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
@@ -18,6 +19,7 @@ public class NetTables extends Subsystem {
 		try{
 			x = server.getNumber("COG_X", 000);
 			y = server.getNumber("COG_Y", 000);
+			System.out.println("Updated");
 			
 		}catch(TableKeyNotDefinedException ex)
 		{
@@ -35,10 +37,14 @@ public class NetTables extends Subsystem {
 	}
 	public static double getX(){
 		update();
+		System.out.println("Getting X");
+		Timer.delay(1);
 		return x;
 	}
 	public static double getY(){
 		update();
+		System.out.println("Getting Y");
+		Timer.delay(1);
 		return y;
 	}
 	

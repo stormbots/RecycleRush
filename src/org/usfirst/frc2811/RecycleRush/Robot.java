@@ -14,6 +14,7 @@ package org.usfirst.frc2811.RecycleRush;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -106,8 +107,15 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         NetTables.update();
+        Timer.delay(1);
+        System.out.println("Getting Values");
+        Timer.delay(1);
         System.out.println("X = " + NetTables.getX());
+        Timer.delay(1);
         System.out.println("Y = " + NetTables.getY());
+        Timer.delay(1);
+        System.out.println("Got Values");
+        Timer.delay(2);
     }
 
     public void teleopInit() {
