@@ -39,10 +39,9 @@ public class CANTeensy extends Subsystem {
 	protected ByteBuffer data = ByteBuffer.allocateDirect(8);
 	
 	//further buffer documentation can be viewed here: http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html
-	//NOTE: FRC CAN packages can only contain 29 bits of data, so care should be taken when sending long datatypes, as they may need to be broken into multiple messages.
-	//TODO: Verify number of bits in can frame
+	//NOTE: CAN packages can only contain 8 bytes of data
 	
-	//TODO: Document the precise details on timestamp format and data to use on remote side
+	//TODO: Figure out what this is used for
 	protected ByteBuffer timestamp = ByteBuffer.allocate(4);
 
     
@@ -73,16 +72,14 @@ public class CANTeensy extends Subsystem {
         /* Alternatively, instead of CAN_SEND_PERIOD_NO_REPEAT, you can specify
         a period in milliseconds to automatically send the message over
         and over again. */
-	    status.clear();
-	    //try(exce e){
-		    CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
-		            MESSAGE1_ARB_ID | DEVICE_NUMBER,
-		            data,
-		            REPEAT_PERIOD,
-		            status
-		    );
-	    //CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
-	    //}//try?
+	status.clear();
+	CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
+		MESSAGE1_ARB_ID | DEVICE_NUMBER,
+		data,
+		REPEAT_PERIOD,
+		status
+	);
+	CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
     }
     protected void recieveCANData(){
         /* To receive a message, put the message ID you're looking for in this
