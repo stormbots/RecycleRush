@@ -128,8 +128,8 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-     //   System.out.println(bident.getDistanceBumper());
-        System.out.println("range finder");
+        //System.out.print("range finder: ");
+        //System.out.println(bident.getDistanceBumper());
     }
     
 }
