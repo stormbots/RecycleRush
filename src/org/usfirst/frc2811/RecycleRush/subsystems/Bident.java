@@ -109,8 +109,9 @@ public class Bident extends Subsystem {
 
     public double getDistanceTop(){
     	binSonarTop.setEnabled(true);
-    	//TODO calibrate range maybe...(limits)
-    	return binSonarTop.getRangeInches();
+    	//FIXME Does not return correctly. Returns void, kills robot
+    	//return binSonarTop.getRangeInches();
+    	return 0;
     }
     
     public double getDistanceBumper(){
