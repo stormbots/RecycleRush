@@ -35,7 +35,7 @@ public class Bident extends Subsystem {
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
     public boolean close = !open;
-    
+	private double setpoint;
     public int TOTEHEIGHTUP = 100;
     public int TOTEHEIGHTDOWN = 102;
     //TODO fix port declaration binRangerTop and Bottom, port are for one wires and need to be two
@@ -50,6 +50,8 @@ public class Bident extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+        
+    
 
     public void init (){
     	bidentMotor.changeControlMode(CANTalon.ControlMode.Position);
@@ -71,15 +73,13 @@ public class Bident extends Subsystem {
 
     
     public void Down(){
-       	bidentMotor.getPosition();
-    	double down = bidentMotor.getPosition()-1000;//TODO tune this
-    	bidentMotor.set(down);
+    	setpoint = bidentMotor.getPosition()-50;//TODO tune this
+    	bidentMotor.set(setpoint);
     }
     
     public void Up(){
-    	bidentMotor.getPosition();
-    	double up = bidentMotor.getPosition()+1000;//TODO tune this
-    	bidentMotor.set(up);
+    	setpoint = bidentMotor.getPosition()+50;//TODO tune this
+    	bidentMotor.set(setpoint);
     }
     
     
@@ -98,8 +98,9 @@ public class Bident extends Subsystem {
     public double set(double inches){
     	//needs to set the target for the pid controller on the srx
     	//expects inches
-    	double output = Map(inches,78,0,800,-700); //TODO do a motor write
-    	return output;
+    	setpoint = Map(inches,78,0,800,-700); 
+    	//TODO do a motor write
+    	return setpoint;
     } 
     
     public double setTotes(int totes){
@@ -134,12 +135,13 @@ public class Bident extends Subsystem {
     	//find the absolute value of the difference
     	// if it is less than 50, return true 
     	// of it is greater than 50, return false
-    double setpoint = bidentMotor.getSetpoint();
+    	
+    //replaced with last setpoint, now saved in sybsystem
+    //double setpoint = bidentMotor.getSetpoint();
     double position =bidentMotor.getPosition();
     double difference = Math.abs(setpoint - position);
     System.out.println(difference);
    if (difference<=50){
-    
     	return true;
    }
    else {

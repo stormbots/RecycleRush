@@ -24,7 +24,6 @@ import org.usfirst.frc2811.RecycleRush.RobotMap;
   *
   **/
 public class  BidentUp extends Command {
-
     public BidentUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -46,12 +45,7 @@ public class  BidentUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.bident.onTarget()){
-    		
-    		 return true;
-    	}
-        return false;
-    	//return false;
+    	return Robot.bident.onTarget();
     }
 
     // Called once after isFinished returns true
