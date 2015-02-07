@@ -139,6 +139,8 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+        System.out.println("X = " + NetTables.getX());
+        System.out.println("Y = " + NetTables.getY());
     }
     
 }
