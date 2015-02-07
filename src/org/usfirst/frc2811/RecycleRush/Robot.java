@@ -105,6 +105,9 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        NetTables.update();
+        System.out.println("X = " + NetTables.getX());
+        System.out.println("Y = " + NetTables.getY());
     }
 
     public void teleopInit() {
@@ -139,8 +142,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-        System.out.println("X = " + NetTables.getX());
-        System.out.println("Y = " + NetTables.getY());
+        
     }
     
 }
