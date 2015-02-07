@@ -103,7 +103,7 @@ public class RobotMap {
         bidentSonarIntake = new Ultrasonic(0,1);
         LiveWindow.addSensor("Bident", "BinSonarTop", bidentSonarIntake);
         
-        bidentSonarBumper = new Ultrasonic(2,3);
+        bidentSonarBumper = new Ultrasonic(3,2);
         LiveWindow.addSensor("Bident", "BinSonarBottom", bidentSonarBumper);
         
         compressor = new Compressor();
