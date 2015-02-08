@@ -5,22 +5,24 @@ import org.usfirst.frc2811.RecycleRush.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *  DEPRECIATED; IS NOT NEEDED
+ * DOES NOT USE PID. 
+ * Only for use with whileHeld buttons in OI
  */
-public class BidentPIDUpdate extends Command {
+public class BidentDownManual extends Command {
 
-    public BidentPIDUpdate() {
+    public BidentDownManual() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.bident);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.bident.Update();
+    	Robot.bident.Down();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,5 +37,6 @@ public class BidentPIDUpdate extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+
     }
 }
