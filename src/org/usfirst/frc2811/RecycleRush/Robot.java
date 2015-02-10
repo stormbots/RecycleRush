@@ -60,7 +60,6 @@ public class Robot extends IterativeRobot {
         map = new Map();
         lights = new Lights();
         underGlow = new UnderGlow();
-        bident.init();
         lcd = DriverStation.getInstance();
         powerPanelReadout = Preferences.getInstance();
         SmartDashboard.putNumber("Temperature", RobotMap.powerPanel.getTemperature());	

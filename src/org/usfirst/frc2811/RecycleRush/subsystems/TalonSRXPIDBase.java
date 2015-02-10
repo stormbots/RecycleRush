@@ -64,6 +64,10 @@ public class TalonSRXPIDBase extends Subsystem {
     	VIRTUAL_STOP_REV=rev;
     	}
     
+    protected void useMotor(CANTalon newmotor){
+    	motor=newmotor;
+    }
+    
     public boolean isHomed(){
     	return true; //TODO: Make the return function meaningful
     }
