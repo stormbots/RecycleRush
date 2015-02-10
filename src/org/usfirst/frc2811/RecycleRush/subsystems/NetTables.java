@@ -8,18 +8,16 @@ import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 public class NetTables extends Subsystem {
 	static double x;
 	static double y;
-	public NetTables(){
-	
-	
-}
+	//static NetworkTable server;
+	static NetworkTable server=NetworkTable.getTable("SmartDashboard");
 	
 	public static void update(){
 		//put code here
-		NetworkTable server = NetworkTable.getTable("SmartDashboard");
 		try{
-			x = server.getNumber("COG_X", 000);
-			y = server.getNumber("COG_Y", 000);
+			x = server.getNumber("COG_X", -3);
+			y = server.getNumber("COG_Y", -2);
 			System.out.println("Updated");
+			Timer.delay(7);
 			
 		}catch(TableKeyNotDefinedException ex)
 		{
