@@ -1,11 +1,12 @@
 package org.usfirst.frc2811.RecycleRush.subsystems;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.can.CANExceptionFactory;
 import edu.wpi.first.wpilibj.can.CANJNI;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Arrays;
+
+import org.usfirst.frc2811.RecycleRush.Robot;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -72,14 +73,15 @@ public class CANTeensy extends Subsystem {
         /* Alternatively, instead of CAN_SEND_PERIOD_NO_REPEAT, you can specify
         a period in milliseconds to automatically send the message over
         and over again. */
-	status.clear();
-	CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
-		MESSAGE1_ARB_ID | DEVICE_NUMBER,
-		data,
-		REPEAT_PERIOD,
-		status
-	);
-	CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
+		status.clear();
+		CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
+			MESSAGE1_ARB_ID | DEVICE_NUMBER,
+			data,
+			REPEAT_PERIOD,
+			status
+		);
+		CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
+    	Robot.logger.special("CAN","sendCANData: "+(MESSAGE1_ARB_ID | DEVICE_NUMBER) +"\t"+Arrays.toString(data.array()));
     }
     protected void recieveCANData(){
         /* To receive a message, put the message ID you're looking for in this
@@ -98,7 +100,9 @@ public class CANTeensy extends Subsystem {
 	
 	    if (data != null) {
 	        CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
-	        System.out.println("Received a message: " + Arrays.toString(data.array()));
+	        //System.out.println("Received a message: " + Arrays.toString(data.array()));
+	    	Robot.logger.special("CAN","recieveCANData: "+(MESSAGE1_ARB_ID) +"\t"+data);
+
 	    }
     	
     }
