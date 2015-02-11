@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc2811.RecycleRush.commands.*;
@@ -100,6 +101,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        
     }
 
     /**
@@ -152,7 +154,12 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-        
+    	NetworkTable server = NetworkTable.getTable("SmartDashboard");
+		double x = server.getNumber("COG_X", -3);
+		double d=server.getNumber("danrules", 0);
+		server.putNumber("danrules", d+1);
+		System.out.println("Testing!"+d);
+		       
     }
     
 }

@@ -9,20 +9,26 @@ public class NetTables extends Subsystem {
 	static double x;
 	static double y;
 	//static NetworkTable server;
-	static NetworkTable server=NetworkTable.getTable("SmartDashboard");
+	static NetworkTable server = NetworkTable.getTable("SmartDashboard");
+	
+	
+	
+	
 	
 	public static void update(){
 		//put code here
-		try{
-			x = server.getNumber("COG_X", -3);
-			y = server.getNumber("COG_Y", -2);
-			System.out.println("Updated");
-			Timer.delay(7);
-			
-		}catch(TableKeyNotDefinedException ex)
-		{
-			y=-1;
-			x=-1;
+		System.out.println(server.isConnected());
+		if(server.isConnected() == true){
+			System.out.println("Connection established.");
+			try{
+				x = server.getNumber("COG_X", -3);
+				y = server.getNumber("COG_Y", -2);
+				Timer.delay(7);
+			}catch(TableKeyNotDefinedException ex){
+				
+			}
+		}else{
+			System.out.println("Cannot access the network table!");
 		}
 		//set x
 		//set y
