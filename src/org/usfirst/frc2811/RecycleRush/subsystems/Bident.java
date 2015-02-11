@@ -52,7 +52,7 @@ public class Bident extends TalonSRXPIDBase {
     	
         INCHES_FWD=72;
         INCHES_REV=0;
-        INCHES_INDEX=0; //index is on the lowest switch
+        INCHES_INDEX=30; //index is on the lowest switch
         
         //Set up the PID function
     	init();
