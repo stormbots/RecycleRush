@@ -34,12 +34,12 @@ public class UnderGlow extends CANTeensy {
     /* Check the datasheets for your device for the arbitration IDs of the
     messages you want to send.  By convention, this is a bitstring
     containing the model number, manufacturer number, and api number. */
-	protected static final int MESSAGE1_ARB_ID = 0x5555;
-	protected static final int MESSAGE2_ARB_ID = 0xAAAA; 
+	protected static final int MESSAGE1_ARB_ID = 0x5500; //signs outgoing messages
+	protected static final int MESSAGE2_ARB_ID = 0xAA00; //filter for incoming messages
 	
 	/*  Device ID, from 0 to 63. This should match the CAN address or filter on the remote end 
 	 */
-	protected static final int DEVICE_NUMBER = 63; //all ones in binary, 0x3f in hex
+	protected static final int DEVICE_NUMBER = 42; 
 	protected static final int REPEAT_PERIOD = 100;
 
     public void initDefaultCommand() {
@@ -54,7 +54,14 @@ public class UnderGlow extends CANTeensy {
     
     
     public void setTeamColor(){
+	//TODO read team color
+	//setcolor to teamcolor
+    }
     
+    public void setPattern(){
+	//TODO See what's happening with the robot state
+	//do something interesting
+	//setcolor to teamcolor
     }
     
     

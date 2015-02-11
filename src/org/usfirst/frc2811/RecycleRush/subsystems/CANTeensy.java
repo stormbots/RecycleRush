@@ -18,8 +18,8 @@ public class CANTeensy extends Subsystem {
     /* Check the datasheets for your device for the arbitration IDs of the
     messages you want to send.  By convention, this is a bitstring
     containing the model number, manufacturer number, and api number. */
-	protected static final int MESSAGE1_ARB_ID = 0x1;
-	protected static final int MESSAGE2_ARB_ID = 0x2;
+	protected static final int MESSAGE1_ARB_ID = 0x100; //used to mark outgoing packets
+	protected static final int MESSAGE2_ARB_ID = 0x200; //used to identify incoming packets
 	
 	/*  Device ID, from 0 to 63. This should match the CAN address or filter on the remote end 
 	 */
