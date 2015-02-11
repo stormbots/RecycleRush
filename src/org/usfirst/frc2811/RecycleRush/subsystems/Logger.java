@@ -4,6 +4,7 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Subsystem to help manage large amounts of print statements 
@@ -23,6 +24,7 @@ public class Logger extends Subsystem {
     public Logger(){
        	WARNING=true;
     	STATUS=true;
+    	
     }
         
     private boolean DEBUG=false;
@@ -30,7 +32,6 @@ public class Logger extends Subsystem {
     private boolean INFO=false;
     private boolean STATUS=false;
     
-    //Create some setter functions
     /**
      * Enable DEBUG level print statements
      * @param string
@@ -58,28 +59,28 @@ public class Logger extends Subsystem {
      * @param string
      */
     public void debug(String string){
-    	if(DEBUG)System.out.println("(DEBUG) "+string);   
+    	if(DEBUG)System.out.println(getTime()+"(DEBUG) "+string);   
     	}
     /**
      * Print a WARNING level statement, if enabled
      * @param string
      */
     public void warning(String string){
-    	if(WARNING)System.out.println("(WARNING) "+string);  
+    	if(WARNING)System.out.println(getTime()+"(WARNING) "+string);  
     	}
     /**
      * Print a INFO level statement, if enabled
      * @param string
      */
     public void info(String string){    
-    	if(INFO)System.out.println("(INFO) "+string);   
+    	if(INFO)System.out.println(getTime()+"(INFO) "+string);   
     }
     /**
      * Print a STATUS level statement, if enabled
      * @param string
      */
     public void status(String string){  
-    	if(STATUS)System.out.println("(STATUS) "+string);   
+    	if(STATUS)System.out.println(getTime()+"(STATUS) "+string);   
     }
     	    
     /**
@@ -88,9 +89,8 @@ public class Logger extends Subsystem {
      * @param string : The data to print
      */
     public void special(String name, String string){
-    	if(specials.get(name)!=null){
-        	//if it exists, it's true
-    		System.out.println("("+name+")	" +string);
+    	if(specials.get(name)!=null){ //if it exists, it's true, so we can print
+    		System.out.println(getTime()+"("+name+")	" +string);
     	}
     }
     /**
@@ -106,7 +106,10 @@ public class Logger extends Subsystem {
     	else{
     		specials.remove(name);
     	}
-    	
+    }
+    
+    private String getTime(){
+    	return String.format("%5.2f",Timer.getFPGATimestamp());
     }
 }
 
