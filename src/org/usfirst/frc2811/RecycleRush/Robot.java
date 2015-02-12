@@ -150,14 +150,11 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    	//NetworkTable server = NetworkTable.getTable("SmartDashboard");
-		//double x = server.getNumber("COG_X", -3);
-		//double d=server.getNumber("danrules", 0);
-		//server.putNumber("danrules", d+1);
-		//System.out.println("Testing!"+d);
         Camera.update();
         System.out.println("X = " + Camera.getX());
         System.out.println("Y = " + Camera.getY());
+        //System.out.print("range finder: ");
+        //System.out.println(bident.getDistanceBumper());
     }
     
 }
