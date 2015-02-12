@@ -18,13 +18,9 @@ import org.usfirst.frc2811.RecycleRush.RobotMap;
 
 
 /**
-  *just moves it up a bit- dosn't use pid control
-  *do not use in autonomous 
-  *Makes the bins move up one tote or just up; This is only for manual control or just testing
-  *
+  *DEPRECIATED; USE BidentUpManual
   **/
 public class  BidentUp extends Command {
-
     public BidentUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -40,22 +36,16 @@ public class  BidentUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.bident.Up();// just moves it up a little 
-    	System.out.println(RobotMap.bidentMotor.getPosition());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.bident.onTarget()){
-    		System.out.println("Up Command Exiting");
-    		 return true;
-    	}
-        return false;
-    	//return false;
+    	return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Up Command Exiting");
     }
 
     // Called when another command which requires one or more of the same

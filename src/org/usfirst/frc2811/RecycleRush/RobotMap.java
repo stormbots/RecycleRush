@@ -39,8 +39,8 @@ public class RobotMap {
     public static DigitalInput elevatorReadySwitch;
     public static AnalogInput elevatorSonar;
     
-    public static CANTalon bidentMotor;
-    public static Solenoid bidentSolenoid;
+    //public static CANTalon bidentMotor; //Moved to Bident subsystem
+    //public static Solenoid bidentSolenoid; //moved to bident subsystem
     public static Ultrasonic bidentSonarIntake;
     public static Ultrasonic bidentSonarBumper;
 
@@ -94,11 +94,13 @@ public class RobotMap {
         elevatorSonar = new AnalogInput(1);
         LiveWindow.addSensor("ToteElevator", "ToteSonar", elevatorSonar);
         
-        bidentMotor = new CANTalon(4);
+        //moved to bident subsystem
+        //bidentMotor = new CANTalon(4);
         //LiveWindow.addActuator("Bident", "BinLifterMotor", (TalonSRX) binLifterMotor);
         
-        bidentSolenoid = new Solenoid(0, 2);
-        LiveWindow.addActuator("Bident", "BinSolenoid", bidentSolenoid);
+        //moved to bident subsystem
+        //bidentSolenoid = new Solenoid(0, 2);
+        //LiveWindow.addActuator("Bident", "BinSolenoid", bidentSolenoid);
         
         //bidentSonarIntake = new Ultrasonic(0,1);
         //LiveWindow.addSensor("Bident", "BinSonarTop", bidentSonarIntake);

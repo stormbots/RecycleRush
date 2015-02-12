@@ -65,7 +65,6 @@ public class Robot extends IterativeRobot {
         map = new Map();
         lights = new Lights();
         underGlow = new UnderGlow();
-        bident.init();
         oi = new OI();
         
 /*		powerPanelReadout = Preferences.getInstance();
