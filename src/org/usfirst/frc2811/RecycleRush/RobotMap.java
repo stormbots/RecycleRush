@@ -35,7 +35,7 @@ public class RobotMap {
     public static Solenoid intakeSolenoidL;
     public static Solenoid intakeSolenoidR;
     
-    public static CANTalon elevatorMotor;
+    //public static CANTalon elevatorMotor;
     public static DigitalInput elevatorReadySwitch;
     public static AnalogInput elevatorSonar;
     
@@ -85,7 +85,7 @@ public class RobotMap {
         intakeSolenoidR = new Solenoid(0, 1);
         LiveWindow.addActuator("ToteIntake", "ToteSolenoidR", intakeSolenoidR);
         
-        elevatorMotor = new CANTalon(7);
+        //elevatorMotor = new CANTalon(7);
         //LiveWindow.addActuator("ToteElevator", "ToteLifterMotor", (TalonSRX) toteLifterMotor);
         
         elevatorReadySwitch = new DigitalInput(4);

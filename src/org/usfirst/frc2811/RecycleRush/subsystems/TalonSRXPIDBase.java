@@ -66,7 +66,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	VIRTUAL_STOP_FWD=fwd;
     	VIRTUAL_STOP_REV=rev;
     	}
-    
+        
     public boolean isHomed(){
     	return true; //TODO: Make the return function meaningful
     }
