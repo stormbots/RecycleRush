@@ -61,7 +61,7 @@ public class Bident extends Subsystem {
     	double ramprate = 36;// who knows what this will do
     	int profile = 0; 
     	bidentMotor.setPID(p,i,d,f,izone,ramprate,profile);
-    	binSonarBottom.setAutomaticMode(true);
+    	//binSonarBottom.setAutomaticMode(true);
     }
     
     public double BidentSpeed(){
@@ -118,7 +118,7 @@ public class Bident extends Subsystem {
     	binSonarBottom.setEnabled(true);
     	//TODO calibrate range maybe...(limits)
     	//binSonarBottom.ping();
-    	return binSonarBottom.getRangeInches();
+    	return 0;//binSonarBottom.getRangeInches();
     }
     
     public void bidentOpen(){
