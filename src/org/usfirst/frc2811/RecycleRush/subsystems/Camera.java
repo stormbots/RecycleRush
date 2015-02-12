@@ -5,12 +5,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 
-public class NetTables extends Subsystem {
-	static double x;
-	static double y;
+public class Camera extends Subsystem {
+	private static double x;
+	private static double y;
+	
 	//static NetworkTable server;
 	static NetworkTable server = NetworkTable.getTable("SmartDashboard");
 	
+	public static void init(){
+		if(server.isConnected() == true){
+			System.out.println("Connection established.");
+		}else{
+			System.out.println("Cannot access the network table!");
+		}
+	}
 	
 	
 	
@@ -19,11 +27,9 @@ public class NetTables extends Subsystem {
 		//put code here
 		System.out.println(server.isConnected());
 		if(server.isConnected() == true){
-			System.out.println("Connection established.");
 			try{
 				x = server.getNumber("COG_X", -3);
 				y = server.getNumber("COG_Y", -2);
-				Timer.delay(7);
 			}catch(TableKeyNotDefinedException ex){
 				
 			}
@@ -36,19 +42,20 @@ public class NetTables extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
+		//runs when we create the subsystem
+		
+		
 		// TODO Auto-generated method stub
 		
 	}
 	public static double getX(){
 		update();
 		System.out.println("Getting X");
-		Timer.delay(1);
 		return x;
 	}
 	public static double getY(){
 		update();
 		System.out.println("Getting Y");
-		Timer.delay(1);
 		return y;
 	}
 	

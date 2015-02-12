@@ -101,6 +101,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        Camera.init();
         
     }
 
@@ -109,16 +110,11 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        NetTables.update();
-        Timer.delay(1);
+        Camera.update();
         System.out.println("Getting Values");
-        Timer.delay(1);
-        System.out.println("X = " + NetTables.getX());
-        Timer.delay(1);
-        System.out.println("Y = " + NetTables.getY());
-        Timer.delay(1);
+        System.out.println("X = " + Camera.getX());
+        System.out.println("Y = " + Camera.getY());
         System.out.println("Got Values");
-        Timer.delay(2);
     }
 
     public void teleopInit() {
@@ -154,11 +150,14 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    	NetworkTable server = NetworkTable.getTable("SmartDashboard");
-		double x = server.getNumber("COG_X", -3);
-		double d=server.getNumber("danrules", 0);
-		server.putNumber("danrules", d+1);
-		System.out.println("Testing!"+d);
+    	//NetworkTable server = NetworkTable.getTable("SmartDashboard");
+		//double x = server.getNumber("COG_X", -3);
+		//double d=server.getNumber("danrules", 0);
+		//server.putNumber("danrules", d+1);
+		//System.out.println("Testing!"+d);
+        Camera.update();
+        System.out.println("X = " + Camera.getX());
+        System.out.println("Y = " + Camera.getY());
 		       
     }
     
