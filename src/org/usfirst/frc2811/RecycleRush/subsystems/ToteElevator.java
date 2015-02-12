@@ -46,8 +46,8 @@ public class ToteElevator extends Subsystem {
     	//
     	//FIXME rangeFinder.setEnabled(true);
     	//TODO calibrate range maybe...(limits)
-    	 return toteSonar.getAverageValue();
-    	
+    	// return toteSonar.getAverageValue();
+    	return 0;
     	
     }
 }

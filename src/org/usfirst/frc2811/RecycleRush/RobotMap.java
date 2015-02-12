@@ -94,16 +94,16 @@ public class RobotMap {
         elevatorSonar = new AnalogInput(1);
         LiveWindow.addSensor("ToteElevator", "ToteSonar", elevatorSonar);
         
-        bidentMotor = new CANTalon(3);
+        bidentMotor = new CANTalon(4);
         //LiveWindow.addActuator("Bident", "BinLifterMotor", (TalonSRX) binLifterMotor);
         
         bidentSolenoid = new Solenoid(0, 2);
         LiveWindow.addActuator("Bident", "BinSolenoid", bidentSolenoid);
         
-        bidentSonarIntake = new Ultrasonic(0,1);
-        LiveWindow.addSensor("Bident", "BinSonarTop", bidentSonarIntake);
+        //bidentSonarIntake = new Ultrasonic(0,1);
+        //LiveWindow.addSensor("Bident", "BinSonarTop", bidentSonarIntake);
         
-        bidentSonarBumper = new Ultrasonic(2,3);
+        bidentSonarBumper = new Ultrasonic(3,2);
         LiveWindow.addSensor("Bident", "BinSonarBottom", bidentSonarBumper);
         
         compressor = new Compressor();

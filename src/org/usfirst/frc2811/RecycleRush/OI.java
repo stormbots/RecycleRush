@@ -67,10 +67,10 @@ public class OI {
         button1.whenPressed(new ToteStack());
        
         button2 = new JoystickButton(joystick, 2);
-        button2.whileHeld(new BidentUp());
+        button2.whenPressed(new BidentUp());
         
         button3=new JoystickButton(joystick,3);
-        button3.whileHeld(new BidentDown());
+        button3.whenPressed(new BidentDown());
         
         
 
