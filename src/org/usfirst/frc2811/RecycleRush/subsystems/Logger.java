@@ -13,45 +13,52 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Logger extends Subsystem {
     
+	/**
+	 * Enable this to cause all channels to print if they haven't been explicitly disabled;
+	 */
+	public static boolean PRINT_BY_DEFAULT=false;
+	
 	//This is used to store special channels 
-    public HashMap<String, Boolean> specials=new HashMap<String, Boolean>(32);
+    private static HashMap<String, Boolean> channels=new HashMap<String, Boolean>(32);
 
+    //lets us print the time of our error
+    private static Timer timer;
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
     public Logger(){
-       	WARNING=true;
-    	STATUS=true;
-    	
+    	//The 5 special channels are simple channels with special functions for accessing, since they're very common. 
+    	setChannel("DEBUG",true);
+    	setChannel("WARNING",true);
+    	setChannel("INFO",true);
+    	setChannel("ERROR",true);
+    	setChannel("WARNING",true);
     }
         
-    private boolean DEBUG=false;
-    private boolean WARNING=false;
-    private boolean INFO=false;
-    private boolean STATUS=false;
-    
+    //Create some setter functions
     /**
      * Enable DEBUG level print statements
      * @param string
      */
-    void setDebug(boolean state){DEBUG=state;}
+    void setDebug(boolean state){setChannel("DEBUG",state);}
     /**
      * Enable WARNING level print statements
      * @param string
      */
-    void setWarning(boolean state){DEBUG=state;}
+    void setWarning(boolean state){setChannel("WARNING",state);}
     /**
      * Enable STATUS level print statements
      * @param string
      */
-    void setStatus(boolean state){DEBUG=state;}
+    void setStatus(boolean state){setChannel("STATUS",state);}
     /**
      * Enable INFO level print statements
      * @param string
      */
-    void setInfo(boolean state){DEBUG=state;}
+    void setInfo(boolean state){setChannel("INFO",state);}
 
     
     /**
@@ -59,38 +66,52 @@ public class Logger extends Subsystem {
      * @param string
      */
     public void debug(String string){
-    	if(DEBUG)System.out.println(getTime()+"(DEBUG) "+string);   
+    	channel("DEBUG",string);   
     	}
     /**
      * Print a WARNING level statement, if enabled
      * @param string
      */
     public void warning(String string){
-    	if(WARNING)System.out.println(getTime()+"(WARNING) "+string);  
+    	channel("WARNING",string);   
     	}
     /**
      * Print a INFO level statement, if enabled
      * @param string
      */
     public void info(String string){    
-    	if(INFO)System.out.println(getTime()+"(INFO) "+string);   
+    	channel("INFO",string);   
     }
     /**
      * Print a STATUS level statement, if enabled
      * @param string
      */
     public void status(String string){  
-    	if(STATUS)System.out.println(getTime()+"(STATUS) "+string);   
+    	channel("STATUS",string);   
+    }
+    public void error(String string){  
+    	channel("ERROR",string);   
     }
     	    
     /**
-     * Print a special logging statement, if enabled by setSpecial
+     * Write to a custom channel. All channels are disabled by default, and must be enabled using setChannel before text will appear
      * @param name : Provide a name for custom logging channels
      * @param string : The data to print
      */
-    public void special(String name, String string){
-    	if(specials.get(name)!=null){ //if it exists, it's true, so we can print
-    		System.out.println(getTime()+"("+name+")	" +string);
+    public void channel(String name, String string){
+    	if(channels.get(name)==null && PRINT_BY_DEFAULT==true){
+    		//Channel is not created or specifically disabled, so enable it
+    		channels.put(name,true);
+    	}
+    	
+    	if(channels.get(name)==true){
+    		//FIXME See if you can print the time using this function
+    		//System.out.printf("%5.2f  ",timer.getFPGATimestamp() );
+    		System.out.print("("+name+")");
+    		System.out.println(string);
+    	}
+    	else{
+    		//Channel disabled, do nothing.
     	}
     }
     /**
@@ -98,18 +119,13 @@ public class Logger extends Subsystem {
      * @param name
      * @param state
      */
-    public void setSpecial(String name, boolean state){
-    	//This will create a key with the value of True, or remove it from the channel list
-    	if(state){
-    		specials.put(name, state);
-    	}
-    	else{
-    		specials.remove(name);
-    	}
-    }
-    
-    private String getTime(){
-    	return String.format("%5.2f",Timer.getFPGATimestamp());
+    public void setChannel(String name, boolean state){
+    	channels.put(name, state);
+    	/* Design Note, this will create channels with a value of "false", which seemingly does nothing.
+    	 * However, if you tweak this to enable channel printing by default, not doing this will prevent you
+    	 * from disabling specific channels in advance.
+    	 */
+    	
     }
 }
 
