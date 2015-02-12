@@ -48,7 +48,7 @@ public class ToteElevator extends TalonSRXPIDBase {
         //setDefaultCommand(new MySpecialCommand());
     }
     public double getDistanceToTote(){
-    	//
+    	return 0;
     	//FIXME rangeFinder.setEnabled(true);
     	//TODO calibrate range maybe...(limits)
     	 return 0;//toteSonar.getAverageValue();
