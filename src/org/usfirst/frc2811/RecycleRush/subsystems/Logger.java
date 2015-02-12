@@ -44,21 +44,30 @@ public class Logger extends Subsystem {
      * @param string
      */
     void setDebug(boolean state){setChannel("DEBUG",state);}
+    
     /**
      * Enable WARNING level print statements
      * @param string
      */
     void setWarning(boolean state){setChannel("WARNING",state);}
+    
     /**
      * Enable STATUS level print statements
      * @param string
      */
     void setStatus(boolean state){setChannel("STATUS",state);}
+    
     /**
      * Enable INFO level print statements
      * @param string
      */
     void setInfo(boolean state){setChannel("INFO",state);}
+    
+    /**
+     * Enable ERROR level print statements
+     * @param string
+     */
+    void setError(boolean state){setChannel("ERROR",state);}
 
     
     /**
@@ -67,21 +76,24 @@ public class Logger extends Subsystem {
      */
     public void debug(String string){
     	channel("DEBUG",string);   
-    	}
+	}
+    
     /**
      * Print a WARNING level statement, if enabled
      * @param string
      */
     public void warning(String string){
     	channel("WARNING",string);   
-    	}
+	}
+    
     /**
-     * Print a INFO level statement, if enabled
+     * Print an INFO level statement, if enabled
      * @param string
      */
     public void info(String string){    
     	channel("INFO",string);   
     }
+    
     /**
      * Print a STATUS level statement, if enabled
      * @param string
@@ -89,6 +101,11 @@ public class Logger extends Subsystem {
     public void status(String string){  
     	channel("STATUS",string);   
     }
+    
+    /**
+     * Print an ERROR level statement, if enabled
+     * @param string
+     */
     public void error(String string){  
     	channel("ERROR",string);   
     }
@@ -114,6 +131,7 @@ public class Logger extends Subsystem {
     		//Channel disabled, do nothing.
     	}
     }
+    
     /**
      * Create custom logging channels, and enable or disable printing from it.
      * @param name
