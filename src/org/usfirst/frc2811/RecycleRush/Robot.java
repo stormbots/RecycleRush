@@ -104,11 +104,13 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        Camera.update();
-        System.out.println("Getting Values");
-        System.out.println("X = " + Camera.getX());
-        System.out.println("Y = " + Camera.getY());
-        System.out.println("Got Values");
+        Camera.update();                            //The update method gets new coordinate values from RoboRealm.
+        System.out.println("Getting Values");		//getX and getY return the doubles x (COG_X) and y (COG_Y)
+        System.out.println("X = " + Camera.getX()); //from the Camera subsystem.
+        System.out.println("Y = " + Camera.getY()); //RoboRealm draws a bounding box around yellow objects, 
+        System.out.println("Got Values");           //and records the coordinates of the center of gravity of said box 
+		 											//in the variables COG_X and COG_Y.
+        
     }
 
     public void teleopInit() {
