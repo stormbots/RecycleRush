@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc2811.RecycleRush.Robot;
 import org.usfirst.frc2811.RecycleRush.subsystems.Bident;
+import org.usfirst.frc2811.RecycleRush.subsystems.TalonSRXPIDBase;
 
 /**Move the Bin to a specific height
  *
@@ -31,9 +32,10 @@ public class  BidentSet extends Command {
     }
     
     public BidentSet(int numberOfTotes){
-    	if (numberOfTotes == Robot.bident.TOTEHEIGHTUP){
+    	//Intelligently set the tote height based on how many totes we currently have
+    	if (numberOfTotes == TalonSRXPIDBase.GO_ONE_TOTE_UP){
     		toteNum = Robot.bident.getTotes() + 1;
-    	} else if (numberOfTotes == Robot.bident.TOTEHEIGHTDOWN){
+    	} else if (numberOfTotes == TalonSRXPIDBase.GO_ONE_TOTE_DOWN){
     		toteNum = Robot.bident.getTotes() - 1;
     	} else {
     		toteNum = numberOfTotes;

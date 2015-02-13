@@ -35,7 +35,7 @@ public class  BidentOpen extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	RobotMap.bidentSolenoid.set(true);
+    	Robot.bident.Open();
     	//This is opening the bident Arm
     }
 

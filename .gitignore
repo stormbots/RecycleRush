@@ -2,6 +2,6 @@
 /build
 
 #needed? Uncomment if causing conflicts
-#/dist
 *.jar
-*.jar
+
+sysProps.xml
