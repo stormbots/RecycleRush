@@ -58,7 +58,7 @@ public class Chassis extends Subsystem {
     }
     
     public void joystickDrive(){
-    	robotDrive41.mecanumDrive_Cartesian(-Robot.oi.joystick.getY(), -Robot.oi.joystick.getX(), 
+    	robotDrive41.mecanumDrive_Cartesian(-Robot.oi.joystick.getX(), -Robot.oi.joystick.getY(), 
     		-Robot.oi.joystick.getZ(), adjustedYaw());
     }
 }

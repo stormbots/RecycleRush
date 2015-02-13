@@ -130,6 +130,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Robot Front",RobotMap.chassisGyro );
         SmartDashboard.putData("PDP", RobotMap.powerPanel);
         SmartDashboard.putData("Accelerometer",RobotMap.onboardAccelerometer);
+        SmartDashboard.putData("Compressor", RobotMap.compressor);
     }
 
     /**

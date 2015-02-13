@@ -73,7 +73,8 @@ public class RobotMap {
     	
 		serialPort = new SerialPort(57600,SerialPort.Port.kMXP);
 
-        LiveWindow.addActuator("Chassis", "FrontLeftDrive", (Talon) frontLeftDrive);
+        frontLeftDrive = new Talon(0);
+		LiveWindow.addActuator("Chassis", "FrontLeftDrive", (Talon) frontLeftDrive);
         
         frontRightDrive = new Talon(2);
         LiveWindow.addActuator("Chassis", "FrontRightDrive", (Talon) frontRightDrive);
