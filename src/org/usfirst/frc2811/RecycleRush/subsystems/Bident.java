@@ -45,7 +45,7 @@ public class Bident extends TalonSRXPIDBase {
 
     public void initDefaultCommand() {
     	//Initialization stuff
-    	useMotor( new CANTalon(4) );
+    	useMotor( new CANTalon(5) );
     	binSolenoid=new Solenoid(1);
     	
     	
