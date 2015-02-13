@@ -116,15 +116,15 @@ public class Logger extends Subsystem {
      * @param string : The data to print
      */
     public void channel(String name, String string){
-    	if(channels.get(name)==null && PRINT_BY_DEFAULT==true){
+    	if(channels.containsKey(name) && PRINT_BY_DEFAULT==true){
     		//Channel is not created or specifically disabled, so enable it
     		channels.put(name,true);
     	}
     	
-    	if(channels.get(name)==true){
+    	if(channels.containsKey(name) && channels.get(name)==true){
     		//FIXME See if you can print the time using this function
     		//System.out.printf("%5.2f  ",timer.getFPGATimestamp() );
-    		System.out.print("("+name+")");
+    		System.out.print("("+name+") ");
     		System.out.println(string);
     	}
     	else{

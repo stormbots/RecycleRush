@@ -81,7 +81,7 @@ public class CANTeensy extends Subsystem {
 			status
 		);
 		CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
-    	Robot.logger.special("CAN","sendCANData: "+(MESSAGE1_ARB_ID | DEVICE_NUMBER) +"\t"+Arrays.toString(data.array()));
+    	Robot.logger.channel("CAN","sendCANData: "+(MESSAGE1_ARB_ID | DEVICE_NUMBER) +"\t"+Arrays.toString(data.array()));
     }
     protected void recieveCANData(){
         /* To receive a message, put the message ID you're looking for in this
@@ -101,7 +101,7 @@ public class CANTeensy extends Subsystem {
 	    if (data != null) {
 	        CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
 	        //System.out.println("Received a message: " + Arrays.toString(data.array()));
-	    	Robot.logger.special("CAN","recieveCANData: "+(MESSAGE1_ARB_ID) +"\t"+data);
+	    	Robot.logger.channel("CAN","recieveCANData: "+(MESSAGE1_ARB_ID) +"\t"+data);
 
 	    }
     	

@@ -41,7 +41,7 @@ public class UnderGlow extends CANTeensy {
         //setDefaultCommand(new MySpecialCommand());
     	
     	//enable logging of CAN writes
-    	Robot.logger.setSpecial("CAN", true);
+    	Robot.logger.setChannel("CAN", true);
     }
 
     
@@ -60,12 +60,12 @@ public class UnderGlow extends CANTeensy {
     
     
     public void setColor(){
-    	Robot.logger.special("CAN","setColor: AA AA AA");
+    	Robot.logger.channel("CAN","setColor: AA AA AA");
     	data.clear();
     	data.put((byte)0xAA);
     	data.put((byte)0xAA);
     	data.put((byte)0xAA);
-    	sendCANData();
+    	sendCANData(); //breaks
     }
     
 }
