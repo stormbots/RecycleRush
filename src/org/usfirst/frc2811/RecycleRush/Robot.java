@@ -45,6 +45,7 @@ public class Robot extends IterativeRobot {
     public static Map map;
     public static Lights lights;
     public static UnderGlow underGlow;
+    public static Camera camera;
 
     //public static DriverStation lcd;
     //private Preferences powerPanelReadout;
@@ -67,6 +68,7 @@ public class Robot extends IterativeRobot {
         underGlow = new UnderGlow();
         bident.init();
         oi = new OI();
+        camera = new Camera();
         
 /*		powerPanelReadout = Preferences.getInstance();
         lcd = DriverStation.getInstance();
@@ -101,7 +103,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
-        Camera.init();
+        camera.init();
         
     }
 
@@ -110,13 +112,13 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        Camera.update();                              //The update method gets new coordinate values from RoboRealm.
-        System.out.println("Getting Values");		  //getX and getY return the doubles x (COG_X) and y (COG_Y)
-        System.out.println("X = " + Camera.getX());   //from the Camera subsystem.
-        System.out.println("Y = " + Camera.getY());   //RoboRealm draws a bounding box around yellow objects, 
-        System.out.println("X2 = " + Camera.getX2()); //and records the coordinates of the center of gravity of said box 
-		System.out.println("Y2 = " + Camera.getY2()); //in the variables COG_X and COG_Y.
-        System.out.println("Got Values");           
+        camera.update();                              //The update method gets new coordinate values from RoboRealm.
+        System.out.print("Getting Values");		  //getX and getY return the doubles x (COG_X) and y (COG_Y)
+        System.out.print ("\tX = " + camera.getX());   //from the Camera subsystem.
+        System.out.print ("\tY = " + camera.getY());   //RoboRealm draws a bounding box around yellow objects, 
+        System.out.print ("\tX2 = " + camera.getX2()); //and records the coordinates of the center of gravity of said box 
+		System.out.print ("\tY2 = " + camera.getY2()); //in the variables COG_X and COG_Y.
+        System.out.println("\tGot Values");           
         
     }
 
@@ -153,14 +155,14 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    	//NetworkTable server = NetworkTable.getTable("SmartDashboard");
-		//double x = server.getNumber("COG_X", -3);
-		//double d=server.getNumber("danrules", 0);
-		//server.putNumber("danrules", d+1);
-		//System.out.println("Testing!"+d);
-        Camera.update();
-        System.out.println("X = " + Camera.getX());
-        System.out.println("Y = " + Camera.getY());
+    	NetworkTable server = NetworkTable.getTable("DanRules");
+		double x = server.getNumber("COG_X", -3);
+		double d=server.getNumber("danrules", 0);
+		server.putNumber("danrules", d+1);
+		System.out.println("Testing!"+d);
+        camera.update();
+        System.out.println("X = " + camera.getX());
+        System.out.println("Y = " + camera.getY());
 		       
     }
     
