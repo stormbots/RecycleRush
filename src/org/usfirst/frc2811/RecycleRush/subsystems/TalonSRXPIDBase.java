@@ -53,8 +53,8 @@ public class TalonSRXPIDBase extends Subsystem {
     public final static double GO_ONE_TOTE_UP=100;
     public final static double GO_ONE_TOTE_DOWN=-1;
 
-    protected boolean isHomed;
-
+    protected boolean isHomed = false;
+    
     public void setRange(double fwd,double rev){
     	ENCODER_TICKS_FWD=fwd;
     	ENCODER_TICKS_REV=rev;
@@ -67,9 +67,16 @@ public class TalonSRXPIDBase extends Subsystem {
     protected void useMotor(CANTalon newmotor){
     	motor=newmotor;
     }
+    public void Home(){
+    	Down(); // Additional check for switch
+    	if (motor.isRevLimitSwitchClosed()){
+    		isHomed = true ;
+    	}
+    }
     
     public boolean isHomed(){
-    	return true; //TODO: Make the return function meaningful
+    	
+    	return isHomed; //TODO: Make the return function meaningful
     }
     
     // Put methods for controlling this subsystem
