@@ -33,8 +33,9 @@ public class Bident extends TalonSRXPIDBase {
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
     public boolean close = !open;
-    
-    
+    private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
+    private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
+
     private double setpoint;
     //TODO fix port declaration binRangerTop and Bottom, port are for one wires and need to be two
     
@@ -73,18 +74,52 @@ public class Bident extends TalonSRXPIDBase {
     	double ramprate = 0;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
+    	bidentSonarIntake.setAutomaticMode(true);
+     	bidentSonarBumper.setAutomaticMode(true);
+     	bidentSonarBumper.setEnabled(true);
+    	bidentSonarIntake.setEnabled(true);
+    	//If crashing, then update to the newest wpilib...  :)
+    	
+
+
+     	/*/FIXME when the ultrasonic.setAutomaicMade(false) or commented out, the robot code doesn't delete, but when the automatic mode is true, the robot
+     	 * code is deleted. Why is this??
+     	 * Try setAutomaticMode then isEnabled...
+     	 * Sandra Hughey
+     	*/
     }
         
     public double getDistanceTop(){
+    	double distance = 0;
     	//FIXME Does not return correctly. Returns void, kills robot
-    	//return binSonarTop.getRangeInches();
-    	return 0;
+    	if(bidentSonarBumper.isRangeValid() && bidentSonarBumper.isEnabled()){
+    		distance=   bidentSonarBumper.getRangeInches();
+        } else if (bidentSonarBumper.isEnabled() == false) {
+        	distance = -1;
+        } else if (bidentSonarBumper.isRangeValid() == false) {
+        	distance = -2;
+        } else {
+        	System.out.println("B0RK3D!!!1!");
+        	distance = -3;
+        }
+    	return distance;
     }
     
     public double getDistanceBumper(){
+    	double distance = 0;
     	//TODO calibrate range maybe...(limits)
-    	//binSonarBottom.ping();
-    	return 0;//binSonarBottom.getRangeInches();
+        if(bidentSonarIntake.isRangeValid() && bidentSonarIntake.isEnabled()){
+        	distance = bidentSonarIntake.getRangeInches();
+        } else if (bidentSonarIntake.isEnabled() == false) {
+        	//System.out.println("not enabled");
+        	distance = -1;
+        } else if (bidentSonarIntake.isRangeValid() == false) {
+        	distance= -2;
+        } else {
+        	System.out.println("B0RK3D!!!1!");
+        	distance = -3.;
+        }    	
+        return distance;
     }
     
     public void Open(){

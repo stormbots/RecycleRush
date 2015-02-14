@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc2811.RecycleRush.Robot;
 import org.usfirst.frc2811.RecycleRush.RobotMap;
+import org.usfirst.frc2811.RecycleRush.subsystems.ToteElevator;
 
 /**hooks the tote and move the totes up one tote step
  *
@@ -41,7 +42,7 @@ public class  ToteIn extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.toteIntake.switchIsPressed()){
+    	if(Robot.toteElevator.switchIsPressed()){
         return true;}
     	else {
     		return false;
