@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 public class Camera extends Subsystem { //This subsystem gets object coordinates from RoboRealm
 	private static double x;			//through a network table that converts them from Visual Basic data
 	private static double y;			//to Java data that we can use. It then returns that data in the
-										//form of the doubles x and y.
-	//static NetworkTable server;
+	private static double x2;           //form of the doubles x and y.
+	private static double y2;
 	static NetworkTable server = NetworkTable.getTable("SmartDashboard");
 	
 	public static void init(){			  //Runs once in AutonomousInit to check
@@ -31,6 +31,8 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 				 //NetworkTables transfers the Visual Basic data from RoboRealm into Java data we can use.
 				x = server.getNumber("COG_X", -3); //-3 and -2 are used as default values so it will be clear when
 				y = server.getNumber("COG_Y", -2); //COG_X and COG_Y are returning default values.
+				x2 = server.getNumber("cogX2", -5);
+				y2 = server.getNumber("cogY2", -4);
 			}catch(TableKeyNotDefinedException ex){
 				
 			}
@@ -58,6 +60,16 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 		update();
 		System.out.println("Getting Y");
 		return y;
+	}
+	public static double getX2(){
+		update();
+		System.out.println("Getting X2");
+		return x2;
+	}
+	public static double getY2(){
+		update();
+		System.out.println("Getting Y2");
+		return y2;
 	}
 	
 }
