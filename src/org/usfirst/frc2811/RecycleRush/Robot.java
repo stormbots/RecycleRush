@@ -130,13 +130,19 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-        underGlow.setColor();
+        //underGlow.setColor();
      //   System.out.println(bident.getDistanceBumper());
         //System.out.println("range finder");
         logger.info("whatever");
         logger.debug("anything");
         logger.warning("something");
         logger.status("a thing");
+        logger.channel("DISABLED","should not show up");
+        logger.channel("ENABLED","should NOT show up 1");
+        logger.setChannel("ENABLED", true);
+        logger.channel("ENABLED","should show up 2");
+        logger.setChannel("ENABLED", false);
+        logger.channel("ENABLED","should not show up 3");
     }
     
 }
