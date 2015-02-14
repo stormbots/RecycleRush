@@ -70,9 +70,12 @@ public class CANTeensy extends Subsystem {
      * and stuffing the data object according to the desired format. For example, a system 
      */
     protected void sendCANData(){
-        /* Alternatively, instead of CAN_SEND_PERIOD_NO_REPEAT, you can specify
-        a period in milliseconds to automatically send the message over
-        and over again. */
+    	//FIXME CAN Function should do something useful. Currently throws errors, and shouldn't be used
+
+    	/*
+        // Alternatively, instead of CAN_SEND_PERIOD_NO_REPEAT, you can specify
+        //a period in milliseconds to automatically send the message over
+        //and over again. 
 		status.clear();
 		CANJNI.FRCNetworkCommunicationCANSessionMuxSendMessage(
 			MESSAGE1_ARB_ID | DEVICE_NUMBER,
@@ -82,11 +85,15 @@ public class CANTeensy extends Subsystem {
 		);
 		CANExceptionFactory.checkStatus(status.get(0), MESSAGE1_ARB_ID);
     	Robot.logger.channel("CAN","sendCANData: "+(MESSAGE1_ARB_ID | DEVICE_NUMBER) +"\t"+Arrays.toString(data.array()));
+    	//*/
     }
     protected void recieveCANData(){
-        /* To receive a message, put the message ID you're looking for in this
-        buffer.  CANJNI...ReceiveMessage  will not block waiting for it,
-        but just return null if it hasn't been received yet. */
+    	//FIXME Make can recieve do something
+    	
+    	/*
+        // To receive a message, put the message ID you're looking for in this
+        //buffer.  CANJNI...ReceiveMessage  will not block waiting for it,
+        //but just return null if it hasn't been received yet. 
 	    messageId.clear();
 	    messageId.put(0, MESSAGE2_ARB_ID | DEVICE_NUMBER);
 	
@@ -104,7 +111,7 @@ public class CANTeensy extends Subsystem {
 	    	Robot.logger.channel("CAN","recieveCANData: "+(MESSAGE1_ARB_ID) +"\t"+data);
 
 	    }
-    	
+    	//*/
     }
 }
 
