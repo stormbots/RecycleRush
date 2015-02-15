@@ -27,6 +27,7 @@ public class BidentHoming extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if (Robot.bident.isHomed() == true){
+    		System.out.println(Robot.bident.getRawEncoder());
     		return true;
     	}
         return false;

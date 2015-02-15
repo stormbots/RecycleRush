@@ -75,7 +75,7 @@ public class OI {
         button3=new JoystickButton(joystick,2);
         button3.whileHeld(new BidentDownManual());
         
-        button4=new JoystickButton(joystick,4);
+        button4=new JoystickButton(joystick,3);
         button4.whenPressed(new BidentStop());
 
         button5=new JoystickButton(joystick,5);

@@ -119,7 +119,10 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	System.out.println("homing start");
     	bidentHoming = new BidentHoming();
+    	bidentHoming.start();
+    	System.out.println("homing Finished");
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -130,11 +133,11 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
        // System.out.println(bident.getDistanceBumper());
        // System.out.println(bident.getDistanceTop());
-        System.out.println("Bident Distance to Bumper:" + bident.getDistanceBumper());
-        System.out.println("Bident Distance to Top:" + bident.getDistanceTop());
-        System.out.println("Tote Elevator Distance:" + toteElevator.getDistanceToTote());
-        
-
+      //  System.out.println("Bident Distance to Bumper:" + bident.getDistanceBumper());
+       // System.out.println("Bident Distance to Top:" + bident.getDistanceTop());
+        //System.out.println("Tote Elevator Distance:" + toteElevator.getDistanceToTote());
+        //System.out.println(bident.getRawEncoder());
+        bident.printStatus();
     }
 
     /**

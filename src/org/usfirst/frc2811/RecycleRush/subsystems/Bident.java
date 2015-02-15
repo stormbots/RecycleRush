@@ -36,6 +36,18 @@ public class Bident extends TalonSRXPIDBase {
     private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
+    
+    //*/Practice Robot
+    protected double ENCODER_TICKS_HEIGHT=29990.0; //Testbench jig
+    protected double INCHES_FWD=58;
+    protected double INCHES_REV=7.75;
+    protected double INCHES_INDEX=INCHES_REV;
+    protected double VIRTUAL_STOP_FWD=INCHES_FWD-.5;
+    protected double VIRTUAL_STOP_REV=INCHES_REV+.5;
+    //*/
+    
+    
+    
     private double setpoint;
     //TODO fix port declaration binRangerTop and Bottom, port are for one wires and need to be two
     
@@ -50,11 +62,7 @@ public class Bident extends TalonSRXPIDBase {
     	useMotor( new CANTalon(4) );
     	binSolenoid=new Solenoid(1);
     	
-    	
-        INCHES_FWD=72;
-        INCHES_REV=0;
-        INCHES_INDEX=30; //index is on the lowest switch
-        
+    	        
         //Set up the PID function
     	init();
     	
@@ -80,6 +88,12 @@ public class Bident extends TalonSRXPIDBase {
     	bidentSonarIntake.setEnabled(true);
     	//If crashing, then update to the newest wpilib...  :)
     	
+    	
+    	
+    	//Declare constants for use in the main function
+    	setRangeInInches(7.5,58);
+    	setHeightInTicks(29990);//Testbench
+
 
 
      	/*/FIXME when the ultrasonic.setAutomaicMade(false) or commented out, the robot code doesn't delete, but when the automatic mode is true, the robot
