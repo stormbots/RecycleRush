@@ -62,12 +62,12 @@ public class Bident extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	double p = 2;
+    	double p = .375;
     	double i = 0.01;
     	double d = 0;
     	double f = 0;
     	int izone = 0; 
-    	double ramprate = 0;// who knows what this will do
+    	double ramprate = 1;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
     }

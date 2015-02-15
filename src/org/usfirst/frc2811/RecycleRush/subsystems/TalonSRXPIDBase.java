@@ -97,7 +97,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	if(motor.isRevLimitSwitchClosed() ){
     		stop();
     	} else {
-    		setpoint = motor.getPosition()-55;//TODO tune this
+    		setpoint = motor.getPosition()-10;//TODO tune this
     		motor.set(setpoint);
     	}
     }
@@ -112,7 +112,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	if(motor.isFwdLimitSwitchClosed() ){
     		stop();
     	} else {
-    	setpoint = motor.getPosition()+55;//TODO tune this
+    	setpoint = motor.getPosition()+10;//TODO tune this
     	motor.set(setpoint);
     	}
     }
