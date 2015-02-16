@@ -47,7 +47,7 @@ public class Bident extends TalonSRXPIDBase {
     	binSolenoid=new Solenoid(1);
     	
     	
-        INCHES_FWD=72;
+        INCHES_FWD=55;
         INCHES_REV=0;
         INCHES_INDEX=30; //index is on the lowest switch
         

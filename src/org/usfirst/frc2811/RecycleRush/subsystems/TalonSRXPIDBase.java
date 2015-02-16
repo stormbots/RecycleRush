@@ -62,6 +62,12 @@ public class TalonSRXPIDBase extends Subsystem {
     	ENCODER_TICKS_FWD=fwd;
     	ENCODER_TICKS_REV=rev;
     }
+    
+    /*public void setInches(double fwd,double rev){
+    	INCHES_FWD = fwd;
+    	INCHES_REV = rev;
+    }*/
+    
     public void setVirtualStops(double fwd,double rev,double index){
     	VIRTUAL_STOP_FWD=fwd;
     	VIRTUAL_STOP_REV=rev;
@@ -124,15 +130,16 @@ public class TalonSRXPIDBase extends Subsystem {
     public double get(){
     	//return current bident height in inches
     	double output;
-    	setpoint=motor.getPosition();
-    	//setpoint = Map(output,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
+    	//output = motor.getEncPosition();
+    	output=motor.getPosition();
+    	setpoint = Map(output,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
     	return setpoint;
     }
         
     public double set(double inches){
     	//needs to set the target for the pid controller on the srx
     	//expects inches
-    	setpoint=inches;
+    	//setpoint=inches;
     	//setpoint= Map(setpoint,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;

@@ -33,7 +33,7 @@ public class ToteElevator extends TalonSRXPIDBase {
 
     public void initDefaultCommand() {
     	//Copy motor instance to ensure this function works right
-        useMotor(new CANTalon(4) );
+        useMotor(new CANTalon(44) );
         
         isHomed=false;
         init();
