@@ -11,10 +11,11 @@
 
 package org.usfirst.frc2811.RecycleRush.subsystems;
 
+import org.usfirst.frc2811.RecycleRush.Robot;
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
-import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -27,7 +28,8 @@ public class ToteIntake extends Subsystem {
     SpeedController toteRollerR = RobotMap.intakeRollerR;
     Solenoid toteSolenoidL = RobotMap.intakeSolenoidL;
     Solenoid toteSolenoidR = RobotMap.intakeSolenoidR;
-    DigitalInput elevatorReadySwitch = RobotMap.elevatorReadySwitch;
+
+
     //TODO these true and false for open/close functions may change
     public boolean open = true;
     public boolean close = !open;
@@ -77,10 +79,12 @@ public class ToteIntake extends Subsystem {
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);
     }
+
     public boolean switchIsPressed(){
-    	return elevatorReadySwitch.get()==true;
+    	return Robot.toteElevator.switchIsPressed();
     	//TODO Make sure this is the correct reading for have a tote
     }
+
 
 }
 

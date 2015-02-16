@@ -39,42 +39,75 @@ public class TalonSRXPIDBase extends Subsystem {
     
     //Will be used internally, but can be overridden in the inherited class
     //These are not static since they will change once when the function is homed after initialization
-    protected double ENCODER_TICKS_FWD;
-    protected double ENCODER_TICKS_REV;
-    protected double ENCODER_TICKS_INDEX;
+    
+    protected static double ENCODER_TICKS_FWD;
+    protected static double ENCODER_TICKS_REV;
+    protected static double ENCODER_TICKS_INDEX;
+    protected static double ENCODER_TICKS_HEIGHT; 
 
     //For the mapping functions, these will be used to convert to inches
-    protected double INCHES_FWD;
-    protected double INCHES_REV;
-    protected double INCHES_INDEX;
-
-    //TODO: Decide units to be used for this
-    protected double VIRTUAL_STOP_FWD;
-    protected double VIRTUAL_STOP_REV;
+    //Using 0/100 is consistent for %, so let's use that as a default
+    protected double INCHES_FWD=100;
+    protected double INCHES_REV=0;
+    protected double INCHES_INDEX=INCHES_REV;
+    
+    //This should be in inches
+    protected double VIRTUAL_STOP_FWD=INCHES_FWD;
+    protected double VIRTUAL_STOP_REV=INCHES_REV;
     
     //Constants for the Set function to indicate go up or down one tote
     public final static double GO_ONE_TOTE_UP=100;
     public final static double GO_ONE_TOTE_DOWN=-1;
 
-    protected boolean isHomed;
-
-    public void setRange(double fwd,double rev){
-    	ENCODER_TICKS_FWD=fwd;
-    	ENCODER_TICKS_REV=rev;
+    protected boolean isHomed = false;
+    
+    /**
+     * Set the height of the system in inches
+     * This is used for internal mapping to provide accurate results
+     * @param fwd
+     * @param rev
+     */
+    public void setRangeInInches(double fwd,double rev){
+    	INCHES_FWD=fwd;
+    	INCHES_REV=rev;
     }
     
-    /*public void setInches(double fwd,double rev){
-    	INCHES_FWD = fwd;
-    	INCHES_REV = rev;
-    }*/
-    
+    /**
+     * Set the height of the system in encoder ticks. 
+     * This should be consistent barring hardware changes
+     * @param ticks
+     */
+    public void setHeightInTicks(double ticks){
+    	ENCODER_TICKS_HEIGHT=ticks;
+    }
+    public void setHeightInTicks(double ticksFwd,double ticksRev){
+    	setHeightInTicks(ticksFwd-ticksRev);
+    }
+        
     public void setVirtualStops(double fwd,double rev,double index){
     	VIRTUAL_STOP_FWD=fwd;
     	VIRTUAL_STOP_REV=rev;
     	}
-        
+    
+    public void Home(){
+    	Down(); // Additional check for switch
+    	if (motor.isRevLimitSwitchClosed()){
+    		isHomed = true ;
+    	    ENCODER_TICKS_REV=motor.getEncPosition();
+    	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
+    	}
+    }
+    
+    public void  printStatus(){
+    	System.out.println("Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
+    	System.out.println("Rev Limits    : "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_REV+")");
+    	System.out.println("Current State : "+get()+ "\t (ticks: "+ getRawEncoder() );
+    	System.out.println("Homing Status : " +isHomed);
+
+    }
+
     public boolean isHomed(){
-    	return true; //TODO: Make the return function meaningful
+    	return isHomed; //TODO: Make the return function meaningful
     }
     
     // Put methods for controlling this subsystem
@@ -98,7 +131,7 @@ public class TalonSRXPIDBase extends Subsystem {
 
     public void Down(){
     	if(motor.isFwdLimitSwitchClosed() ){
-    		motor.ClearIaccum();
+    		//motor.ClearIaccum();
     	}
     	if(motor.isRevLimitSwitchClosed() ){
     		stop();
@@ -111,7 +144,7 @@ public class TalonSRXPIDBase extends Subsystem {
     public void Up(){
     	//prevent I hangups when coming off of a switch
     	if(motor.isRevLimitSwitchClosed() ){
-        	motor.ClearIaccum();
+        	//motor.ClearIaccum();
     	}
     	
     	//prevent I buildup when hitting a switch
@@ -130,7 +163,6 @@ public class TalonSRXPIDBase extends Subsystem {
     public double get(){
     	//return current bident height in inches
     	double output;
-    	//output = motor.getEncPosition();
     	output=motor.getPosition();
     	setpoint = Map(output,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
     	return setpoint;
@@ -139,8 +171,8 @@ public class TalonSRXPIDBase extends Subsystem {
     public double set(double inches){
     	//needs to set the target for the pid controller on the srx
     	//expects inches
-    	//setpoint=inches;
-    	//setpoint= Map(setpoint,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
+    	setpoint=inches;
+    	setpoint= Map(setpoint,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;
     } 
@@ -154,7 +186,7 @@ public class TalonSRXPIDBase extends Subsystem {
 	    double difference = Math.abs(setpoint - position);
 	
 	    //FIXME Don't need print spam unless debugging
-	    System.out.println("S: "+setpoint+" P: "+position+ "D:"+difference +" S?" +isIndexSwitchPressed());
+	    //System.out.println("S: "+setpoint+" P: "+position+ "D:"+difference +" S?" +isIndexSwitchPressed());
 		if (difference<=50){
 			return true;
 			}
@@ -179,6 +211,10 @@ public class TalonSRXPIDBase extends Subsystem {
     	return motor.getPinStateQuadIdx()==1?false:true;
     }
 
+    public double getRawEncoder(){
+    	return motor.getEncPosition() ;
+    	
+    }
 
 protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
 	double output = (input/(maximum-minimum)-minimum/(maximum-minimum))*(outputMax-outputMin)+outputMin;

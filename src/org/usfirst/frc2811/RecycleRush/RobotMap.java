@@ -54,13 +54,10 @@ public class RobotMap {
     public static Solenoid intakeSolenoidR;
     
     //public static CANTalon elevatorMotor;
-    public static DigitalInput elevatorReadySwitch;
-    public static AnalogInput elevatorSonar;
     
+   
     //public static CANTalon bidentMotor; //Moved to Bident subsystem
     //public static Solenoid bidentSolenoid; //moved to bident subsystem
-    public static Ultrasonic bidentSonarIntake;
-    public static Ultrasonic bidentSonarBumper;
 
     public static PowerDistributionPanel powerPanel;
     public static Compressor compressor;
@@ -110,24 +107,9 @@ public class RobotMap {
         
         intakeSolenoidR = new Solenoid(0, 1);
         LiveWindow.addActuator("ToteIntake", "ToteSolenoidR", intakeSolenoidR);
-        
-        //elevatorMotor = new CANTalon(7);
-        //LiveWindow.addActuator("ToteElevator", "ToteLifterMotor", (TalonSRX) toteLifterMotor);
-        
-        elevatorReadySwitch = new DigitalInput(6);
-        LiveWindow.addSensor("ToteElevator", "ToteSwitch", elevatorReadySwitch);
-        
-        elevatorSonar = new AnalogInput(1);
-        LiveWindow.addSensor("ToteElevator", "ToteSonar", elevatorSonar);
-     
-        //moved to bident subsystem
-        //bidentSolenoid = new Solenoid(0, 2);
-        //LiveWindow.addActuator("Bident", "BinSolenoid", bidentSolenoid);
-        
-        bidentSonarBumper = new Ultrasonic(3,2);
-        LiveWindow.addSensor("Bident", "BinSonarBottom", bidentSonarBumper);
-        
-        compressor = new Compressor();
+
+                
+        compressor = new Compressor(59);
         powerPanel = new PowerDistributionPanel();
         onboardAccelerometer = new BuiltInAccelerometer();
 
