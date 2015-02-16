@@ -75,8 +75,8 @@ public class Bident extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	double p = .375;
-    	double i = 0.01;
+    	double p = 0.1;
+    	double i = 0.0;
     	double d = 0;
     	double f = 0;
     	int izone = 0; 
