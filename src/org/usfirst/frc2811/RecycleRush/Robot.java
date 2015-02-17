@@ -109,7 +109,10 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
         Camera.init();
-        
+    	//Simple command for testing the homing state
+    	Command homing=new BidentHoming();
+    	homing.start();
+
     }
 
     /**
@@ -135,10 +138,8 @@ public class Robot extends IterativeRobot {
     	if (autonomousCommand != null) autonomousCommand.cancel();
     	joystickDrive.start();
 
-    	//Simple command for testing the homing state
-    	//Command homing=new BidentHoming();
-    	//homing.start();
-    	//bident.set(13);
+    	bident.set(25);
+    	bident.enable();
 
     }
 
@@ -155,6 +156,7 @@ public class Robot extends IterativeRobot {
         //bident.printStatus();
         
         //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
+        bident.disable();
         bident.printStatus();
 
     }
@@ -165,6 +167,7 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
         //System.out.println("Bident Switch pressed?"+bident.isReverseSwitchPressed() +" "+bident.getRawEncoder());
+        bident.printStatus();
 
     }
     

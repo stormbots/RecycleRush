@@ -117,6 +117,7 @@ public class TalonSRXPIDBase extends Subsystem {
      * 
      */
     public void Home(){
+    	enable();
     	Down(); // Additional check for switch
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
@@ -260,6 +261,14 @@ public class TalonSRXPIDBase extends Subsystem {
     public double getRawEncoder(){
     	return motor.getEncPosition() ;
     	
+    }
+    
+    public void disable(){
+    	motor.disableControl();
+    }
+    
+    public void enable(){
+    	motor.enableControl();
     }
 
 protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
