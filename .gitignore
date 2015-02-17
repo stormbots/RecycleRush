@@ -2,6 +2,6 @@
 /build
 
 #needed? Uncomment if causing conflicts
-*.jar
-
+*.jar*.jar
+dist/FRCUserProgram.jar
 sysProps.xml

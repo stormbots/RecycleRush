@@ -107,8 +107,6 @@ public class RobotMap {
         
         intakeSolenoidR = new Solenoid(0, 1);
         LiveWindow.addActuator("ToteIntake", "ToteSolenoidR", intakeSolenoidR);
-
-                
         compressor = new Compressor(59);
         powerPanel = new PowerDistributionPanel();
         onboardAccelerometer = new BuiltInAccelerometer();
