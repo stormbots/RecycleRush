@@ -89,8 +89,8 @@ public class RobotMap {
         robotDrive41.setExpiration(0.1);
         robotDrive41.setSensitivity(0.5);
         robotDrive41.setMaxOutput(1.0);
-        robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         
         chassisGyro = new IMU(serialPort,updateRate);
         LiveWindow.addSensor("Chassis", "chassisGyro", chassisGyro);
