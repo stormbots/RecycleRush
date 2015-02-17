@@ -81,7 +81,7 @@ public class OI {
         button4.whenPressed(new BidentStop());
 
         button5=new JoystickButton(joystick,6);
-        button5.whileHeld(new BidentSet());
+        button5.whileHeld(new BidentSet(25));
         
         button7=new JoystickButton(joystick,7);
         button7.whileHeld(new ToteDownManual());
@@ -120,7 +120,7 @@ public class OI {
 
         SmartDashboard.putData("BidentDown", new BidentDownManual());
 
-        SmartDashboard.putData("BidentSet", new BidentSet());
+        SmartDashboard.putData("BidentSet", new BidentSet(25));
 
         SmartDashboard.putData("BidentLineUp", new BidentLineUp());
         

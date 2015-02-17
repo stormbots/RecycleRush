@@ -110,8 +110,12 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.start();
         Camera.init();
     	//Simple command for testing the homing state
-    	Command homing=new BidentHoming();
+    	RobotMap.compressor.stop(); //FIXME enable the compressor at some point
+    	
+        Command homing=new BidentHoming();
     	homing.start();
+    	homing.cancel();
+
 
     }
 
@@ -127,6 +131,10 @@ public class Robot extends IterativeRobot {
         System.out.println("Got Values");           //and records the coordinates of the center of gravity of said box 
 		 											//in the variables COG_X and COG_Y.
         */
+        if (bident.onTarget()){
+        	bident.set(25);
+        }
+
     }
 
     public void teleopInit() {
@@ -138,7 +146,6 @@ public class Robot extends IterativeRobot {
     	if (autonomousCommand != null) autonomousCommand.cancel();
     	joystickDrive.start();
 
-    	bident.set(25);
     	bident.enable();
 
     }
@@ -165,7 +172,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-        LiveWindow.run();
+        //LiveWindow.run();
         //System.out.println("Bident Switch pressed?"+bident.isReverseSwitchPressed() +" "+bident.getRawEncoder());
         bident.printStatus();
 

@@ -19,7 +19,12 @@ public class AutonomousCommand extends CommandGroup {
     
     public  AutonomousCommand() {
         // Add Commands here:
-        // e.g. addSequential(new Command1());
+    	//FIXME: Make these parallel and wait for all to quit
+        addSequential(new BidentHoming(),2);
+        addSequential(new ToteElevatorHoming(),2);
+        addSequential(new BidentSet(25));
+        addSequential(new BidentSet(7));
+
         //      addSequential(new Command2());
         // these will run in order.
 
