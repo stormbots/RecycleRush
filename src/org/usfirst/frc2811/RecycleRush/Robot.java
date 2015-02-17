@@ -135,7 +135,10 @@ public class Robot extends IterativeRobot {
     	if (autonomousCommand != null) autonomousCommand.cancel();
     	joystickDrive.start();
 
-      
+    	//Simple command for testing the homing state
+    	//Command homing=new BidentHoming();
+    	//homing.start();
+    	//bident.set(13);
 
     }
 
@@ -151,7 +154,8 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("Compressor", RobotMap.compressor);
         //bident.printStatus();
         
-        System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
+        //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
+        bident.printStatus();
 
     }
 

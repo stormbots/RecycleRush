@@ -100,9 +100,10 @@ public class TalonSRXPIDBase extends Subsystem {
     
     public void  printStatus(){
     	System.out.println("Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
-    	System.out.println("Rev Limits    : "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_REV+")");
-    	System.out.println("Current State : "+get()+ "\t (ticks: "+ getRawEncoder() );
-    	System.out.println("Homing Status : " +isHomed);
+    	System.out.println("Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
+    	System.out.println("Current State(IN) : Target:"+onTarget()+"\tH:"+get());
+    	System.out.println("Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
+    	System.out.println("Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed());
 
     }
 
@@ -162,17 +163,18 @@ public class TalonSRXPIDBase extends Subsystem {
     
     public double get(){
     	//return current bident height in inches
+    	double input;
     	double output;
-    	output=motor.getPosition();
-    	setpoint = Map(output,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
-    	return setpoint;
+    	input=motor.getPosition();
+    	output = Map(input,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
+    	return output;
     }
         
     public double set(double inches){
     	//needs to set the target for the pid controller on the srx
     	//expects inches
-    	setpoint=inches;
-    	setpoint= Map(setpoint,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
+    	//setpoint=inches;
+    	setpoint= Map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;
     } 

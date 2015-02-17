@@ -70,7 +70,9 @@ public class Bident extends TalonSRXPIDBase {
     public void init (){
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
-    	setpoint=motor.getPosition();
+    	//motor.reverseOutput(true);
+    	//not used 
+    	motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
     	double d = .01;
@@ -85,10 +87,13 @@ public class Bident extends TalonSRXPIDBase {
     	bidentSonarIntake.setEnabled(true);
     	//If crashing, then update to the newest wpilib...  :)
     	
+    	//Ensure the robot doesn't try to move upon boot
+    	stop();
     	
     	
     	//Declare constants for use in the main function
-        setHeightInTicks(-9347, -18);//Practice Bot
+        //setHeightInTicks(-9347, -18);//Practice Bot
+    	setHeightInTicks(-9360);//Practice Bot
         setRangeInInches(61, 6);
     	//setHeightInTicks(29990);//Testbench
 
