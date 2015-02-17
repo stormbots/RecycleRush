@@ -24,7 +24,7 @@ public class  Compress extends Command {
     public Compress() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	RobotMap.compressor.start();
+    	
     }
 
     // Called just before this Command runs the first time
@@ -33,6 +33,7 @@ public class  Compress extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	RobotMap.compressor.start();
     }
 
     // Make this return true when this Command no longer needs to run execute()

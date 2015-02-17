@@ -6,4 +6,5 @@
 /dist/*
 *.jar
 
+dist/FRCUserProgram.jar
 sysProps.xml

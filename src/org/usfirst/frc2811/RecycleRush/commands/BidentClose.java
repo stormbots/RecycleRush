@@ -35,7 +35,7 @@ public class  BidentClose extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	RobotMap.bidentSolenoid.set(false);
+    	Robot.bident.Close();
     	//This is closes the bident Arm
     }
 
