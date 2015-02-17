@@ -80,22 +80,51 @@ public class TalonSRXPIDBase extends Subsystem {
     public void setHeightInTicks(double ticks){
     	ENCODER_TICKS_HEIGHT=ticks;
     }
+    
+    /**
+     * Save some math, and provide 2 ticks for the end stop of the ticks
+     * @param ticksFwd Number of ticks for the FWD direction of the robot
+     * @param ticksRev Number of ticks for the REV direction of the robot
+     */
     public void setHeightInTicks(double ticksFwd,double ticksRev){
     	setHeightInTicks(ticksFwd-ticksRev);
     }
-        
-    public void setVirtualStops(double fwd,double rev,double index){
+       
+    /**
+     * Set up virtual stops for when the robot is done homing
+     * Units should be in inches
+     * @param fwd (Units: Inches)
+     * @param rev (Units: Inches)
+     */
+    public void setVirtualStops(double fwd,double rev){
     	VIRTUAL_STOP_FWD=fwd;
     	VIRTUAL_STOP_REV=rev;
+    }
+    /**
+     * Write virtual stops to motor
+     * Requires VIRTUAL_STOP_FWD and VIRTUAL_STOP_REV to be set
+     */
+    private void writeVirtualStops(){
+    	double ticksFWD= Map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	
+    	motor.enableForwardSoftLimit(true);
+    	motor.enableReverseSoftLimit(true);
+    	motor.setForwardSoftLimit((int) ENCODER_TICKS_FWD);
+    	motor.setReverseSoftLimit((int) ENCODER_TICKS_REV);
     	}
     
+    /**
+     * 
+     */
     public void Home(){
     	Down(); // Additional check for switch
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
     	    ENCODER_TICKS_REV=motor.getEncPosition();
     	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
+    	    writeVirtualStops();
     	}
+    	
     }
     
     public void  printStatus(){
@@ -213,13 +242,19 @@ public class TalonSRXPIDBase extends Subsystem {
     	return motor.getPinStateQuadIdx()==1?false:true;
     }
     public boolean isForwardSwitchPressed(){
+    	if(get()>=VIRTUAL_STOP_FWD){
+    		return true;
+    	}
     	//Switch is normally high (1), and low(0) when closed
     	return motor.isFwdLimitSwitchClosed();//==1?false:true;
     }
 
     public boolean isReverseSwitchPressed(){
+    	if(get()<=VIRTUAL_STOP_REV){
+    		return true;
+    	}
     	//Switch is normally high (1), and low(0) when closed
-    	return motor.isRevLimitSwitchClosed();
+		return motor.isRevLimitSwitchClosed();
     }
 
     public double getRawEncoder(){
