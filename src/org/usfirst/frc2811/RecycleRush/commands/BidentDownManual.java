@@ -32,6 +32,7 @@ public class BidentDownManual extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Down Exited");
     }
 
     // Called when another command which requires one or more of the same

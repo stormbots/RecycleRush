@@ -33,7 +33,7 @@ public class Bident extends TalonSRXPIDBase {
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
     
-    //*/Practice Robot
+    /*/Practice Robot
     protected double ENCODER_TICKS_HEIGHT=29990.0; //Testbench jig
     protected double INCHES_FWD=58;
     protected double INCHES_REV=7.75;
@@ -43,7 +43,7 @@ public class Bident extends TalonSRXPIDBase {
     //*/
     
     
-    private double setpoint;
+    //private double setpoint;
     //TODO fix port declaration binRangerTop and Bottom, port are for one wires and need to be two
     
 
@@ -60,10 +60,6 @@ public class Bident extends TalonSRXPIDBase {
     	binSolenoid=new Solenoid(1);
     	
     	
-        INCHES_FWD=55;
-        INCHES_REV=0;
-        INCHES_INDEX=30; //index is on the lowest switch
-
         //Set up the PID function
     	init();
     	
@@ -75,12 +71,12 @@ public class Bident extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	double p = 0.1;
-    	double i = 0.0;
-    	double d = 0;
+    	double p = .4;
+    	double i = 0.001;
+    	double d = .01;
     	double f = 0;
-    	int izone = 0; 
-    	double ramprate = 1;// who knows what this will do
+    	int izone = 1000; 
+    	double ramprate = 12;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
     	bidentSonarIntake.setAutomaticMode(true);
@@ -92,8 +88,9 @@ public class Bident extends TalonSRXPIDBase {
     	
     	
     	//Declare constants for use in the main function
-    	setRangeInInches(7.5,58);
-    	setHeightInTicks(29990);//Testbench
+        setHeightInTicks(-9347, -18);//Practice Bot
+        setRangeInInches(61, 6);
+    	//setHeightInTicks(29990);//Testbench
 
 
 

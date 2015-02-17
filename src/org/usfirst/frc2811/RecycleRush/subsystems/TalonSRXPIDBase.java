@@ -40,10 +40,10 @@ public class TalonSRXPIDBase extends Subsystem {
     //Will be used internally, but can be overridden in the inherited class
     //These are not static since they will change once when the function is homed after initialization
     
-    protected static double ENCODER_TICKS_FWD;
-    protected static double ENCODER_TICKS_REV;
+    protected static double ENCODER_TICKS_FWD=100;
+    protected static double ENCODER_TICKS_REV=-100;
     protected static double ENCODER_TICKS_INDEX;
-    protected static double ENCODER_TICKS_HEIGHT; 
+    protected static double ENCODER_TICKS_HEIGHT=ENCODER_TICKS_FWD-ENCODER_TICKS_REV; 
 
     //For the mapping functions, these will be used to convert to inches
     //Using 0/100 is consistent for %, so let's use that as a default
@@ -136,7 +136,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	if(motor.isRevLimitSwitchClosed() ){
     		stop();
     	} else {
-    		setpoint = motor.getPosition()-10;//TODO tune this
+    		setpoint = motor.getPosition()-25;//TODO tune this
     		motor.set(setpoint);
     	}
     }
@@ -151,7 +151,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	if(motor.isFwdLimitSwitchClosed() ){
     		stop();
     	} else {
-    	setpoint = motor.getPosition()+10;//TODO tune this
+    	setpoint = motor.getPosition()+25;//TODO tune this
     	motor.set(setpoint);
     	}
     }
@@ -210,6 +210,15 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Switch is normally high (1), and low(0) when closed
     	return motor.getPinStateQuadIdx()==1?false:true;
     }
+    public boolean isForwardSwitchPressed(){
+    	//Switch is normally high (1), and low(0) when closed
+    	return motor.isFwdLimitSwitchClosed();//==1?false:true;
+    }
+
+    public boolean isReverseSwitchPressed(){
+    	//Switch is normally high (1), and low(0) when closed
+    	return motor.isRevLimitSwitchClosed();
+    }
 
     public double getRawEncoder(){
     	return motor.getEncPosition() ;
@@ -218,6 +227,10 @@ public class TalonSRXPIDBase extends Subsystem {
 
 protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
 	double output = (input/(maximum-minimum)-minimum/(maximum-minimum))*(outputMax-outputMin)+outputMin;
+	if (output==Double.NaN){
+		//System.out.println("Map::Error::"+input+"  "+minimum+"  "+maximum+"  "+outputMin+"  "+outputMax);
+		output=minimum;
+		}
 	return output; 
 	//NO ONE EXPECTS THE SPANISH INQUISITION
 	}

@@ -67,19 +67,21 @@ public class OI {
         joystick = new Joystick(0);
         
         button1 = new JoystickButton(joystick, 1);
-        button1.whenPressed(new ToteStack());
+        button1.whenPressed(new BidentHoming ());
        
         button2 = new JoystickButton(joystick, 4);
         button2.whileHeld(new BidentUpManual());
+        button2.whenReleased(new BidentStop());
         
         button3=new JoystickButton(joystick,2);
         button3.whileHeld(new BidentDownManual());
-        
+        button3.whenReleased(new BidentStop());
+
         button4=new JoystickButton(joystick,3);
         button4.whenPressed(new BidentStop());
 
-        button5=new JoystickButton(joystick,5);
-        button5.whileHeld(new ToteUpManual());
+        button5=new JoystickButton(joystick,6);
+        button5.whileHeld(new BidentSet());
         
         button7=new JoystickButton(joystick,7);
         button7.whileHeld(new ToteDownManual());
