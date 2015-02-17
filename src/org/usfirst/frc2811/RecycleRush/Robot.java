@@ -121,13 +121,13 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        /* TODO: Add camera code to Auto mode
-        System.out.println("Getting Values");		//getX and getY return the doubles x (COG_X) and y (COG_Y)
-        System.out.println("X = " + Camera.getX()); //from the Camera subsystem.
-        System.out.println("Y = " + Camera.getY()); //RoboRealm draws a bounding box around yellow objects, 
-        System.out.println("Got Values");           //and records the coordinates of the center of gravity of said box 
+        // TODO: Add camera code to Auto mode
+        Robot.logger.setChannel("CAMERA",false); //disable  camera loggers
+        Robot.logger.channel("CAMERA","Getting Values");		//getX and getY return the doubles x (COG_X) and y (COG_Y)
+        Robot.logger.channel("CAMERA","X = " + Camera.getX()); //from the Camera subsystem.
+        Robot.logger.channel("CAMERA","Y = " + Camera.getY()); //RoboRealm draws a bounding box around yellow objects, 
+        Robot.logger.channel("CAMERA","Got Values");           //and records the coordinates of the center of gravity of said box 
 		 											//in the variables COG_X and COG_Y.
-        */
         if (bident.onTarget()){
         	bident.set(25);
         }
@@ -171,22 +171,20 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         //LiveWindow.run();
         //System.out.println("Bident Switch pressed?"+bident.isReverseSwitchPressed() +" "+bident.getRawEncoder());
-        bident.printStatus();
+        //bident.printStatus();
 
         LiveWindow.run();
         //underGlow.setColor();
      //   System.out.println(bident.getDistanceBumper());
         //System.out.println("range finder");
+        
+        
         logger.info("whatever");
         logger.debug("anything");
         logger.warning("something");
         logger.status("a thing");
-        logger.channel("DISABLED","should not show up");
-        logger.channel("ENABLED","should NOT show up 1");
-        logger.setChannel("ENABLED", true);
-        logger.channel("ENABLED","should show up 2");
-        logger.setChannel("ENABLED", false);
-        logger.channel("ENABLED","should not show up 3");
+        
+        logger.setChannel("TALON", false);
     }
     
 }

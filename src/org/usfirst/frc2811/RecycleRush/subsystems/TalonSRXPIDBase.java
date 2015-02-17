@@ -79,6 +79,7 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void setHeightInTicks(double ticks){
     	ENCODER_TICKS_HEIGHT=ticks;
+    	Robot.logger.channel("TALON","Talon height set to "+ticks+" ticks");
     }
     
     /**
@@ -88,6 +89,7 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void setHeightInTicks(double ticksFwd,double ticksRev){
     	setHeightInTicks(ticksFwd-ticksRev);
+
     }
        
     /**
@@ -106,12 +108,14 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     private void writeVirtualStops(){
     	double ticksFWD= Map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	double ticksREV= Map(VIRTUAL_STOP_REV,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
     	
     	motor.enableForwardSoftLimit(true);
     	motor.enableReverseSoftLimit(true);
-    	motor.setForwardSoftLimit((int) ENCODER_TICKS_FWD);
-    	motor.setReverseSoftLimit((int) ENCODER_TICKS_REV);
-    	}
+    	motor.setForwardSoftLimit((int) ticksFWD);
+    	motor.setReverseSoftLimit((int) ticksREV);
+    	Robot.logger.channel("TALON","Virtual Limits set to "+ENCODER_TICKS_FWD+"in ("+ENCODER_TICKS_FWD+" ticks) " +ENCODER_TICKS_FWD+"in ("+"ENCODER_TICKS_REV"+"ticks)");
+	}
     
     /**
      * 
@@ -124,17 +128,16 @@ public class TalonSRXPIDBase extends Subsystem {
     	    ENCODER_TICKS_REV=motor.getEncPosition();
     	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
     	    writeVirtualStops();
+        	Robot.logger.channel("TALON","Homing sequence complete; System homed");
     	}
-    	
     }
     
     public void  printStatus(){
-    	System.out.println("Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
-    	System.out.println("Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
-    	System.out.println("Current State(IN) : Target:"+onTarget()+"\tH:"+get());
-    	System.out.println("Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
-    	System.out.println("Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed());
-
+    	Robot.logger.channel("TALON","Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
+    	Robot.logger.channel("TALON","Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
+    	Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
+    	Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
+    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed());
     }
 
     public boolean isHomed(){
@@ -189,6 +192,7 @@ public class TalonSRXPIDBase extends Subsystem {
     public void stop(){
     	setpoint=motor.getPosition();
     	motor.ClearIaccum();
+    	Robot.logger.channel("TALON","Talon Stopped");
     }    
     
     public double get(){
@@ -300,10 +304,13 @@ public class TalonSRXPIDBase extends Subsystem {
     public void disable(){
     	motor.disable();
     	motor.disableControl();
+    	Robot.logger.channel("TALON","Talon control disabled");
     }
     
     public void enable(){
     	motor.enableControl();
+    	Robot.logger.channel("TALON","Talon control enabled");
+
     }
 
 protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
