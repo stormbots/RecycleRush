@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj.CANTalon;
 
 
 /**
- *  This contains the common functions for the two Lifer systems. 
- *  /For individual declarations, extend this class
+ *  Wraps the CAN Talon classes with helper functions and conversions to common units. 
+ *  /For individual declarations, extend this class and add additional sensors and sensor reading functions
  *  //NOTE
  */
 public class TalonSRXPIDBase extends Subsystem {
@@ -242,6 +242,24 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Switch is normally high (1), and low(0) when closed
     	return motor.getPinStateQuadIdx()==1?false:true;
     }
+    
+    /**
+     * Return Switch state, with ability to disable soft limits
+     * @param enableSoftLimits
+     * @return
+     */
+    public boolean isForwardSwitchPressed(boolean enableSoftLimits){
+    	//Switch is normally high (1), and low(0) when closed
+    	if(enableSoftLimits==true){
+    		return isForwardSwitchPressed();
+    	}
+    	else return motor.isFwdLimitSwitchClosed();
+    }
+
+    /**
+     * Returns switch state
+     * @return true if switch is pressed, or if virtual limits exceeded
+     */
     public boolean isForwardSwitchPressed(){
     	if(get()>=VIRTUAL_STOP_FWD){
     		return true;
@@ -250,12 +268,28 @@ public class TalonSRXPIDBase extends Subsystem {
     	return motor.isFwdLimitSwitchClosed();//==1?false:true;
     }
 
+    /**
+     * Return Switch state, with ability to disable soft limits
+     * @param enableSoftLimits
+     * @return
+     */
+    public boolean isReverseSwitchPressed(boolean enableSoftLimits){
+    	//Switch is normally high (1), and low(0) when closed
+    	if(enableSoftLimits==true){
+    		return isReverseSwitchPressed();
+    	}
+    	else return motor.isRevLimitSwitchClosed();
+    }
+    
+    /**
+     * Returns switch state
+     * @return true if switch is pressed, or if virtual limits exceeded
+     */
     public boolean isReverseSwitchPressed(){
     	if(get()<=VIRTUAL_STOP_REV){
     		return true;
     	}
-    	//Switch is normally high (1), and low(0) when closed
-		return motor.isRevLimitSwitchClosed();
+    	return isReverseSwitchPressed();
     }
 
     public double getRawEncoder(){
@@ -264,6 +298,7 @@ public class TalonSRXPIDBase extends Subsystem {
     }
     
     public void disable(){
+    	motor.disable();
     	motor.disableControl();
     }
     
