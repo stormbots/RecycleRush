@@ -9,7 +9,6 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 	private static double y;			//to Java data that we can use. It then returns that data in the
 	private static double x2;           //form of the doubles x and y.
 	private static double y2;
-	//private static String tableName="SmartDashboard";
 	private static String tableName="SmartDashboard";
 	static NetworkTable server = NetworkTable.getTable(tableName);
 	
