@@ -125,7 +125,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         // TODO: Add camera code to Auto mode
-        Robot.logger.setChannel("CAMERA",false); //disable  camera loggers
+        //Robot.logger.setChannel("CAMERA",false); //disable  camera loggers
         Robot.logger.channel("CAMERA","Getting Values");		//getX and getY return the doubles x (COG_X) and y (COG_Y)
         Robot.logger.channel("CAMERA","X = " + Camera.getX()); //from the Camera subsystem.
         Robot.logger.channel("CAMERA","Y = " + Camera.getY()); //RoboRealm draws a bounding box around yellow objects, 
@@ -162,9 +162,6 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("Compressor", RobotMap.compressor);
         //bident.printStatus();
         
-        //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
-        bident.disable();
-        bident.printStatus();
 
     }
 
@@ -187,7 +184,15 @@ public class Robot extends IterativeRobot {
         logger.warning("something");
         logger.status("a thing");
         
+        //print lifter status
         logger.setChannel("TALON", false);
+        toteElevator.printStatus();
+        logger.setChannel("TALON", false);
+        
+        //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
+        bident.disable();
+        bident.printStatus();
+
     }
     
 }

@@ -70,7 +70,7 @@ public class ToteElevator extends TalonSRXPIDBase {
     	//motor.reverseSensor(true);
     	motor.reverseOutput(true);
     	double p = .4;
-    	double i = 0.001;
+    	double i = 0.005;
     	double d = .01;
     	double f = 0;
     	int izone = 1000; 
