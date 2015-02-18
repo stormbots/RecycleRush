@@ -14,14 +14,12 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc2811.RecycleRush.Robot;
-import org.usfirst.frc2811.RecycleRush.RobotMap;
-import org.usfirst.frc2811.RecycleRush.subsystems.ToteElevator;
 
 /**hooks the tote and move the totes up one tote step
  *
  */
 public class  ToteIn extends Command {
-
+	String rollerState = Robot.toteIntake.rollerState;
     public ToteIn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -32,28 +30,28 @@ public class  ToteIn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.toteIntake.rollersIn();
+    	if(rollerState=="out"||rollerState=="off"){
+    		Robot.toteIntake.rollersIn();
+    	} else {
+    		Robot.toteIntake.rollersOff();
+    	}
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.toteElevator.switchIsPressed()){
-        return true;}
-    	else {
-    		return false;
-    	}
-        //return true if totelifter switch is pressed, goes to the end statement
+    		return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	//turnoff rollers
-    	Robot.toteIntake.rollersOff();
+    	Robot.toteIntake.rollerState = "in";
     }
 
     // Called when another command which requires one or more of the same
