@@ -33,8 +33,8 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 			try{ //RoboRealm draws a bounding box around yellow objects, and records the coordinates
 				 //of the center of gravity of said box in the variables COG_X and COG_Y.
 				 //NetworkTables transfers the Visual Basic data from RoboRealm into Java data we can use.
-				x = server.getNumber("COG_X", -3); //-3 and -2 are used as default values so it will be clear when
-				y = server.getNumber("COG_Y", -2); //COG_X and COG_Y are returning default values.
+				x = server.getNumber("cogX", -3); //-3 and -2 are used as default values so it will be clear when
+				y = server.getNumber("cogY", -2); //COG_X and COG_Y are returning default values.
 				x2 = server.getNumber("cogX2", -5);
 				y2 = server.getNumber("cogY2", -4);
 				System.out.print(" OK?" +server.getBoolean("Success",false) + " ");

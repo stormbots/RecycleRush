@@ -163,6 +163,8 @@ public class Robot extends IterativeRobot {
         camera.update();
         System.out.println("X = " + camera.getX());
         System.out.println("Y = " + camera.getY());
+        System.out.println("X2 = " + camera.getX2());
+        System.out.println("Y2 = " + camera.getY2());
 		       
     }
     
