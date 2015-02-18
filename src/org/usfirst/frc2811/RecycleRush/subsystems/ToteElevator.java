@@ -67,16 +67,25 @@ public class ToteElevator extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	double p = 2;
-    	double i = 0.01;
-    	double d = 0;
+    	//motor.reverseSensor(true);
+    	motor.reverseOutput(true);
+    	double p = .4;
+    	double i = 0.001;
+    	double d = .01;
     	double f = 0;
-    	int izone = 0; 
-    	double ramprate = 0;// who knows what this will do
+    	int izone = 1000; 
+    	double ramprate = 12;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
     	elevatorSonar.setEnabled(true);
-    	elevatorSonar.setAutomaticMode(true);   	
+    	elevatorSonar.setAutomaticMode(true);   
+    	stop();
+    	setHeightInTicks(9360);//Practice Bot
+        setRangeInInches(61, 6);
+    	//setHeightInTicks(29990);//Testbench
+
+        //setVirtualStops(51,16);
+        setVirtualStops(16,51);
 
     }
 
