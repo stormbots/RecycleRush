@@ -116,7 +116,7 @@ public class Logger extends Subsystem {
      * @param string : The data to print
      */
     public void channel(String name, String string){
-    	if(channels.containsKey(name) && PRINT_BY_DEFAULT==true){
+    	if(!channels.containsKey(name) && PRINT_BY_DEFAULT==true){
     		//Channel is not created or specifically disabled, so enable it
     		channels.put(name,true);
     	}
