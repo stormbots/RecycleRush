@@ -1,5 +1,7 @@
 package org.usfirst.frc2811.RecycleRush.subsystems;
 
+import org.usfirst.frc2811.RecycleRush.Robot;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
@@ -13,9 +15,9 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 	
 	public static void init(){			  //Runs once in AutonomousInit to check
 		if(server.isConnected() == true){ //if the code can retrieve data from the network table.
-			System.out.println("Connection established.");
+			Robot.logger.channel("CAMERA","Connection established.");
 		}else{
-			System.out.println("Cannot access the network table!");
+			Robot.logger.channel("CAMERA","Cannot access the network table!");
 		}
 	}
 	
@@ -24,7 +26,7 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 	
 	public static void update(){
 		//put code here
-		System.out.println(server.isConnected());
+		Robot.logger.channel("CAMERA",""+server.isConnected());
 		if(server.isConnected() == true){
 			try{ //RoboRealm draws a bounding box around yellow objects, and records the coordinates
 				 //of the center of gravity of said box in the variables COG_X and COG_Y.
@@ -35,7 +37,7 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 				
 			}
 		}else{
-			System.out.println("Cannot access the network table!");
+			Robot.logger.error("Camera: Cannot access the network table!");
 		}
 		//set x
 		//set y
@@ -52,7 +54,7 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 
 	public static double getX(){		 //These methods return the values retrieved in the 
 		update();                        //update method as doubles.
-		System.out.println("Getting X");
+		Robot.logger.channel("CAMERA","Getting X");
 		return x;
 	}
 	public static double getY(){
