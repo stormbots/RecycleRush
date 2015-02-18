@@ -63,18 +63,18 @@ public class ToteIntake extends Subsystem {
     		toteRollerL.set(0);
     		toteRollerR.set(0);
     }
-    public void rollerIntake(){
-    	rollerIntake(-1);
+    public void rollersIn(){
+    	rollersIn(-1);
     }
-    public void rollerIntake(double speed){
+    public void rollersIn(double speed){
 
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);
     }
-    public void rollerReject(){
-    	rollerReject(-1);
+    public void rollersOut(){
+    	rollersOut(-1);
     }
-    public void rollerReject(double speed){
+    public void rollersOut(double speed){
 
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);

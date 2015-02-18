@@ -1,5 +1,7 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 
+import org.usfirst.frc2811.RecycleRush.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -18,6 +20,11 @@ public class BidentToggle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.bident.solenoidState()=="open"){
+    		Robot.bident.Close();
+    	} else if(Robot.bident.solenoidState()=="closed"){
+    		Robot.bident.Open();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

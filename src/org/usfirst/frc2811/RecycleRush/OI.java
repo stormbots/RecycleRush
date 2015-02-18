@@ -196,6 +196,8 @@ public class OI {
 		        
 		        
 		        buttonG10 = new JoystickButton(gamePad, 10);
+		        
+		        
 		    break;
 		    
     		case "austin":

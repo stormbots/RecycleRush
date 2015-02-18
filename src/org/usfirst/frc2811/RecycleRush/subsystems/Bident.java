@@ -13,6 +13,7 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANJaguar.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,7 +24,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private Solenoid binSolenoid;
+	private Solenoid bidentSolenoid;
     //TODO remove the ultrasonic sensors because they are declared in the code
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
@@ -57,7 +58,7 @@ public class Bident extends TalonSRXPIDBase {
 
     	//Initialization stuff
     	useMotor( new CANTalon(5) );
-    	binSolenoid=new Solenoid(1);
+    	bidentSolenoid=new Solenoid(1);
     	
     	
         //Set up the PID function
@@ -141,12 +142,15 @@ public class Bident extends TalonSRXPIDBase {
     }
     
     public void Open(){
-    	binSolenoid.set(open);
+    	bidentSolenoid.set(open);
     }
     
     public void Close(){
-    	binSolenoid.set(close);
+    	bidentSolenoid.set(close);
     }    
     
+    public String solenoidState(){
+    	return bidentSolenoid.get()==open?"open":"closed";
+    }
 }
 
