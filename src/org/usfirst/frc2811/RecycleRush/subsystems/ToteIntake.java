@@ -60,9 +60,8 @@ public class ToteIntake extends Subsystem {
     	//toteSolenoidR.set(close);
     }
     public void rollersOff(){
-    
-    		toteRollerL.set(0);
-    		toteRollerR.set(0);
+    	toteRollerL.set(0);
+    	toteRollerR.set(0);
     }
     public void rollersIn(){
     	rollersIn(-1);
@@ -71,6 +70,7 @@ public class ToteIntake extends Subsystem {
 
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);
+    	rollerState = "in";
     }
     public void rollersOut(){
     	rollersOut(-1);
@@ -79,6 +79,7 @@ public class ToteIntake extends Subsystem {
 
     	toteRollerL.set(speed);
     	toteRollerR.set(-speed);
+    	rollerState = "out";
     }
 
     public boolean switchIsPressed(){
