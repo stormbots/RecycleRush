@@ -101,6 +101,13 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
+        
+        //print lifter status
+        /*
+        		logger.setChannel("TALON", false);
+        toteElevator.printStatus();
+        logger.setChannel("TALON", false);
+		*/
     }
 
     public void autonomousInit() {
@@ -109,12 +116,12 @@ public class Robot extends IterativeRobot {
         Camera.init();
     	//Simple command for testing the homing state
     	RobotMap.compressor.stop(); //FIXME enable the compressor at some point
-    	Command totehoming = new ToteElevatorHoming();
-        Command homing=new BidentHoming();
-    	homing.start();
-    	homing.cancel();
-    	totehoming.start();
-    	totehoming.cancel();
+    	Command toteHoming = new ToteElevatorHoming();
+        Command bidentHoming=new BidentHoming();
+    	bidentHoming.start();
+    	bidentHoming.cancel();
+    	//totehoming.start();
+    	//totehoming.cancel();
 
 
     }
@@ -160,7 +167,8 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("PDP", RobotMap.powerPanel);
         //SmartDashboard.putData("Accelerometer",RobotMap.onboardAccelerometer);
         //SmartDashboard.putData("Compressor", RobotMap.compressor);
-        //bident.printStatus();
+        bident.printStatus();
+        System.out.println(Robot.toteIntake.rollerState);
         
 
     }
@@ -179,20 +187,21 @@ public class Robot extends IterativeRobot {
         //System.out.println("range finder");
         
         
-        logger.info("whatever");
-        logger.debug("anything");
-        logger.warning("something");
-        logger.status("a thing");
+        //logger.info("whatever");
+        //logger.debug("anything");
+        //logger.warning("something");
+        //logger.status("a thing");
         
         //print lifter status
-        logger.setChannel("TALON", false);
+        logger.setChannel("TALON", true);
         toteElevator.printStatus();
         logger.setChannel("TALON", false);
         
         //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
         bident.disable();
-        bident.printStatus();
+        //bident.printStatus();
 
     }
+    
     
 }

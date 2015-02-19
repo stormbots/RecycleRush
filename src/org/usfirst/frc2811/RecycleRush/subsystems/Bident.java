@@ -29,7 +29,7 @@ public class Bident extends TalonSRXPIDBase {
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
-    public boolean close = !open;
+    public boolean closed = !open;
     private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
@@ -76,8 +76,8 @@ public class Bident extends TalonSRXPIDBase {
     	motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
-    	double d = .01;
-    	double f = 0;
+    	double d = .02;
+    	double f = 0.1;
     	int izone = 1000; 
     	double ramprate = 12;// who knows what this will do
     	int profile = 0; 
@@ -136,7 +136,7 @@ public class Bident extends TalonSRXPIDBase {
         	distance= -2;
         } else {
         	System.out.println("B0RK3D!!!1!");
-        	distance = -3.;
+        	distance = -3;
         }    	
         return distance;
     }
@@ -146,7 +146,7 @@ public class Bident extends TalonSRXPIDBase {
     }
     
     public void Close(){
-    	bidentSolenoid.set(close);
+    	bidentSolenoid.set(closed);
     }    
     
     public String solenoidState(){
