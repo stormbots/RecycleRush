@@ -13,6 +13,7 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANJaguar.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,12 +24,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private Solenoid binSolenoid;
+	private Solenoid bidentSolenoid;
     //TODO remove the ultrasonic sensors because they are declared in the code
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
-    public boolean close = !open;
+    public boolean closed = !open;
     private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
@@ -57,7 +58,7 @@ public class Bident extends TalonSRXPIDBase {
 
     	//Initialization stuff
     	useMotor( new CANTalon(5) );
-    	binSolenoid=new Solenoid(1);
+    	bidentSolenoid=new Solenoid(1);
     	
     	
         //Set up the PID function
@@ -75,8 +76,8 @@ public class Bident extends TalonSRXPIDBase {
     	motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
-    	double d = .01;
-    	double f = 0;
+    	double d = .02;
+    	double f = 0.1;
     	int izone = 1000; 
     	double ramprate = 12;// who knows what this will do
     	int profile = 0; 
@@ -135,18 +136,21 @@ public class Bident extends TalonSRXPIDBase {
         	distance= -2;
         } else {
         	System.out.println("B0RK3D!!!1!");
-        	distance = -3.;
+        	distance = -3;
         }    	
         return distance;
     }
     
     public void Open(){
-    	binSolenoid.set(open);
+    	bidentSolenoid.set(open);
     }
     
     public void Close(){
-    	binSolenoid.set(close);
+    	bidentSolenoid.set(closed);
     }    
     
+    public String solenoidState(){
+    	return bidentSolenoid.get()==open?"open":"closed";
+    }
 }
 

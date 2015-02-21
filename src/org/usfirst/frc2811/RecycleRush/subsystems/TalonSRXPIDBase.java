@@ -137,7 +137,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	Robot.logger.channel("TALON","Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
     	Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
     	Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
-    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed());
+    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
     }
 
     public boolean isHomed(){
