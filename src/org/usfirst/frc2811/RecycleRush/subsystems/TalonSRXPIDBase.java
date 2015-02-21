@@ -60,7 +60,7 @@ public class TalonSRXPIDBase extends Subsystem {
     //Constants for the Set function to indicate go up or down one tote
     public final static double GO_ONE_TOTE_UP=100;
     public final static double GO_ONE_TOTE_DOWN=-1;
-    protected static int totePosition=0;
+    protected static double totePosition=0;
 
     protected boolean isHomed = false;
     
@@ -125,13 +125,14 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void home(){
     	enable();
-    	down(); // Additional check for switch
+    	//down(); // Additional check for switch
+    	motor.set(Math.signum(ENCODER_TICKS_REV)*ENCODER_TICKS_HEIGHT);
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
     		totePosition=0;
     	    ENCODER_TICKS_REV=motor.getEncPosition();
     	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
-    	    writeVirtualStops();
+    	    //writeVirtualStops(); //FIXME enable virtual stops
         	Robot.logger.channel("TALON","Homing sequence complete; System homed");
     	}
     }
@@ -174,7 +175,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	if(motor.isRevLimitSwitchClosed() ){
     		stop();
     	} else {
-    		setpoint = motor.getPosition()-25;//TODO tune this
+    		setpoint = motor.getPosition()-50;//TODO tune this
     		motor.set(setpoint);
     	}
 
@@ -202,7 +203,8 @@ public class TalonSRXPIDBase extends Subsystem {
     	
     }
     public void stop(){
-    	setpoint=motor.getPosition();
+    	setpoint=motor.getEncPosition();
+    	motor.set(setpoint);
     	motor.ClearIaccum();
     	Robot.logger.channel("TALON","Talon Stopped");
     }    
@@ -244,7 +246,7 @@ public class TalonSRXPIDBase extends Subsystem {
 			}
     }
 
-    public int getTotes(){
+    public double getTotes(){
     	return totePosition;    	
     }
     
@@ -256,6 +258,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Set the pid to a specific height in totes
     	//TODO set tote height
 		double GAP = 6;
+		totePosition=toteheight;
         set( (getTotes() )*TOTEHEIGHT-GAP);
 
     }
@@ -265,13 +268,15 @@ public class TalonSRXPIDBase extends Subsystem {
 		double GRAB = -6;
     	//Set the pid to a specific height in totes
     	//TODO set tote height
-        set( (getTotes()+1)*TOTEHEIGHT+GAP);
+		totePosition=(getTotes()+1);
+;        set( totePosition*TOTEHEIGHT+GAP);
 
     }
     public void setOneToteDown(){
     	double GAP = 6;
     	double GRAB = -6;
-    	set( (getTotes()-1)*TOTEHEIGHT+GAP);
+    	totePosition=(getTotes()-1);
+    	set( totePosition*TOTEHEIGHT+GAP);
     }
     
     

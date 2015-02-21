@@ -19,12 +19,18 @@ public class BidentUp extends Command {
 
 	    // Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.logger.setDebug(true);
+		Robot.logger.debug("bident tote up init");
+		Robot.logger.debug(""+Robot.bident.getTotes());
 	    Robot.bident.setOneToteUp();
+	
+	   Robot.logger.debug(""+Robot.bident.getTotes());
 	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return Robot.bident.onTarget();

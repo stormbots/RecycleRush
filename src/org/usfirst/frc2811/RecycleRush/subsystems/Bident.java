@@ -94,12 +94,12 @@ public class Bident extends TalonSRXPIDBase {
     	
     	//Declare constants for use in the main function
         //setHeightInTicks(-9347, -18);//Practice Bot
-    	setHeightInTicks(9360);//Practice Bot
-        setRangeInInches(61, 6);
+    	setHeightInTicks(9272);//Practice Bot
+        setRangeInInches(61.25, 10);
     	//setHeightInTicks(29990);//Testbench
 
         //setVirtualStops(51,16);
-        setVirtualStops(16,51);
+        setVirtualStops(61,9);
 
      	/*/FIXME when the ultrasonic.setAutomaicMade(false) or commented out, the robot code doesn't delete, but when the automatic mode is true, the robot
      	 * code is deleted. Why is this??

@@ -183,25 +183,26 @@ public class OI {
 		        //buttonG4.whenReleased(new BidentStop());		        		
 		        
 		        buttonG5  = new JoystickButton(gamePad,  5);
-		        buttonG5.whileHeld(new BidentUpManual());
-		        buttonG5.whenReleased(new BidentStop());
+		        buttonG5.whenPressed(new BidentUp());
+		        //buttonG5.whenReleased(new BidentStop());
 		        
 		        buttonG6  = new JoystickButton(gamePad,  6);
 		        buttonG6.whileHeld(new ToteUpManual());
 		        buttonG6.whenReleased(new ToteStop());
 		        
 		        buttonG7  = new JoystickButton(gamePad,  7);
-		        buttonG7.whileHeld(new BidentDownManual());
-		        buttonG7.whenReleased(new BidentStop());
+		        buttonG7.whenPressed(new BidentDown());
+		        //buttonG7.whenReleased(new BidentStop());
 		        
 		        buttonG8  = new JoystickButton(gamePad,  8);
 		        buttonG8.whileHeld(new ToteDownManual());
 		        buttonG8.whenReleased(new ToteStop());
 		        
 		        buttonG9  = new JoystickButton(gamePad,  9);
-		        
+		        buttonG9.whenPressed(new BidentToggle());
 		        
 		        buttonG10 = new JoystickButton(gamePad, 10);
+		        buttonG10.whenPressed(new BidentHoming());
 		        
 		        
 		    break;

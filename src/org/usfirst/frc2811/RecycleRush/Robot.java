@@ -98,13 +98,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.start();
         Camera.init();
     	//Simple command for testing the homing state
-    	RobotMap.compressor.stop(); //FIXME enable the compressor at some point
-    	Command toteHoming = new ToteElevatorHoming();
-        Command bidentHoming=new BidentHoming();
-    	bidentHoming.start();
-    	bidentHoming.cancel();
-    	//totehoming.start();
-    	//totehoming.cancel();
+    	
     }
 
     /**
@@ -118,10 +112,8 @@ public class Robot extends IterativeRobot {
         Robot.logger.channel("CAMERA","X = " + Camera.getX()); //from the Camera subsystem.
         Robot.logger.channel("CAMERA","Y = " + Camera.getY()); //RoboRealm draws a bounding box around yellow objects, 
         Robot.logger.channel("CAMERA","Got Values");           //and records the coordinates of the center of gravity of said box 
-		 											//in the variables COG_X and COG_Y.
-        if (bident.onTarget()){
-        	bident.set(25);
-        }
+
+
 
     }
 
@@ -184,8 +176,8 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
 
         //Ensure that if we stop the robot, the lifters stop what they're doing
-    	bident.stop();
-    	toteElevator.stop();
+    	//bident.stop();
+    	//toteElevator.stop();
 
     }
 
@@ -200,7 +192,7 @@ public class Robot extends IterativeRobot {
         
         //Bident Status
         bident.disable();
-        logger.setChannel("TALON", false);
+        logger.setChannel("TALON", true);
         bident.printStatus();        
         logger.setChannel("TALON", false);
 
