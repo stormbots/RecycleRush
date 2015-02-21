@@ -149,7 +149,7 @@ public class OI {
     	case "austin":
     		return Robot.chassis.adjustedYaw();
     	case "testing":
-    		return RobotMap.chassisGyro.getYaw();
+    		return Robot.chassis.adjustedYaw();
     	default:
     		return 0;
     	}
