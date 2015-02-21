@@ -22,7 +22,7 @@ public class ToteElevatorHoming extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.toteElevator.Home();
+    	Robot.toteElevator.home();
     	Robot.logger.channel("HOMING","Homing. Status: "+ Robot.toteElevator.isHomed());
     }
 

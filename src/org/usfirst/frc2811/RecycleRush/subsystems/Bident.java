@@ -141,11 +141,11 @@ public class Bident extends TalonSRXPIDBase {
         return distance;
     }
     
-    public void Open(){
+    public void open(){
     	bidentSolenoid.set(open);
     }
     
-    public void Close(){
+    public void close(){
     	bidentSolenoid.set(closed);
     }    
     

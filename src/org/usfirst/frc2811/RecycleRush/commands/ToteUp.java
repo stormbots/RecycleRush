@@ -29,35 +29,12 @@ public class  ToteUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.toteElevator.get()>GAPPOSITIONSIX){
-    		Robot.toteElevator.set(GAPPOSITIONSIX);
-    	}
-    	if(Robot.toteElevator.get() >= GAPPOSITIONFIVE&& Robot.toteElevator.get()<GAPPOSITIONSIX){
-    		Robot.toteElevator.set(GAPPOSITIONSIX);
-    	}
-    	if(Robot.toteElevator.get() >= GAPPOSITIONFOUR&& Robot.toteElevator.get()<GAPPOSITIONFIVE){
-    		Robot.toteElevator.set(GAPPOSITIONFIVE);
-    	}
-    	if(Robot.toteElevator.get() >= GAPPOSITIONTHREE&& Robot.toteElevator.get()<GAPPOSITIONFOUR){
-    		Robot.toteElevator.set(GAPPOSITIONFOUR);
-    	}
-    	if(Robot.toteElevator.get() >= GAPPOSITIONTWO&& Robot.toteElevator.get()<GAPPOSITIONTHREE){
-    		Robot.toteElevator.set(GAPPOSITIONTHREE);
-    	}
-    	if(Robot.toteElevator.get() >= GAPPOSITIONONE&& Robot.toteElevator.get()<GAPPOSITIONTWO){
-    		Robot.toteElevator.set(GAPPOSITIONTWO);
-    	}
-    	if(Robot.toteElevator.get()<GAPPOSITIONONE){
-    		Robot.toteElevator.set(TOTE+GRAB);
-    	}
-    	else{
-    		System.out.println("ERROR IN BIDENT UP");
-    	}
-    	
+
     }
 
    
     protected void execute() {
+    	Robot.toteElevator.setOneToteUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()

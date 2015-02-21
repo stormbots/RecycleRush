@@ -9,16 +9,7 @@ import org.usfirst.frc2811.RecycleRush.Robot;
  * DEPRECIATED. For manual control, use BidentDownManual
  */
 public class  ToteDown extends Command {
-	public double TOTE = 12;
-	public double GAP = 2;
-	public double GRAB = 12;
-	public double GAPPOSITIONONE = TOTE + GAP;
-	public double GAPPOSITIONTWO = 2*TOTE + GAP;
-	public double GAPPOSITIONTHREE = 3*TOTE + GAP;
-	public double GAPPOSITIONFOUR = 4*TOTE + GAP;
-	public double GAPPOSITIONFIVE = 5*TOTE + GAP;
-	public double GAPPOSITIONSIX = 6*TOTE + GAP;
-	
+		
     public ToteDown() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -29,40 +20,17 @@ public class  ToteDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.toteElevator.get()>GAPPOSITIONSIX){
-    		Robot.toteElevator.set(GAPPOSITIONSIX);
-    	}
-    	if(Robot.toteElevator.get() > GAPPOSITIONFIVE&& Robot.toteElevator.get()<=GAPPOSITIONSIX){
-    		Robot.toteElevator.set(GAPPOSITIONFIVE);
-    	}
-    	if(Robot.toteElevator.get() > GAPPOSITIONFOUR&& Robot.toteElevator.get()<=GAPPOSITIONFIVE){
-    		Robot.toteElevator.set(GAPPOSITIONFOUR);
-    	}
-    	if(Robot.toteElevator.get() > GAPPOSITIONTHREE&& Robot.toteElevator.get()<=GAPPOSITIONFOUR){
-    		Robot.toteElevator.set(GAPPOSITIONTHREE);
-    	}
-    	if(Robot.toteElevator.get() > GAPPOSITIONTWO&& Robot.toteElevator.get()<=GAPPOSITIONTHREE){
-    		Robot.toteElevator.set(GAPPOSITIONTWO);
-    	}
-    	if(Robot.toteElevator.get() > GAPPOSITIONONE&& Robot.toteElevator.get()<=GAPPOSITIONTWO){
-    		Robot.toteElevator.set(GAPPOSITIONONE);
-    	}
-    	if(Robot.toteElevator.get()>=GAPPOSITIONONE){
-    		Robot.toteElevator.set(TOTE+GRAB);
-    	}
-    	else{
-    		System.out.println("ERROR IN TOTE DOWN");
-    	}
-    	
+    	Robot.toteElevator.setOneToteDown();   	
     }
 
    
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+    	return Robot.toteElevator.onTarget();
     }
 
     // Called once after isFinished returns true

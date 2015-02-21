@@ -110,8 +110,8 @@ public class TalonSRXPIDBase extends Subsystem {
      * Requires VIRTUAL_STOP_FWD and VIRTUAL_STOP_REV to be set
      */
     private void writeVirtualStops(){
-    	double ticksFWD= Map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
-    	double ticksREV= Map(VIRTUAL_STOP_REV,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	double ticksFWD= map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	double ticksREV= map(VIRTUAL_STOP_REV,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
     	
     	motor.enableForwardSoftLimit(true);
     	motor.enableReverseSoftLimit(true);
@@ -123,9 +123,9 @@ public class TalonSRXPIDBase extends Subsystem {
     /**
      * 
      */
-    public void Home(){
+    public void home(){
     	enable();
-    	Down(); // Additional check for switch
+    	down(); // Additional check for switch
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
     		totePosition=0;
@@ -162,12 +162,12 @@ public class TalonSRXPIDBase extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
         
-    public double Speed(){
+    public double speed(){
     	double speed = motor.getSpeed(); // gives speed  in the sensor's native ticks per 100ms
       	return speed;
     }
 
-    public void Down(){
+    public void down(){
     	if(motor.isFwdLimitSwitchClosed() ){
     		//motor.ClearIaccum();
     	}
@@ -183,7 +183,7 @@ public class TalonSRXPIDBase extends Subsystem {
 
     }
     
-    public void Up(){
+    public void up(){
     	//prevent I hangups when coming off of a switch
     	if(motor.isRevLimitSwitchClosed() ){
         	//motor.ClearIaccum();
@@ -212,7 +212,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	double input;
     	double output;
     	input=motor.getPosition();
-    	output = Map(input,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
+    	output = map(input,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
     	return output;
     }
         
@@ -220,7 +220,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	//needs to set the target for the pid controller on the srx
     	//expects inches
     	//setpoint=inches;
-    	setpoint= Map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
+    	setpoint= map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;
     } 
@@ -347,7 +347,7 @@ public class TalonSRXPIDBase extends Subsystem {
 
     }
 
-protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
+protected double map( double input, double maximum, double minimum, double outputMax, double outputMin){
 	double output = (input/(maximum-minimum)-minimum/(maximum-minimum))*(outputMax-outputMin)+outputMin;
 	if (output==Double.NaN){
 		//System.out.println("Map::Error::"+input+"  "+minimum+"  "+maximum+"  "+outputMin+"  "+outputMax);
