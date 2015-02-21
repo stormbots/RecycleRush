@@ -65,35 +65,23 @@ public class TalonSRXPIDBase extends Subsystem {
     protected boolean isHomed = false;
     
     /**
-     * Set the height of the system in inches
-     * This is used for internal mapping to provide accurate results
-     * @param fwd
-     * @param rev
+     * 
+     * @param fwd_inches Motor Forward height in inches
+     * @param rev_inches Motor Reverse height in inches
+     * @param fwd_ticks Motor forward height in inches (relative)
+     * @param rev_ticks Motor Reverse height in inches (relative)
      */
-    public void setRangeInInches(double fwd,double rev){
-    	INCHES_FWD=fwd;
-    	INCHES_REV=rev;
-    }
-    
-    /**
-     * Set the height of the system in encoder ticks. 
-     * This should be consistent barring hardware changes
-     * @param ticks
-     */
-    public void setHeightInTicks(double ticks){
-    	ENCODER_TICKS_HEIGHT=ticks;
-    	Robot.logger.channel("TALON","Talon height set to "+ticks+" ticks");
-    }
-    
-    /**
-     * Save some math, and provide 2 ticks for the end stop of the ticks
-     * @param ticksFwd Number of ticks for the FWD direction of the robot
-     * @param ticksRev Number of ticks for the REV direction of the robot
-     */
-    public void setHeightInTicks(double ticksFwd,double ticksRev){
-    	setHeightInTicks(ticksFwd-ticksRev);
+    public void setRange(double fwd_inches,double rev_inches,double fwd_ticks, double rev_ticks){
+    	INCHES_FWD=fwd_inches;
+    	INCHES_REV=rev_inches;
+        ENCODER_TICKS_FWD=fwd_ticks;
+        ENCODER_TICKS_REV=rev_ticks;
 
+    	
+    	ENCODER_TICKS_HEIGHT=fwd_ticks-rev_ticks;
+    	Robot.logger.channel("TALON","Talon height set to "+ENCODER_TICKS_HEIGHT+" ticks");
     }
+    //*/
        
     /**
      * Set up virtual stops for when the robot is done homing
@@ -258,9 +246,15 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Set the pid to a specific height in totes
     	//TODO set tote height
 		double GAP = 6;
+		if(toteheight < 0){
+			toteheight = 0;
+		}
+		if(toteheight > 6){
+			toteheight = 6;
+		}
 		totePosition=toteheight;
         set( (getTotes() )*TOTEHEIGHT-GAP);
-
+        
     }
 
     public void setOneToteUp(){
@@ -269,6 +263,9 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Set the pid to a specific height in totes
     	//TODO set tote height
 		totePosition=(getTotes()+1);
+		if(totePosition > 6){
+			totePosition = 6;
+		}		
 ;        set( totePosition*TOTEHEIGHT+GAP);
 
     }
@@ -276,6 +273,9 @@ public class TalonSRXPIDBase extends Subsystem {
     	double GAP = 6;
     	double GRAB = -6;
     	totePosition=(getTotes()-1);
+    	if(totePosition < 0){
+			totePosition = 0;
+		}
     	set( totePosition*TOTEHEIGHT+GAP);
     }
     

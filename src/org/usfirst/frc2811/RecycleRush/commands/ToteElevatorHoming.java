@@ -16,7 +16,7 @@ public class ToteElevatorHoming extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.logger.setChannel("HOMING",false);
+    	Robot.logger.setChannel("HOMING",true);
     	Robot.logger.channel("HOMING","Starting homing sequence for ToteElevator");
     }
 

@@ -127,6 +127,7 @@ public class Robot extends IterativeRobot {
     	joystickDrive.start();
 
     	bident.enable();
+    	toteElevator.enable();
 
     }
 
@@ -140,7 +141,7 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("PDP", RobotMap.powerPanel);
         //SmartDashboard.putData("Accelerometer",RobotMap.onboardAccelerometer);
         //SmartDashboard.putData("Compressor", RobotMap.compressor);
-        System.out.println(Robot.toteIntake.rollerState);
+        //System.out.println(Robot.toteIntake.rollerState);
     }
 
     public void testInit(){
@@ -178,6 +179,7 @@ public class Robot extends IterativeRobot {
         //Ensure that if we stop the robot, the lifters stop what they're doing
     	//bident.stop();
     	//toteElevator.stop();
+    	
 
     }
 
@@ -186,13 +188,13 @@ public class Robot extends IterativeRobot {
         
         //print lifter status
         toteElevator.disable();
-        logger.setChannel("TALON", false);
+        logger.setChannel("TALON", true);
         toteElevator.printStatus();
         logger.setChannel("TALON", false);
         
         //Bident Status
         bident.disable();
-        logger.setChannel("TALON", true);
+        logger.setChannel("TALON", false);
         bident.printStatus();        
         logger.setChannel("TALON", false);
 

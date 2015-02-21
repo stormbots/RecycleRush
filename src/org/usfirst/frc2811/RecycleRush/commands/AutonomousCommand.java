@@ -21,12 +21,18 @@ public class AutonomousCommand extends CommandGroup {
     public  AutonomousCommand() {
         // Add Commands here:
     	//FIXME: Make these parallel and wait for all to quit
-        addSequential(new BidentHoming(),4);
+        /*
         addSequential(new BidentStop());
-        //addSequential(new ToteElevatorHoming(),2);
-        //addSequential(new ToteStop());
-        addSequential(new WaitCommand(4));
+        addSequential(new BidentHoming(),2);
+        addSequential(new BidentStop());
         addSequential(new BidentSet(25));
+        */
+        
+        addSequential(new ToteStop());
+        addSequential(new ToteElevatorHoming(),2);
+        addSequential(new ToteStop());
+        addSequential(new ToteSet(3));
+                
         //addSequential(new BidentSet(7));
 
         //      addSequential(new Command2());

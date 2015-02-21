@@ -76,7 +76,7 @@ public class Bident extends TalonSRXPIDBase {
     	motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
-    	double d = .02;
+    	double d = .0;
     	double f = 0.1;
     	int izone = 1000; 
     	double ramprate = 12;// who knows what this will do
@@ -90,12 +90,13 @@ public class Bident extends TalonSRXPIDBase {
     	
     	//Ensure the robot doesn't try to move upon boot
     	stop();
-    	
+
+    	motor.enableBrakeMode(false);//TODO: Make this a subsystem call properly
+
     	
     	//Declare constants for use in the main function
         //setHeightInTicks(-9347, -18);//Practice Bot
-    	setHeightInTicks(9272);//Practice Bot
-        setRangeInInches(61.25, 10);
+    	setRange(61,10,0,-9336);//Practice Bot
     	//setHeightInTicks(29990);//Testbench
 
         //setVirtualStops(51,16);

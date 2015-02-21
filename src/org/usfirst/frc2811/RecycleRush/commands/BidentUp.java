@@ -23,7 +23,7 @@ public class BidentUp extends Command {
 		Robot.logger.debug("bident tote up init");
 		Robot.logger.debug(""+Robot.bident.getTotes());
 	    Robot.bident.setOneToteUp();
-	
+	    System.out.println(Robot.bident.getTotes());
 	   Robot.logger.debug(""+Robot.bident.getTotes());
 	}
     // Called repeatedly when this Command is scheduled to run
@@ -38,6 +38,7 @@ public class BidentUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println(Robot.bident.getTotes());
     }
 
     // Called when another command which requires one or more of the same

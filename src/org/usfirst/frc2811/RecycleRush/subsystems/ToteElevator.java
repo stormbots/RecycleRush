@@ -71,21 +71,21 @@ public class ToteElevator extends TalonSRXPIDBase {
     	motor.reverseOutput(true);
     	double p = .4;
     	double i = 0.005;
-    	double d = .01;
-    	double f = 0;
+    	double d = 0;
+    	double f = 0.1;
     	int izone = 1000; 
-    	double ramprate = 12;// who knows what this will do
+    	double ramprate = 6;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
     	elevatorSonar.setEnabled(true);
     	elevatorSonar.setAutomaticMode(true);   
     	stop();
-    	setHeightInTicks(9360);//Practice Bot
-        setRangeInInches(61, 6);
-    	//setHeightInTicks(29990);//Testbench
+        //setRange(61, 6,9360,0);//Practice Bot, before tweaking
+        setRange(53, 6,8594.0,0);//Practice Bot
 
+        motor.enableBrakeMode(false);//TODO: Make this a subsystem call properly
         //setVirtualStops(51,16);
-        setVirtualStops(16,51);
+        //setVirtualStops(16,51);
 
     }
 
