@@ -58,6 +58,7 @@ public class TalonSRXPIDBase extends Subsystem {
     //Constants for the Set function to indicate go up or down one tote
     public final static double GO_ONE_TOTE_UP=100;
     public final static double GO_ONE_TOTE_DOWN=-1;
+    protected static int totePosition=0;
 
     protected boolean isHomed = false;
     
@@ -125,6 +126,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	Down(); // Additional check for switch
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
+    		totePosition=0;
     	    ENCODER_TICKS_REV=motor.getEncPosition();
     	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
     	    writeVirtualStops();
@@ -232,16 +234,79 @@ public class TalonSRXPIDBase extends Subsystem {
     }
 
     public int getTotes(){
+    	return totePosition;
+    	/*
+    	double TOTE = 12;
+    	double GAP = 6;
+    	double GRAB = -6;
+    	double GAPPOSITIONONE = TOTE + GAP;
+    	double GAPPOSITIONTWO = 2*TOTE + GAP;
+    	double GAPPOSITIONTHREE = 3*TOTE + GAP;
+    	double GAPPOSITIONFOUR = 4*TOTE + GAP;
+    	double GAPPOSITIONFIVE = 5*TOTE + GAP;
+    	double GAPPOSITIONSIX = 6*TOTE + GAP;
     	//return current bident height in totes
     	//TODO return bident height in totes
-    	return 1;
+    	if(motor.get()>GAPPOSITIONSIX){
+    		return 6;
+    	}
+    	if(motor.get() > GAPPOSITIONFIVE&& motor.get()<=GAPPOSITIONSIX){
+    		return 6;
+    	}
+    	if(motor.get() > GAPPOSITIONFOUR&& motor.get()<=GAPPOSITIONFIVE){
+    		return 5;
+    	}
+    	if(motor.get() > GAPPOSITIONTHREE&& motor.get()<=GAPPOSITIONFOUR){
+    		return 4;
+    	}
+    	if(motor.get() > GAPPOSITIONTWO&& motor.get()<=GAPPOSITIONTHREE){
+    		return 3;
+    	}
+    	if(motor.get() > GAPPOSITIONONE&& motor.get()<=GAPPOSITIONTWO){
+    		return 2;
+    	}
+    	if(motor.get()>GAPPOSITIONONE && motor.get() <= GAP){
+    		return 1;
+    	}
+    	if(motor.get() <= GAP){
+    		return 0;
+    	}
+    	else{
+    		System.out.println("ERROR IN TOTE COUNT");
+    		//*/
+    	}
     }
     
+	/**
+	 * 
+	 * @param toteheight
+	 */
     public void setTotes(double toteheight){
     	//Set the pid to a specific height in totes
     	//TODO set tote height
+    	double TOTEHEIGHT = 12;
+		double GAP = 6;
+        set( (getTotes() )*TOTEHEIGHT-GAP);
+
     }
 
+    public void setOneToteUp(){
+		double TOTEHEIGHT = 12;
+		double GAP = 6;
+		double GRAB = -6;
+    	//Set the pid to a specific height in totes
+    	//TODO set tote height
+        set( (getTotes()+1)*TOTEHEIGHT+GAP);
+
+    }
+    public void setOneToteDown(){
+    	double TOTEHEIGHT = 12;
+    	double GAP = 6;
+    	double GRAB = -6;
+    	set( (getTotes()-1)*TOTEHEIGHT+GAP);
+    }
+    
+    
     public boolean isIndexSwitchPressed(){
     	//Switch is normally high (1), and low(0) when closed
     	return motor.getPinStateQuadIdx()==1?false:true;
