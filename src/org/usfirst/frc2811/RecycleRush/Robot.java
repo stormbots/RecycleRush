@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
+
 import org.usfirst.frc2811.RecycleRush.commands.*;
 import org.usfirst.frc2811.RecycleRush.subsystems.*;
 
@@ -97,10 +98,28 @@ public class Robot extends IterativeRobot {
      */
     public void disabledInit(){
 
+        //Ensure that if we stop the robot, the lifters stop what they're doing
+    	bident.stop();
+    	toteElevator.stop();
+
     }
 
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
+        
+        //print lifter status
+        toteElevator.disable();
+        logger.setChannel("TALON", false);
+        toteElevator.printStatus();
+        logger.setChannel("TALON", false);
+        
+        //Bident Status
+        bident.disable();
+        logger.setChannel("TALON", false);
+        bident.printStatus();        
+        logger.setChannel("TALON", false);
+
+
     }
 
     public void autonomousInit() {
@@ -161,8 +180,6 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("Accelerometer",RobotMap.onboardAccelerometer);
         //SmartDashboard.putData("Compressor", RobotMap.compressor);
         //bident.printStatus();
-        
-
     }
 
     /**
@@ -178,21 +195,14 @@ public class Robot extends IterativeRobot {
      //   System.out.println(bident.getDistanceBumper());
         //System.out.println("range finder");
         
-        
+        /*
         logger.info("whatever");
         logger.debug("anything");
         logger.warning("something");
         logger.status("a thing");
+        //*/
         
-        //print lifter status
-        logger.setChannel("TALON", false);
-        toteElevator.printStatus();
-        logger.setChannel("TALON", false);
         
-        //System.out.println("Bident::Height"+bident.get() +" OnTarget?"+bident.onTarget());
-        bident.disable();
-        bident.printStatus();
-
     }
     
 }
