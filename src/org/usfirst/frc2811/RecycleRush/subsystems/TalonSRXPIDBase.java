@@ -35,6 +35,8 @@ public class TalonSRXPIDBase extends Subsystem {
     	motor=newMotor;
     }
         
+	double TOTEHEIGHT = 12;
+
     protected double setpoint;
     
     //Will be used internally, but can be overridden in the inherited class
@@ -175,6 +177,10 @@ public class TalonSRXPIDBase extends Subsystem {
     		setpoint = motor.getPosition()-25;//TODO tune this
     		motor.set(setpoint);
     	}
+
+    	//Correct tote position when moving manually
+    	totePosition=Math.floorDiv((int)get(),(int) TOTEHEIGHT);
+
     }
     
     public void Up(){
@@ -190,6 +196,10 @@ public class TalonSRXPIDBase extends Subsystem {
     	setpoint = motor.getPosition()+25;//TODO tune this
     	motor.set(setpoint);
     	}
+    	
+    	//Correct tote position when moving manually
+    	totePosition=Math.floorDiv((int)get(),(int) TOTEHEIGHT);
+    	
     }
     public void stop(){
     	setpoint=motor.getPosition();
@@ -234,47 +244,7 @@ public class TalonSRXPIDBase extends Subsystem {
     }
 
     public int getTotes(){
-    	return totePosition;
-    	/*
-    	double TOTE = 12;
-    	double GAP = 6;
-    	double GRAB = -6;
-    	double GAPPOSITIONONE = TOTE + GAP;
-    	double GAPPOSITIONTWO = 2*TOTE + GAP;
-    	double GAPPOSITIONTHREE = 3*TOTE + GAP;
-    	double GAPPOSITIONFOUR = 4*TOTE + GAP;
-    	double GAPPOSITIONFIVE = 5*TOTE + GAP;
-    	double GAPPOSITIONSIX = 6*TOTE + GAP;
-    	//return current bident height in totes
-    	//TODO return bident height in totes
-    	if(motor.get()>GAPPOSITIONSIX){
-    		return 6;
-    	}
-    	if(motor.get() > GAPPOSITIONFIVE&& motor.get()<=GAPPOSITIONSIX){
-    		return 6;
-    	}
-    	if(motor.get() > GAPPOSITIONFOUR&& motor.get()<=GAPPOSITIONFIVE){
-    		return 5;
-    	}
-    	if(motor.get() > GAPPOSITIONTHREE&& motor.get()<=GAPPOSITIONFOUR){
-    		return 4;
-    	}
-    	if(motor.get() > GAPPOSITIONTWO&& motor.get()<=GAPPOSITIONTHREE){
-    		return 3;
-    	}
-    	if(motor.get() > GAPPOSITIONONE&& motor.get()<=GAPPOSITIONTWO){
-    		return 2;
-    	}
-    	if(motor.get()>GAPPOSITIONONE && motor.get() <= GAP){
-    		return 1;
-    	}
-    	if(motor.get() <= GAP){
-    		return 0;
-    	}
-    	else{
-    		System.out.println("ERROR IN TOTE COUNT");
-    		//*/
-    	}
+    	return totePosition;    	
     }
     
 	/**
@@ -284,14 +254,12 @@ public class TalonSRXPIDBase extends Subsystem {
     public void setTotes(double toteheight){
     	//Set the pid to a specific height in totes
     	//TODO set tote height
-    	double TOTEHEIGHT = 12;
 		double GAP = 6;
         set( (getTotes() )*TOTEHEIGHT-GAP);
 
     }
 
     public void setOneToteUp(){
-		double TOTEHEIGHT = 12;
 		double GAP = 6;
 		double GRAB = -6;
     	//Set the pid to a specific height in totes
@@ -300,7 +268,6 @@ public class TalonSRXPIDBase extends Subsystem {
 
     }
     public void setOneToteDown(){
-    	double TOTEHEIGHT = 12;
     	double GAP = 6;
     	double GRAB = -6;
     	set( (getTotes()-1)*TOTEHEIGHT+GAP);
@@ -367,12 +334,14 @@ public class TalonSRXPIDBase extends Subsystem {
     }
     
     public void disable(){
+    	//FIXME: Disable/enable doesn't work
     	motor.disable();
     	motor.disableControl();
     	Robot.logger.channel("TALON","Talon control disabled");
     }
     
     public void enable(){
+    	//FIXME: Disable/enable doesn't work
     	motor.enableControl();
     	Robot.logger.channel("TALON","Talon control enabled");
 
