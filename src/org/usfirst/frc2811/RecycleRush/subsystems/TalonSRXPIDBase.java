@@ -35,6 +35,8 @@ public class TalonSRXPIDBase extends Subsystem {
     	motor=newMotor;
     }
         
+	double TOTEHEIGHT = 12;
+
     protected double setpoint;
     
     //Will be used internally, but can be overridden in the inherited class
@@ -58,39 +60,28 @@ public class TalonSRXPIDBase extends Subsystem {
     //Constants for the Set function to indicate go up or down one tote
     public final static double GO_ONE_TOTE_UP=100;
     public final static double GO_ONE_TOTE_DOWN=-1;
+    protected static double totePosition=0;
 
     protected boolean isHomed = false;
     
     /**
-     * Set the height of the system in inches
-     * This is used for internal mapping to provide accurate results
-     * @param fwd
-     * @param rev
+     * 
+     * @param fwd_inches Motor Forward height in inches
+     * @param rev_inches Motor Reverse height in inches
+     * @param fwd_ticks Motor forward height in inches (relative)
+     * @param rev_ticks Motor Reverse height in inches (relative)
      */
-    public void setRangeInInches(double fwd,double rev){
-    	INCHES_FWD=fwd;
-    	INCHES_REV=rev;
-    }
-    
-    /**
-     * Set the height of the system in encoder ticks. 
-     * This should be consistent barring hardware changes
-     * @param ticks
-     */
-    public void setHeightInTicks(double ticks){
-    	ENCODER_TICKS_HEIGHT=ticks;
-    	Robot.logger.channel("TALON","Talon height set to "+ticks+" ticks");
-    }
-    
-    /**
-     * Save some math, and provide 2 ticks for the end stop of the ticks
-     * @param ticksFwd Number of ticks for the FWD direction of the robot
-     * @param ticksRev Number of ticks for the REV direction of the robot
-     */
-    public void setHeightInTicks(double ticksFwd,double ticksRev){
-    	setHeightInTicks(ticksFwd-ticksRev);
+    public void setRange(double fwd_inches,double rev_inches,double fwd_ticks, double rev_ticks){
+    	INCHES_FWD=fwd_inches;
+    	INCHES_REV=rev_inches;
+        ENCODER_TICKS_FWD=fwd_ticks;
+        ENCODER_TICKS_REV=rev_ticks;
 
+    	
+    	ENCODER_TICKS_HEIGHT=fwd_ticks-rev_ticks;
+    	Robot.logger.channel("TALON","Talon height set to "+ENCODER_TICKS_HEIGHT+" ticks");
     }
+    //*/
        
     /**
      * Set up virtual stops for when the robot is done homing
@@ -107,8 +98,8 @@ public class TalonSRXPIDBase extends Subsystem {
      * Requires VIRTUAL_STOP_FWD and VIRTUAL_STOP_REV to be set
      */
     private void writeVirtualStops(){
-    	double ticksFWD= Map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
-    	double ticksREV= Map(VIRTUAL_STOP_REV,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	double ticksFWD= map(VIRTUAL_STOP_FWD,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
+    	double ticksREV= map(VIRTUAL_STOP_REV,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV);
     	
     	motor.enableForwardSoftLimit(true);
     	motor.enableReverseSoftLimit(true);
@@ -120,14 +111,16 @@ public class TalonSRXPIDBase extends Subsystem {
     /**
      * 
      */
-    public void Home(){
+    public void home(){
     	enable();
-    	Down(); // Additional check for switch
+    	//down(); // Additional check for switch
+    	motor.set(Math.signum(ENCODER_TICKS_REV)*ENCODER_TICKS_HEIGHT);
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
+    		totePosition=0;
     	    ENCODER_TICKS_REV=motor.getEncPosition();
     	    ENCODER_TICKS_FWD=ENCODER_TICKS_REV+ENCODER_TICKS_HEIGHT;
-    	    writeVirtualStops();
+    	    //writeVirtualStops(); //FIXME enable virtual stops
         	Robot.logger.channel("TALON","Homing sequence complete; System homed");
     	}
     }
@@ -137,7 +130,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	Robot.logger.channel("TALON","Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
     	Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
     	Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
-    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed());
+    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
     }
 
     public boolean isHomed(){
@@ -158,24 +151,28 @@ public class TalonSRXPIDBase extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
         
-    public double Speed(){
+    public double speed(){
     	double speed = motor.getSpeed(); // gives speed  in the sensor's native ticks per 100ms
       	return speed;
     }
 
-    public void Down(){
+    public void down(){
     	if(motor.isFwdLimitSwitchClosed() ){
     		//motor.ClearIaccum();
     	}
     	if(motor.isRevLimitSwitchClosed() ){
     		stop();
     	} else {
-    		setpoint = motor.getPosition()-25;//TODO tune this
+    		setpoint = motor.getPosition()-50;//TODO tune this
     		motor.set(setpoint);
     	}
+
+    	//Correct tote position when moving manually
+    	totePosition=Math.floorDiv((int)get(),(int) TOTEHEIGHT);
+
     }
     
-    public void Up(){
+    public void up(){
     	//prevent I hangups when coming off of a switch
     	if(motor.isRevLimitSwitchClosed() ){
         	//motor.ClearIaccum();
@@ -188,9 +185,14 @@ public class TalonSRXPIDBase extends Subsystem {
     	setpoint = motor.getPosition()+25;//TODO tune this
     	motor.set(setpoint);
     	}
+    	
+    	//Correct tote position when moving manually
+    	totePosition=Math.floorDiv((int)get(),(int) TOTEHEIGHT);
+    	
     }
     public void stop(){
-    	setpoint=motor.getPosition();
+    	setpoint=motor.getEncPosition();
+    	motor.set(setpoint);
     	motor.ClearIaccum();
     	Robot.logger.channel("TALON","Talon Stopped");
     }    
@@ -200,15 +202,16 @@ public class TalonSRXPIDBase extends Subsystem {
     	double input;
     	double output;
     	input=motor.getPosition();
-    	output = Map(input,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
+    	output = map(input,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
     	return output;
     }
         
     public double set(double inches){
-    	//needs to set the target for the pid controller on the srx
-    	//expects inches
-    	//setpoint=inches;
-    	setpoint= Map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
+    	//todo: Should we use this?
+    	//totePosition=Math.floorDiv((int)inches,(int) TOTEHEIGHT);
+    	
+    	//Convert to ticks and write to the motor
+    	setpoint= map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;
     } 
@@ -231,17 +234,52 @@ public class TalonSRXPIDBase extends Subsystem {
 			}
     }
 
-    public int getTotes(){
-    	//return current bident height in totes
-    	//TODO return bident height in totes
-    	return 1;
+    public double getTotes(){
+    	return totePosition;    	
     }
     
+	/**
+	 * 
+	 * @param toteheight
+	 */
     public void setTotes(double toteheight){
     	//Set the pid to a specific height in totes
     	//TODO set tote height
+		double GAP = 6;
+		if(toteheight < 0){
+			toteheight = 0;
+		}
+		if(toteheight > 6){
+			toteheight = 6;
+		}
+		totePosition=toteheight;
+        set( (getTotes() )*TOTEHEIGHT-GAP);
+        
     }
 
+    public void setOneToteUp(){
+		double GAP = 6;
+		double GRAB = -6;
+    	//Set the pid to a specific height in totes
+    	//TODO set tote height
+		totePosition=(getTotes()+1);
+		if(totePosition > 6){
+			totePosition = 6;
+		}		
+;        set( totePosition*TOTEHEIGHT+GAP);
+
+    }
+    public void setOneToteDown(){
+    	double GAP = 6;
+    	double GRAB = -6;
+    	totePosition=(getTotes()-1);
+    	if(totePosition < 0){
+			totePosition = 0;
+		}
+    	set( totePosition*TOTEHEIGHT+GAP);
+    }
+    
+    
     public boolean isIndexSwitchPressed(){
     	//Switch is normally high (1), and low(0) when closed
     	return motor.getPinStateQuadIdx()==1?false:true;
@@ -302,18 +340,20 @@ public class TalonSRXPIDBase extends Subsystem {
     }
     
     public void disable(){
+    	//FIXME: Disable/enable doesn't work
     	motor.disable();
     	motor.disableControl();
     	Robot.logger.channel("TALON","Talon control disabled");
     }
     
     public void enable(){
+    	//FIXME: Disable/enable doesn't work
     	motor.enableControl();
     	Robot.logger.channel("TALON","Talon control enabled");
 
     }
 
-protected double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
+protected double map( double input, double maximum, double minimum, double outputMax, double outputMin){
 	double output = (input/(maximum-minimum)-minimum/(maximum-minimum))*(outputMax-outputMin)+outputMin;
 	if (output==Double.NaN){
 		//System.out.println("Map::Error::"+input+"  "+minimum+"  "+maximum+"  "+outputMin+"  "+outputMax);

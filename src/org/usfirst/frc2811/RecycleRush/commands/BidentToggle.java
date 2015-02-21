@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToteUpManual extends Command {
+public class BidentToggle extends Command {
 
-    public ToteUpManual() {
+    public BidentToggle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,7 +20,11 @@ public class ToteUpManual extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.toteElevator.up();
+    	if(Robot.bident.solenoidState()=="open"){
+    		Robot.bident.close();
+    	} else if(Robot.bident.solenoidState()=="closed"){
+    		Robot.bident.open();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

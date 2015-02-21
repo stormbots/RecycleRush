@@ -43,31 +43,31 @@ public class Logger extends Subsystem {
      * Enable DEBUG level print statements
      * @param string
      */
-    void setDebug(boolean state){setChannel("DEBUG",state);}
+    public void setDebug(boolean state){setChannel("DEBUG",state);}
     
     /**
      * Enable WARNING level print statements
      * @param string
      */
-    void setWarning(boolean state){setChannel("WARNING",state);}
+    public void setWarning(boolean state){setChannel("WARNING",state);}
     
     /**
      * Enable STATUS level print statements
      * @param string
      */
-    void setStatus(boolean state){setChannel("STATUS",state);}
+    public void setStatus(boolean state){setChannel("STATUS",state);}
     
     /**
      * Enable INFO level print statements
      * @param string
      */
-    void setInfo(boolean state){setChannel("INFO",state);}
+    public void setInfo(boolean state){setChannel("INFO",state);}
     
     /**
      * Enable ERROR level print statements
      * @param string
      */
-    void setError(boolean state){setChannel("ERROR",state);}
+    public void setError(boolean state){setChannel("ERROR",state);}
 
     
     /**
@@ -116,7 +116,7 @@ public class Logger extends Subsystem {
      * @param string : The data to print
      */
     public void channel(String name, String string){
-    	if(channels.containsKey(name) && PRINT_BY_DEFAULT==true){
+    	if(!channels.containsKey(name) && PRINT_BY_DEFAULT==true){
     		//Channel is not created or specifically disabled, so enable it
     		channels.put(name,true);
     	}

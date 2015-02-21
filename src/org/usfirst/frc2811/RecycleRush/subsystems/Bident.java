@@ -13,6 +13,7 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANJaguar.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,12 +24,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private Solenoid binSolenoid;
+	private Solenoid bidentSolenoid;
     //TODO remove the ultrasonic sensors because they are declared in the code
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
     public boolean open = true;
-    public boolean close = !open;
+    public boolean closed = !open;
     private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
@@ -57,7 +58,7 @@ public class Bident extends TalonSRXPIDBase {
 
     	//Initialization stuff
     	useMotor( new CANTalon(5) );
-    	binSolenoid=new Solenoid(1);
+    	bidentSolenoid=new Solenoid(1);
     	
     	
         //Set up the PID function
@@ -75,8 +76,8 @@ public class Bident extends TalonSRXPIDBase {
     	motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
-    	double d = .01;
-    	double f = 0;
+    	double d = .0;
+    	double f = 0.1;
     	int izone = 1000; 
     	double ramprate = 12;// who knows what this will do
     	int profile = 0; 
@@ -89,16 +90,17 @@ public class Bident extends TalonSRXPIDBase {
     	
     	//Ensure the robot doesn't try to move upon boot
     	stop();
-    	
+
+    	motor.enableBrakeMode(false);//TODO: Make this a subsystem call properly
+
     	
     	//Declare constants for use in the main function
         //setHeightInTicks(-9347, -18);//Practice Bot
-    	setHeightInTicks(9360);//Practice Bot
-        setRangeInInches(61, 6);
+    	setRange(61,10,0,-9336);//Practice Bot
     	//setHeightInTicks(29990);//Testbench
 
         //setVirtualStops(51,16);
-        setVirtualStops(16,51);
+        setVirtualStops(61,9);
 
      	/*/FIXME when the ultrasonic.setAutomaicMade(false) or commented out, the robot code doesn't delete, but when the automatic mode is true, the robot
      	 * code is deleted. Why is this??
@@ -135,18 +137,21 @@ public class Bident extends TalonSRXPIDBase {
         	distance= -2;
         } else {
         	System.out.println("B0RK3D!!!1!");
-        	distance = -3.;
+        	distance = -3;
         }    	
         return distance;
     }
     
-    public void Open(){
-    	binSolenoid.set(open);
+    public void open(){
+    	bidentSolenoid.set(open);
     }
     
-    public void Close(){
-    	binSolenoid.set(close);
+    public void close(){
+    	bidentSolenoid.set(closed);
     }    
     
+    public String solenoidState(){
+    	return bidentSolenoid.get()==open?"open":"closed";
+    }
 }
 

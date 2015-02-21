@@ -35,7 +35,7 @@ public class  BidentClose extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.bident.Close();
+    	Robot.bident.close();
     	//This is closes the bident Arm
     }
 

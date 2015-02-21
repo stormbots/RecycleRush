@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -20,10 +21,19 @@ public class AutonomousCommand extends CommandGroup {
     public  AutonomousCommand() {
         // Add Commands here:
     	//FIXME: Make these parallel and wait for all to quit
+        /*
+        addSequential(new BidentStop());
         addSequential(new BidentHoming(),2);
-        addSequential(new ToteElevatorHoming(),2);
+        addSequential(new BidentStop());
         addSequential(new BidentSet(25));
-        addSequential(new BidentSet(7));
+        */
+        
+        addSequential(new ToteStop());
+        addSequential(new ToteElevatorHoming(),2);
+        addSequential(new ToteStop());
+        addSequential(new ToteSet(3));
+                
+        //addSequential(new BidentSet(7));
 
         //      addSequential(new Command2());
         // these will run in order.
