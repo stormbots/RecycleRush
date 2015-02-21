@@ -217,9 +217,10 @@ public class TalonSRXPIDBase extends Subsystem {
     }
         
     public double set(double inches){
-    	//needs to set the target for the pid controller on the srx
-    	//expects inches
-    	//setpoint=inches;
+    	//todo: Should we use this?
+    	//totePosition=Math.floorDiv((int)inches,(int) TOTEHEIGHT);
+    	
+    	//Convert to ticks and write to the motor
     	setpoint= map(inches,INCHES_FWD,INCHES_REV,ENCODER_TICKS_FWD,ENCODER_TICKS_REV); //TODO do a motor write
     	motor.set(setpoint);
     	return setpoint;

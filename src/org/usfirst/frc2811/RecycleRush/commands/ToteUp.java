@@ -9,17 +9,8 @@ import org.usfirst.frc2811.RecycleRush.Robot;
  * DEPRECIATED. For manual control, use BidentDownManual
  */
 public class  ToteUp extends Command {
-	public double TOTE = 12;
-	public double GAP = 2;
-	public double GRAB = 12;
-	public double GAPPOSITIONONE = TOTE + GAP;
-	public double GAPPOSITIONTWO = 2*TOTE + GAP;
-	public double GAPPOSITIONTHREE = 3*TOTE + GAP;
-	public double GAPPOSITIONFOUR = 4*TOTE + GAP;
-	public double GAPPOSITIONFIVE = 5*TOTE + GAP;
-	public double GAPPOSITIONSIX = 6*TOTE + GAP;
 	
-    public ToteUp() {
+	public ToteUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -29,17 +20,17 @@ public class  ToteUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.toteElevator.setOneToteUp();
 
     }
 
    
     protected void execute() {
-    	Robot.toteElevator.setOneToteUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+    	return Robot.toteElevator.onTarget();
     }
 
     // Called once after isFinished returns true
