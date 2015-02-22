@@ -67,8 +67,8 @@ public class ToteElevator extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	//motor.reverseSensor(true);
-    	motor.reverseOutput(true);
+    	motor.reverseSensor(true);
+    	//motor.reverseOutput(true);
     	double p = .4;
     	double i = 0.005;
     	double d = 0;

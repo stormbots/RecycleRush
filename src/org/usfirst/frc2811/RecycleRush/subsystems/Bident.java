@@ -24,7 +24,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private Solenoid bidentSolenoid;
+	private Solenoid bidentSolenoidA;
+	private Solenoid bidentSolenoidB;
     //TODO remove the ultrasonic sensors because they are declared in the code
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
@@ -58,7 +59,8 @@ public class Bident extends TalonSRXPIDBase {
 
     	//Initialization stuff
     	useMotor( new CANTalon(5) );
-    	bidentSolenoid=new Solenoid(1);
+    	bidentSolenoidA = new Solenoid(0);
+    	bidentSolenoidB=new Solenoid(1);
     	
     	
         //Set up the PID function
@@ -71,9 +73,9 @@ public class Bident extends TalonSRXPIDBase {
     public void init (){
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
-    	//motor.reverseOutput(true);
+    	motor.reverseOutput(true);
     	//not used 
-    	motor.reverseSensor(true);
+    	//motor.reverseSensor(true);
     	double p = .4;
     	double i = 0.001;
     	double d = .0;
@@ -97,10 +99,11 @@ public class Bident extends TalonSRXPIDBase {
     	//Declare constants for use in the main function
         //setHeightInTicks(-9347, -18);//Practice Bot
     	setRange(61,10,0,-9336);//Practice Bot
+    	//setRange(66,9.5,-8,10262);
     	//setHeightInTicks(29990);//Testbench
 
         //setVirtualStops(51,16);
-        setVirtualStops(61,9);
+        //setVirtualStops(61,9);
 
      	/*/FIXME when the ultrasonic.setAutomaicMade(false) or commented out, the robot code doesn't delete, but when the automatic mode is true, the robot
      	 * code is deleted. Why is this??
@@ -143,15 +146,17 @@ public class Bident extends TalonSRXPIDBase {
     }
     
     public void open(){
-    	bidentSolenoid.set(open);
+    	bidentSolenoidA.set(open);
+    	bidentSolenoidB.set(closed);
     }
     
     public void close(){
-    	bidentSolenoid.set(closed);
+    	bidentSolenoidA.set(closed);
+    	bidentSolenoidB.set(open);
     }    
     
     public String solenoidState(){
-    	return bidentSolenoid.get()==open?"open":"closed";
+    	return bidentSolenoidA.get()==open?"open":"closed";
     }
 }
 
