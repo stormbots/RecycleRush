@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToteOut extends Command {
+public class RollersOut extends Command {
 
 	String rollerState = Robot.toteIntake.rollerState;
-    public ToteOut() {
+    public RollersOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,7 +22,7 @@ public class ToteOut extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(rollerState=="in"||rollerState=="off"){
+    	if(rollerState!="out"){
     		Robot.toteIntake.rollersOut();
     	} else {
     		Robot.toteIntake.rollersOff();
@@ -37,6 +37,7 @@ public class ToteOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	rollerState = "out";
     	
     }
 
