@@ -12,14 +12,27 @@
 package org.usfirst.frc2811.RecycleRush.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/**
+/**hooks the tote and move the totes up one tote step
  *
  */
-public class  ToteLineUp extends Command {
-
-    public ToteLineUp() {
+public class  RollersInUntil extends Command {
+	double inches=0;
+	
+	/**
+	 * Turn on rollers until we hit a target range
+	 * @param inches
+	 */
+    public RollersInUntil(double range_inches) {
+    	inches=range_inches;
+    }
+    
+    /**
+     * Turn on rollers until we hit the switch
+     */
+    public RollersInUntil() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -29,19 +42,29 @@ public class  ToteLineUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.toteIntake.rollersIn();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	//switch is at the target distance
+    	 if(inches !=0 && Robot.toteElevator.getDistanceToTote()<inches){
+    		 return true;
+    	 }
+    	
+    	//switch is hit
+    	return Robot.toteElevator.switchIsPressed();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.toteIntake.rollersOff();
     }
 
     // Called when another command which requires one or more of the same
