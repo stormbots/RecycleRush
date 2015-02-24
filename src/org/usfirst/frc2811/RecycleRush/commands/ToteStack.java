@@ -27,9 +27,9 @@ public class ToteStack extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	addSequential (new RollersInUntil(6)); //TODO tune this value
-    	addSequential (new ToteSet(0));
+    	addSequential (new ToteSetTotes(0));
     	addSequential (new RollersInUntil());
-    	addSequential (new ToteSet(1));
+    	addSequential (new ToteSetTotes(1));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

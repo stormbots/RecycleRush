@@ -253,7 +253,7 @@ public class TalonSRXPIDBase extends Subsystem {
 			toteheight = 6;
 		}
 		totePosition=toteheight;
-        set( (getTotes() )*TOTEHEIGHT-GAP);
+        set( toteheight*TOTEHEIGHT-GAP);
         
     }
 

@@ -69,10 +69,10 @@ public class ToteElevator extends TalonSRXPIDBase {
     	setpoint=motor.getPosition();
     	double p = .4;
     	double i = 0.005;
-    	double d = 0;
+    	double d = .001;
     	double f = 0.0;
     	int izone = 1000; 
-    	double ramprate = 6;// who knows what this will do
+    	double ramprate = 0;// who knows what this will do
     	int profile = 0; 
     	motor.setPID(p,i,d,f,izone,ramprate,profile);
     	elevatorSonar.setEnabled(true);
@@ -85,13 +85,7 @@ public class ToteElevator extends TalonSRXPIDBase {
         //setVirtualStops(51,16);
         //setVirtualStops(16,51);
 
-        // Dan fiddling with stuff
-        /*
-        setRange(61,6,2882,-4997);//Practice Bot
-    	motor.reverseSensor(true);
-    	motor.reverseOutput(false);
-    	*/
-        
+            
         //Master Branch, previously working code
         setRange(53,6,8594,0);//Practice Bot
     	motor.reverseSensor(true);

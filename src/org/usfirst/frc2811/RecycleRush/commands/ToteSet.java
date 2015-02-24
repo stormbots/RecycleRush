@@ -14,7 +14,7 @@ package org.usfirst.frc2811.RecycleRush.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2811.RecycleRush.Robot;
 
-/** Move the tote to a specific height (in number of totes)
+/** Move the tote to a specific height (in inches)
  *
  */
 public class  ToteSet extends Command {
