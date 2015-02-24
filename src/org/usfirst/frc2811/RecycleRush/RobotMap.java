@@ -96,10 +96,10 @@ public class RobotMap {
         LiveWindow.addSensor("Chassis", "chassisGyro", chassisGyro);
 
         
-        intakeRollerL = new Talon(5);
+        intakeRollerL = new Talon(4);
         LiveWindow.addActuator("ToteIntake", "ToteRollerL", (Talon) intakeRollerL);
         
-        intakeRollerR = new Talon(6);
+        intakeRollerR = new Talon(5);
         LiveWindow.addActuator("ToteIntake", "ToteRollerR", (Talon) intakeRollerR);
         
         intakeSolenoidL = new Solenoid(0, 0);

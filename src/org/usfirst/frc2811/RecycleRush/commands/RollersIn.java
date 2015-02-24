@@ -19,8 +19,7 @@ import org.usfirst.frc2811.RecycleRush.Robot;
  *
  */
 public class  RollersIn extends Command {
-	String rollerState = Robot.toteIntake.rollerState;
-    public RollersIn() {
+	public RollersIn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -35,11 +34,14 @@ public class  RollersIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(rollerState!="in"){
+    	
+    	
+    	if(Robot.toteIntake.rollerState()!=-1){
     		Robot.toteIntake.rollersIn();
     	} else {
     		Robot.toteIntake.rollersOff();
     	}
+    	
     	
     }
 
@@ -50,7 +52,7 @@ public class  RollersIn extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	rollerState = "in";
+    	
     
     }
 

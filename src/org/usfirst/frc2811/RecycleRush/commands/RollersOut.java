@@ -8,9 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RollersOut extends Command {
-
-	String rollerState = Robot.toteIntake.rollerState;
-    public RollersOut() {
+	
+	public RollersOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,12 +21,12 @@ public class RollersOut extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(rollerState!="out"){
+    	if(Robot.toteIntake.rollerState()!=1){
     		Robot.toteIntake.rollersOut();
     	} else {
     		Robot.toteIntake.rollersOff();
     	}
-    		
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,8 +36,7 @@ public class RollersOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	rollerState = "out";
-    	
+    	    	
     }
 
     // Called when another command which requires one or more of the same
