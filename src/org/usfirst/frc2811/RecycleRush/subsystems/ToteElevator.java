@@ -67,12 +67,10 @@ public class ToteElevator extends TalonSRXPIDBase {
     	motor.changeControlMode(CANTalon.ControlMode.Position);
     	motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);//  changeFeedbackDevice(CANTalon.ControlMode.Position);
     	setpoint=motor.getPosition();
-    	motor.reverseSensor(true);
-    	//motor.reverseOutput(true);
     	double p = .4;
     	double i = 0.005;
     	double d = 0;
-    	double f = 0.1;
+    	double f = 0.0;
     	int izone = 1000; 
     	double ramprate = 6;// who knows what this will do
     	int profile = 0; 
@@ -81,11 +79,24 @@ public class ToteElevator extends TalonSRXPIDBase {
     	elevatorSonar.setAutomaticMode(true);   
     	stop();
         //setRange(61, 6,9360,0);//Practice Bot, before tweaking
-        setRange(53, 6,8594.0,0);//Practice Bot
+        //setRange(61, 6,-4997,2882);//Practice Bot
 
         motor.enableBrakeMode(false);//TODO: Make this a subsystem call properly
         //setVirtualStops(51,16);
         //setVirtualStops(16,51);
+
+        // Dan fiddling with stuff
+        /*
+        setRange(61,6,2882,-4997);//Practice Bot
+    	motor.reverseSensor(true);
+    	motor.reverseOutput(false);
+    	*/
+        
+        //Master Branch, previously working code
+        setRange(53,6,8594,0);//Practice Bot
+    	motor.reverseSensor(true);
+    	motor.reverseOutput(false);
+
 
     }
 

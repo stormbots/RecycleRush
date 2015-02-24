@@ -31,8 +31,11 @@ public class AutonomousCommand extends CommandGroup {
         addSequential(new ToteStop());
         addSequential(new ToteElevatorHoming(),2);
         addSequential(new ToteStop());
-        addSequential(new ToteSet(3));
+        addSequential(new ToteSet(25));
+        //*/
                 
+       // addSequential(new BidentOpen(),2);
+       // addSequential(new BidentClose(),2);
         //addSequential(new BidentSet(7));
 
         //      addSequential(new Command2());
