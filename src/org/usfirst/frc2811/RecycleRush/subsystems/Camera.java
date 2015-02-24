@@ -4,11 +4,27 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 
+
+/*SUBSYSTEM METHODS:
+ * ---These methods work with the network table---
+ * init : checks for connection to the network table
+ * update : gets new values from the network table
+ * initDefaultCommand : runs init method
+ * ---These methods get the raw coordinate data from the network table---
+ * getX : returns the x value of the first object
+ * getY : returns the y value of the first object
+ * getX2 : returns the x value of the second object
+ * getY2 : returns the y value of the second object
+ * 
+*/
+
 public class Camera extends Subsystem { //This subsystem gets object coordinates from RoboRealm
 	private static double x;			//through a network table that converts them from Visual Basic data
 	private static double y;			//to Java data that we can use. It then returns that data in the
 	private static double x2;           //form of the doubles x and y.
 	private static double y2;
+	private static double offY;
+	private static double offX;
 	private static String tableName="SmartDashboard";
 	static NetworkTable server = NetworkTable.getTable(tableName);
 	
@@ -56,26 +72,38 @@ public class Camera extends Subsystem { //This subsystem gets object coordinates
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	
 	public static double getX(){		 //These methods return the values retrieved in the 
 		update();                        //update method as doubles.
 		//System.out.println("Getting X");
-		return x;
+		return Map(x, 0, 640, -320, 320);
 	}
 	public static double getY(){
 		update();
 		//System.out.println("Getting Y");
-		return y;
+		return Map(y, 0, 480, -240, 240);
 	}
 	public static double getX2(){
 		update();
 		//System.out.println("Getting X2");
-		return x2;
+		return Map(x2, 0, 640, -320, 320);
 	}
 	public static double getY2(){
 		update();
 		//System.out.println("Getting Y2");
-		return y2;
+		return Map(y2, 0, 480, -240, 240);
 	}
 	
+	
+	
+	
+	private static double Map( double input, double maximum, double minimum, double outputMax, double outputMin){
+		double output = (input/(maximum-minimum)-minimum/(maximum-minimum))*(outputMax-outputMin)+outputMin;
+		return output; 
+		}
+
 }
 
