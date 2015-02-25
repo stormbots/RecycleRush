@@ -185,15 +185,13 @@ public class Robot extends IterativeRobot {
         
         //print lifter status
         toteElevator.disable();
-        logger.setChannel("TALON", true);
+        logger.setChannel("TOTEELEVATOR", false);
         toteElevator.printStatus();
-        logger.setChannel("TALON", false);
         
         //Bident Status
         bident.disable();
-        logger.setChannel("TALON", false);
+        logger.setChannel("BIDENT", false);
         bident.printStatus();        
-        logger.setChannel("TALON", false);
 
     }
     

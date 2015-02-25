@@ -107,7 +107,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	motor.enableReverseSoftLimit(true);
     	motor.setForwardSoftLimit((int) ticksFWD);
     	motor.setReverseSoftLimit((int) ticksREV);
-    	Robot.logger.channel("TALON","Virtual Limits set to "+ENCODER_TICKS_FWD+"in ("+ENCODER_TICKS_FWD+" ticks) " +ENCODER_TICKS_FWD+"in ("+"ENCODER_TICKS_REV"+"ticks)");
+    	Robot.logger.channel(name,"Virtual Limits set to "+ENCODER_TICKS_FWD+"in ("+ENCODER_TICKS_FWD+" ticks) " +ENCODER_TICKS_FWD+"in ("+"ENCODER_TICKS_REV"+"ticks)");
 	}
     
     /**
@@ -137,19 +137,19 @@ public class TalonSRXPIDBase extends Subsystem {
 			Robot.logger.channel(name,"successfully homed");
 		}
 		else{ 
-			/* TODO: This might be helpful for declaring a max value, and passing it as an argument to home();
-			 * However, it requires additional testing, since reverseInput(true) non-detectable, and will interfere;
+			/*TODO: This might be helpful for declaring a max value, and passing it as an argument to home();
+			//However, it requires additional testing, since reverseInput(true) is non-detectable, and will reverse  the sign of speed();
 			double velocity=0.02;
 			double velocity_actual=speed();
-			if(Math.abs(velocity_actual)>Math.abs(velocity)){
+			if(velocity_actual<velocity){
 				//speed too slow, increase the output voltage in the appropriate direction
 				voltage=motor.getOutputVoltage();
 				voltage=voltage+Math.signum(voltage)*.01;
 			}
-			else if(Math.abs(velocity_actual)<Math.abs(velocity)){
+			else if(velocity_actual>velocity){
 				//speed too fast, increase the output voltage in the appropriate direction
 				voltage=motor.getOutputVoltage();
-				voltage=voltage+Math.signum(voltage)*.01;
+				voltage=voltage-Math.signum(voltage)*.01;
 			}
 			//*/
 			
@@ -177,6 +177,7 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Robot.logger.channel(name,"Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
     	//Robot.logger.channel(name,"Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
     	
+    	//TODO: Make this a raw print statement, or tie in with the name variable
     	Robot.logger.channel(name,"CUR (H["+isHomed+","+isReverseSwitchPressed(false)+isForwardSwitchPressed(false)+"]), (in["+get()+"],t["+getRawEncoder()+"]), limits(in["+INCHES_FWD+","+INCHES_REV+"],t["+ENCODER_TICKS_FWD+","+ENCODER_TICKS_REV+"])"+" S[in("+setpoint+"),t("+motor.getSetpoint()+")]");
 
     }
@@ -274,7 +275,22 @@ public class TalonSRXPIDBase extends Subsystem {
     	motor.set(setpoint);
     	return setpoint;
     } 
+    
+    /**
+     * Returns true if the PID is within 1 inch of the desired setpoint
+     * @return
+     */
+
     public boolean onTarget(){
+    	return onTarget(1);
+    }
+    
+    /**
+     * Returns true if the PID is within tolerance of the setpoint
+     * @param tolerance : Error margin in inches for the function to be considered on target.
+     * @return
+     */
+    public boolean onTarget(double tolerance){
     	//find out where we are
     	//find out where we want to go
     	//find the absolute value of the difference
@@ -283,16 +299,17 @@ public class TalonSRXPIDBase extends Subsystem {
 	    double position =motor.getPosition();
 	    double difference = Math.abs(setpoint - position);
 	
-	    //FIXME Don't need print spam unless debugging
+	    difference=Math.abs(map(difference,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV));
 	    //System.out.println("S: "+setpoint+" P: "+position+ "D:"+difference +" S?" +isIndexSwitchPressed());
-		if (difference<=50){
+	    
+		if (difference<=tolerance){
 			return true;
 			}
-			else {
-				return false;
-			}
+		else {
+			return false;
+		}
     }
-
+    
     public double getTotes(){
     	return totePosition;    	
     }
