@@ -21,20 +21,49 @@ public class AutonomousCommand extends CommandGroup {
     public  AutonomousCommand() {
         // Add Commands here:
     	//FIXME: Make these parallel and wait for all to quit
-        /*
+    	addSequential(new BidentOpen(),2);
+
+    	
+    	addSequential(new BidentStop());
+        addSequential(new BidentHoming(),2);
         addSequential(new BidentStop());
+        addSequential(new BidentSet(25));
+    	
+    	
+    	addSequential(new ToteStop());
+        addSequential(new ToteElevatorHoming(),2);
+        addSequential(new ToteStop());
+        addSequential(new ToteSetTotes(1));
+        addSequential (new ToteStack());
+       
+        
+        /*
+        addSequential (new RollersInUntil(6)); //TODO tune this value
+     	addSequential (new ToteSetTotes(0));
+     	addSequential (new RollersInUntil());
+     	addSequential (new ToteSetTotes(1));
+        */
+     
+     	/*
+     	addSequential(new BidentStop());
         addSequential(new BidentHoming(),2);
         addSequential(new BidentStop());
         addSequential(new BidentSet(25));
         */
-        
-        addSequential(new ToteStop());
+            
+    	/*
+     	addSequential(new ToteStop());
         addSequential(new ToteElevatorHoming(),2);
         addSequential(new ToteStop());
-        addSequential(new ToteSet(3));
-                
-        //addSequential(new BidentSet(7));
-
+        addSequential(new ToteSet(25));
+        */
+        
+    	/*        
+    	addSequential(new BidentOpen(),2);
+    	addSequential(new BidentClose(),2);
+        addSequential(new BidentSet(7));
+    	*/
+    	
         //      addSequential(new Command2());
         // these will run in order.
 

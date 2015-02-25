@@ -113,8 +113,9 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void home(){
     	enable();
-    	//down(); // Additional check for switch
-    	motor.set(Math.signum(ENCODER_TICKS_REV)*ENCODER_TICKS_HEIGHT);
+    	double direction=Math.signum(ENCODER_TICKS_REV);
+    	if(direction==0)direction=1;
+    	motor.set(direction*ENCODER_TICKS_HEIGHT);
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
     		totePosition=0;
@@ -126,11 +127,14 @@ public class TalonSRXPIDBase extends Subsystem {
     }
     
     public void  printStatus(){
-    	Robot.logger.channel("TALON","Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
-    	Robot.logger.channel("TALON","Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
-    	Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
-    	Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
-    	Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
+    	//Robot.logger.channel("TALON","Forward Limits: "+INCHES_FWD+ "\t (ticks: "+ENCODER_TICKS_FWD+")");
+    	//Robot.logger.channel("TALON","Rev Limits    : "+INCHES_REV+ "\t (ticks: "+ENCODER_TICKS_REV+")");
+    	//Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
+    	//Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
+    	//Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
+    	
+    	Robot.logger.channel("TALON","CUR (H["+isHomed+","+isReverseSwitchPressed(false)+isForwardSwitchPressed(false)+"]), (in["+get()+"],t["+getRawEncoder()+"]), limits(in["+INCHES_FWD+","+INCHES_REV+"],t["+ENCODER_TICKS_FWD+","+ENCODER_TICKS_REV+"])"+" S[in("+setpoint+"),t("+motor.getSetpoint()+")]");
+
     }
 
     public boolean isHomed(){
@@ -253,7 +257,7 @@ public class TalonSRXPIDBase extends Subsystem {
 			toteheight = 6;
 		}
 		totePosition=toteheight;
-        set( (getTotes() )*TOTEHEIGHT-GAP);
+        set( toteheight*TOTEHEIGHT-GAP);
         
     }
 

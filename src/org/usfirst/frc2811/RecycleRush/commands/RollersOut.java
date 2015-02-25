@@ -7,24 +7,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BidentToggle extends Command {
-
-    public BidentToggle() {
+public class RollersOut extends Command {
+	
+	public RollersOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.bident.solenoidOpen()!=Robot.bident.open){
-    		Robot.bident.open();
+    	if(Robot.toteIntake.rollerState()!=1){
+    		Robot.toteIntake.rollersOut();
     	} else {
-    		Robot.bident.close();
+    		Robot.toteIntake.rollersOff();
     	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,6 +36,7 @@ public class BidentToggle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	    	
     }
 
     // Called when another command which requires one or more of the same

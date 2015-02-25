@@ -17,7 +17,7 @@ import org.usfirst.frc2811.RecycleRush.Robot;
 import org.usfirst.frc2811.RecycleRush.subsystems.Bident;
 import org.usfirst.frc2811.RecycleRush.subsystems.TalonSRXPIDBase;
 
-/**Move the Bin to a specific height
+/**Move the Bin to a specific height (in inches)
  *
  */
 public class  BidentSet extends Command {
@@ -45,7 +45,7 @@ public class  BidentSet extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.bident.set(toteNum);
+    	Robot.bident.setTotes(toteNum);
     }
 
     // Make this return true when this Command no longer needs to run execute()
