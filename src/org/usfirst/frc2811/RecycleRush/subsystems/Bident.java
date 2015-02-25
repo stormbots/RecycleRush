@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private Solenoid bidentSolenoidA;
-	private Solenoid bidentSolenoidB;
+	private static Solenoid bidentSolenoidA;
+	private static Solenoid bidentSolenoidB;
     //TODO remove the ultrasonic sensors because they are declared in the code
     //FIXME public Ultrasonic binRangeTop = new Ultrasonic(0,1);
     //FIXME public Ultrasonic binRangeBottom = new Ultrasonic(2,3);
@@ -59,8 +59,10 @@ public class Bident extends TalonSRXPIDBase {
 
     	//Initialization stuff
     	useMotor( new CANTalon(5) );
+    	//bidentSolenoidA = new Solenoid(59,0);
+    	//bidentSolenoidB = new Solenoid(59,1);
     	bidentSolenoidA = new Solenoid(0);
-    	bidentSolenoidB=new Solenoid(1);
+    	bidentSolenoidB = new Solenoid(1);
     	
     	
         //Set up the PID function
@@ -155,8 +157,8 @@ public class Bident extends TalonSRXPIDBase {
     	bidentSolenoidB.set(open);
     }    
     
-    public String solenoidState(){
-    	return bidentSolenoidA.get()==open?"open":"closed";
+    public boolean solenoidOpen(){
+    	return bidentSolenoidA.get()==open?true:false;
     }
 }
 
