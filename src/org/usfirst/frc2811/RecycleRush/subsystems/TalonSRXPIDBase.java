@@ -113,8 +113,9 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void home(){
     	enable();
-    	//down(); // Additional check for switch
-    	motor.set(Math.signum(ENCODER_TICKS_REV)*ENCODER_TICKS_HEIGHT);
+    	double direction=Math.signum(ENCODER_TICKS_REV);
+    	if(direction==0)direction=1;
+    	motor.set(direction*ENCODER_TICKS_HEIGHT);
     	if (motor.isRevLimitSwitchClosed()){
     		isHomed = true ;
     		totePosition=0;
