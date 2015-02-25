@@ -137,6 +137,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("PDP", RobotMap.powerPanel);
         SmartDashboard.putData("Accelerometer",RobotMap.onboardAccelerometer);
         SmartDashboard.putData("Compressor", RobotMap.compressor);
+        SmartDashboard.putString("whoami", Robot.oi.getDriver());
         //System.out.println(Robot.toteIntake.rollerState);
     }
 

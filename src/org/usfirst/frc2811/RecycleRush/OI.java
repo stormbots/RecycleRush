@@ -154,6 +154,10 @@ public class OI {
     		return 0;
     	}
     }
+    
+    public String getDriver(){
+    	return driver.toLowerCase();
+    }
         
     public OI(String new_driver){
     	driver=new_driver;
