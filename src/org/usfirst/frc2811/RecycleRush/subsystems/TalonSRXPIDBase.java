@@ -362,7 +362,9 @@ protected double map( double input, double maximum, double minimum, double outpu
 		output=minimum;
 		}
 	return output; 
-	//NO ONE EXPECTS THE SPANISH INQUISITION
+	//NO ONE EXPECTS THE SPANISH INQUISITION!
+	//Amongst our weaponry are such diverse elements as fear, surprise, ruthless efficiency, 
+	//an almost fanatical devotion to "Demon Robot", and nice blue jackets.
 	}
 }
            
