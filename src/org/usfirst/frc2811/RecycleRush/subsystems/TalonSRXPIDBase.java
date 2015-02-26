@@ -130,8 +130,9 @@ public class TalonSRXPIDBase extends Subsystem {
     	//Robot.logger.channel("TALON","Current State(IN) : Target:"+onTarget()+"\tH:"+get());
     	//Robot.logger.channel("TALON","Current State(ticks) : Target:"+onTarget()+ "\tCurrent"+ getRawEncoder() +"\tTarget:"+setpoint);
     	//Robot.logger.channel("TALON","Homing Status : " +isHomed+" Switch:"+isReverseSwitchPressed(false));
-    	
-    	Robot.logger.channel("TALON","CUR (H["+isHomed+","+isReverseSwitchPressed(false)+isForwardSwitchPressed(false)+"]), (in["+get()+"],t["+getRawEncoder()+"]), limits(in["+INCHES_FWD+","+INCHES_REV+"],t["+ENCODER_TICKS_FWD+","+ENCODER_TICKS_REV+"])"+" S[in("+setpoint+"),t("+motor.getSetpoint()+")]");
+    	double inch_setpoint=map(setpoint,ENCODER_TICKS_FWD,ENCODER_TICKS_REV,INCHES_FWD,INCHES_REV);
+
+    	Robot.logger.channel("TALON","CUR (H["+isHomed+","+isReverseSwitchPressed(false)+isForwardSwitchPressed(false)+"]), (in["+get()+"],t["+getRawEncoder()+"]), limits(in["+INCHES_FWD+","+INCHES_REV+"],t["+ENCODER_TICKS_FWD+","+ENCODER_TICKS_REV+"])"+" S[in("+inch_setpoint+"),t("+setpoint+")]");
 
     }
 
