@@ -13,9 +13,21 @@ public class TalonSRXPIDBase extends Subsystem {
 	protected static CANTalon talonSRX;
 	
 	/**
+	 * Used to pass a particular motor object to the base class
+	 */
+	protected void useMotor(CANTalon motor){
+		talonSRX=motor;
+	}
+	
+	/**
 	 * This is used in internal printlines and status messages
 	 */
 	protected String systemName="TalonSRX";
+	
+	protected void setName(String name){
+		systemName=name;
+	}
+	
 	
 	/**
 	 * The value (in inches) that the system will attempt to set itself to. 

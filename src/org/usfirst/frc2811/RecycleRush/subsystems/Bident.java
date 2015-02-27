@@ -45,8 +45,9 @@ public class Bident extends TalonSRXPIDBase {
     	//Don't use this: It requires requires(), which screws up other stuff
         //setDefaultCommand(new BidentMonitor());
     	
-    	systemName="Bident"; //declare the name used for printing in the TalonPIDBase
-    	talonSRX=new CANTalon(5);
+    	setName("Bident"); //declare the name used for printing in the TalonPIDBase
+    	useMotor(new CANTalon(5)); //ensure that we're using the same TalonSRX for all Bident code
+    	
     	talonSRX.changeControlMode(CANTalon.ControlMode.Speed);
     	talonSRX.set(0);
     	//bident.setPID(6, 0.01,0);
