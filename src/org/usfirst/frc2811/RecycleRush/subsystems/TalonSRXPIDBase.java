@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class TalonSRXPIDBase extends Subsystem {
-	protected static CANTalon talonSRX;
+	
+	//FIXME: This should not be public. hacked fix
+	public CANTalon talonSRX;
 	
 	/**
 	 * Used to pass a particular motor object to the base class
@@ -255,7 +257,8 @@ public class TalonSRXPIDBase extends Subsystem {
     }
     public double getHeight(){
     	//TODO: Test function for correctness
-    	return ticksToInches(talonSRX.getPosition()-tickValueOfBottomLimitSwitch);
+    	//return ticksToInches(talonSRX.getPosition()-tickValueOfBottomLimitSwitch);
+    	return -1;
     }
 
     public void setHeight(double inches){

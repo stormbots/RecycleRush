@@ -62,5 +62,9 @@ public class Chassis extends Subsystem {
     		//-Robot.oi.joystick.getZ(), adjustedYaw());
     		Robot.oi.getRotation(),Robot.oi.getGyro());
     }
+    
+    public void autoDrive(double x, double y, double rotation){
+    	robotDrive41.mecanumDrive_Cartesian(x, y, rotation, 0);
+    }
 }
 

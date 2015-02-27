@@ -13,8 +13,8 @@ package org.usfirst.frc2811.RecycleRush.subsystems;
 
 import org.usfirst.frc2811.RecycleRush.RobotMap;
 import org.usfirst.frc2811.RecycleRush.commands.*;
-import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,8 +35,23 @@ public class ToteElevator extends TalonSRXPIDBase {
 
     public void initDefaultCommand() {
     	
-    	systemName="toteElevator";
-    	talonSRX=new CANTalon(4);
+    	setName("toteElevator");
+    	useMotor(new CANTalon(5));
+    	
+    	talonSRX.changeControlMode(CANTalon.ControlMode.Speed);
+    	talonSRX.set(0);
+    	talonSRX.setPID(6, 0.01,0);
+    	talonSRX.setVoltageRampRate(6);
+    	talonSRX.setCloseLoopRampRate(0);
+    	talonSRX.enableBrakeMode(false);
+    	talonSRX.clearStickyFaults();
+    	
+    	talonSRX.reverseOutput(false);
+    	talonSRX.reverseSensor(true);
+    	reverseMotorDirection(true);
+    	    	
+    	setRange(10, 60, 0, 9000);
+    	
         
     	elevatorSonar.setEnabled(true);
     	elevatorSonar.setAutomaticMode(true);   

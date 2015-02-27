@@ -24,10 +24,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Bident extends TalonSRXPIDBase {
     
-	private static Solenoid bidentSolenoidA;
-	private static Solenoid bidentSolenoidB;
+	private static Solenoid bidentSolenoidA = new Solenoid(0);
+	private static Solenoid bidentSolenoidB = new Solenoid(1);
     public boolean open = true;
     public boolean closed = !open;
+    public boolean bidentState = closed;
     private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
@@ -173,8 +174,8 @@ public class Bident extends TalonSRXPIDBase {
     	bidentSolenoidB.set(open);
     }    
     
-    public boolean solenoidOpen(){
+    /*public boolean solenoidOpen(){
     	return bidentSolenoidA.get()==open?true:false;
-    }
+    }*/
 }
 

@@ -70,7 +70,7 @@ public class OI {
 	
 	
 	
-	public static String driver="testing";
+	public static String driver="twodriver";
 
 	public Joystick gamePad;
 	    public JoystickButton buttonG1 ;
@@ -128,6 +128,8 @@ public class OI {
     			return map(gamePad.getY(),1,-1,jdYMap,-jdYMap);
     		case "austin":	
     			return map(leftStick.getY(),1,-1,austinYMap,-austinYMap);
+    		case "twodriver":
+    			return map(leftStick.getY(),1,-1,austinYMap,-austinYMap);
     		case "testing":	
     			return map(gamePad.getY(),1,-1,testingYMap,-testingYMap);
     		case "threeaxis":
@@ -141,6 +143,8 @@ public class OI {
     		case "jd":	
     			return map(gamePad.getX(),1,-1,jdXMap,-jdXMap);
     		case "austin":	
+    			return map(leftStick.getX(),1,-1,austinXMap,-austinXMap);
+    		case "twodriver":
     			return map(leftStick.getX(),1,-1,austinXMap,-austinXMap);
     		case "testing":	
     			return map(gamePad.getX(),1,-1,testingXMap,-testingXMap);
@@ -156,6 +160,8 @@ public class OI {
     			return map(gamePad.getZ(),1,-1,jdZMap,-jdZMap);
     		case "austin":	
     			return map(rightStick.getX(),1,-1,austinZMap,-austinZMap);
+    		case "twodriver":
+    			return map(rightStick.getX(),1,-1,austinZMap,-austinZMap);
     		case "testing":	
     			return map(gamePad.getZ(),1,-1,testingZMap,-testingZMap);
     		case "threeaxis":
@@ -170,6 +176,8 @@ public class OI {
     	case "jd":
     		return Robot.chassis.adjustedYaw();
     	case "austin":
+    		return Robot.chassis.adjustedYaw();
+    	case "twodriver":
     		return Robot.chassis.adjustedYaw();
     	case "testing":
     		return 0;
@@ -193,10 +201,11 @@ public class OI {
     public OI(String new_driver){
     	driver=new_driver;
     	if(driver=="default"){
-    		driver = "jd";
+    		driver = "twodriver";
     	}
         SmartDashboard.putData("SetDriver(JD)", new SwitchDriver("jd"));
         SmartDashboard.putData("SetDriver(Austin)", new SwitchDriver("austin"));
+        SmartDashboard.putData("SetDriver(Two Drivers)", new SwitchDriver("twodriver"));
         SmartDashboard.putData("SetDriver(Test Mode)", new SwitchDriver("testing"));
     		
     	switch(driver.toLowerCase()){
@@ -216,16 +225,18 @@ public class OI {
 		        buttonG4.whenPressed(new RollersOut());
 		        	        
 		        buttonG5  = new JoystickButton(gamePad,  5);
-		        buttonG5.whenPressed(new BidentUp());
-		        		        
+		        buttonG5.whileHeld(new BidentSetVelocity(100));
+		        buttonG5.whenReleased(new BidentSetVelocity(0));
+		        
 		        buttonG6  = new JoystickButton(gamePad,  6);
-		        buttonG6.whenPressed(new ToteUp());
+		        //buttonG6.whenPressed(new ToteUp());
 		        		        
 		        buttonG7  = new JoystickButton(gamePad,  7);
-		        buttonG7.whenPressed(new BidentDown());
+		        buttonG5.whileHeld(new BidentSetVelocity(-100));
+		        buttonG5.whenReleased(new BidentSetVelocity(0));
 		        		        
 		        buttonG8  = new JoystickButton(gamePad,  8);
-		        buttonG8.whenPressed(new ToteDown());
+		        //buttonG8.whenPressed(new ToteDown());
 		        		        
 		        buttonG9  = new JoystickButton(gamePad,  9);
 		        
@@ -302,7 +313,47 @@ public class OI {
     	        
     	        
     	    break;
-    		    
+    		
+    		case "twodriver":
+    			gamePad = new Joystick(0);
+    			leftStick = new Joystick(1);
+    			rightStick = new Joystick(2);
+    			
+		        buttonG1  = new JoystickButton(gamePad,  1);
+		        buttonG1.whenPressed(new BidentToggle());
+		               
+		        buttonG2  = new JoystickButton(gamePad,  2);
+		        buttonG2.whenPressed(new RollersIn());
+		        		        
+		       // buttonG3  = new JoystickButton(gamePad,  3);
+		       // buttonG3.whenPressed(new ToteStack());
+		        
+		        buttonG4  = new JoystickButton(gamePad,  4);
+		        buttonG4.whenPressed(new RollersOut());
+		        	        
+		        buttonG5  = new JoystickButton(gamePad,  5);
+		        buttonG5.whileHeld(new BidentSetVelocity(200));
+		        buttonG5.whenReleased(new BidentSetVelocity(0));
+		        
+		        buttonG6  = new JoystickButton(gamePad,  6);
+		        buttonG6.whileHeld(new ToteSetVelocity(200));
+		        buttonG6.whenReleased(new ToteSetVelocity(0));
+		        
+		        buttonG7  = new JoystickButton(gamePad,  7);
+		        buttonG7.whileHeld(new BidentSetVelocity(-200));
+		        buttonG7.whenReleased(new BidentSetVelocity(0));
+		        		        
+		        buttonG8  = new JoystickButton(gamePad,  8);
+		        buttonG8.whileHeld(new ToteSetVelocity(-200));
+		        buttonG8.whenReleased(new ToteSetVelocity(0));
+		        		        
+		        buttonG9  = new JoystickButton(gamePad,  9);
+		        
+		        
+		        buttonG10 = new JoystickButton(gamePad, 10);
+		    
+    	    
+    	    
     		case "testing":
     			gamePad = new Joystick(0);
     			
