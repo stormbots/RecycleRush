@@ -175,7 +175,7 @@ public class TalonSRXPIDBase extends Subsystem {
 
     /**
      * Set the robot velocity in raw ticks. This should be used by every function in this class, but not used externally. 
-     * @param ticks
+     * @param ticks travelled every 10 ms.
      */
     public void setTickVelocity(double ticks){
     	if (reverseMotorDirection)ticks= -ticks;
@@ -194,7 +194,7 @@ public class TalonSRXPIDBase extends Subsystem {
      */
     public void up(double inchesPerSecond){
     	//TODO: Test this, then use them exclusively when setting directions to the robot
-    	double ticksPerSecond=inchesPerSecond*ticksPerInch()*100;
+    	double ticksPerSecond=inchesPerSecond*ticksPerInch()/100;
     	
     	//set(speed) requires units of ticks/10ms, 
     	setTickVelocity(ticksPerSecond);

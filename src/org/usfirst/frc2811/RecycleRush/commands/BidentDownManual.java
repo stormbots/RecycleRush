@@ -5,8 +5,7 @@ import org.usfirst.frc2811.RecycleRush.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * DOES NOT USE PID. 
- * Only for use with whileHeld buttons in OI
+ * 
  */
 public class BidentDownManual extends Command {
 
