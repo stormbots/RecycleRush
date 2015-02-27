@@ -36,7 +36,9 @@ public class ToteElevator extends TalonSRXPIDBase {
     public void initDefaultCommand() {
     	
     	setName("toteElevator");
-    	useMotor(new CANTalon(5));
+    	useMotor(new CANTalon(4));//correct ID 
+    	//useMotor(new CANTalon(5));//FIXME: faking mirror mode for now to 
+    	
     	
     	talonSRX.changeControlMode(CANTalon.ControlMode.Speed);
     	talonSRX.set(0);

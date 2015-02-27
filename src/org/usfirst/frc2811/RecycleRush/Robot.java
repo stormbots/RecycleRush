@@ -72,10 +72,6 @@ public class Robot extends IterativeRobot {
         toteIntake = new ToteIntake();
         toteElevator = new ToteElevator();
         bident = new Bident();
-        //FIXME: Hack fix for auto
-        toteElevator.talonSRX=new CANTalon(4) ;
-        //bident.talonSRX=new CANTalon(5) ;
-        
         map = new Map();
         lights = new Lights();
         underGlow = new UnderGlow();
@@ -175,6 +171,15 @@ public class Robot extends IterativeRobot {
 
     public void testInit(){
     	oi = new OI("testing");
+    	
+    	
+    	if(toteElevator.talonSRX==bident.talonSRX){
+    		System.out.println("Yup, they're the same, what the heck");;
+    	}
+    	else{
+    		System.out.println(toteElevator.talonSRX);;
+    		System.out.println(bident.talonSRX);;
+    	}
     	
     	System.out.println("Bident::Ticks per inch "+bident.ticksPerInch());
     	System.out.println("Bident::Current height "+bident.getHeight());
