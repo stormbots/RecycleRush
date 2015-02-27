@@ -24,7 +24,7 @@ public class SwitchDriver extends Command {
 	    	break;
 			
 	    	default: 
-				next_driver="jd";
+				next_driver="twodrivers";
     	}
 
     }
