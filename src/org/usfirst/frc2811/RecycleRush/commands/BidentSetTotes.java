@@ -36,21 +36,16 @@ public class  BidentSetTotes extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//figure out our current height in totes, and go up or down as needed.
-    	//NEED :Current height (in totes)
-    	//need special values to detect;
-    	//-1 for bottom
-    	//100 for up
+    	Robot.bident.setTotePosition(toteNum);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.bident.set(toteNum);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.bident.onTarget();
+        return Robot.bident.isOnTarget();
     }
 
     // Called once after isFinished returns true

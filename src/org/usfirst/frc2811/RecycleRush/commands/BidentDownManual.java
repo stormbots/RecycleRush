@@ -12,11 +12,12 @@ public class BidentDownManual extends Command {
 
     public BidentDownManual() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.bident);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.bident.disable();
+
 
     }
 
@@ -32,12 +33,13 @@ public class BidentDownManual extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Down Exited");
+    	Robot.bident.enable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.bident.enable();
 
     }
 }

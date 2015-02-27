@@ -11,7 +11,6 @@ public class BidentStop extends Command {
 
     public BidentStop() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.bident);
     }
 
     // Called just before this Command runs the first time
