@@ -166,6 +166,20 @@ public class Robot extends IterativeRobot {
 
     public void testInit(){
     	oi = new OI("testing");
+    	
+    	System.out.println("Bident::Ticks per inch "+bident.ticksPerInch());
+    	System.out.println("Bident::Current height "+bident.getHeight());
+    	System.out.println("Bident::Current Tote Position "+bident.getTotePosition());
+        System.out.println("Bident:: Bottom switch state" + Robot.bident.isBottomSwitchPressed());
+        System.out.println("Bident:: Top switch state" + Robot.bident.isTopSwitchPressed());
+
+    	System.out.println("toteElevator::Ticks per inch "+toteElevator.ticksPerInch());
+    	System.out.println("toteElevator::Current height "+toteElevator.getHeight());
+        System.out.println("toteElevator:: Bottom switch state" + Robot.toteElevator.isBottomSwitchPressed());
+        System.out.println("toteElevator:: Top switch state" + Robot.toteElevator.isTopSwitchPressed());
+        System.out.println("");
+        
+    	
     }
     
     
