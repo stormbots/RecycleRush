@@ -49,9 +49,10 @@ public class Bident extends TalonSRXPIDBase {
     	setName("Bident"); //declare the name used for printing in the TalonPIDBase
     	useMotor(new CANTalon(5)); //ensure that we're using the same TalonSRX for all Bident code
     	
+    	talonSRX.setProfile(0);
     	talonSRX.changeControlMode(CANTalon.ControlMode.Speed);
     	talonSRX.set(0);
-    	//bident.setPID(6, 0.01,0);
+    	talonSRX.setPID(6, 0.01,0);
     	talonSRX.setVoltageRampRate(6);
     	talonSRX.setCloseLoopRampRate(0);
     	talonSRX.enableBrakeMode(false);
