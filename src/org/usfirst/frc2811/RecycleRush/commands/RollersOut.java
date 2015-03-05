@@ -22,14 +22,11 @@ public class RollersOut extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if( Robot.toteIntake.rollerState() == 1){
+    	if(Robot.toteIntake.rollerState() == 1){
     		Robot.toteIntake.rollersOff();
-    		}
-    	else{
-    		
+    	}else{
     		Robot.toteIntake.rollersOut();    	
-	
-    	}
+	   	}
     	
     }
 
