@@ -29,7 +29,7 @@ public class Bident extends TalonSRXPIDBase {
     public boolean open = true;
     public boolean closed = !open;
     public boolean bidentState = closed;
-    private Ultrasonic bidentSonarIntake = new Ultrasonic(0,1);
+    private Ultrasonic bidentSonarIntake = new Ultrasonic(10,11);
     private Ultrasonic bidentSonarBumper = new Ultrasonic(2,3);
 
 	/**

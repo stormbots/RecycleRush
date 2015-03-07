@@ -173,15 +173,7 @@ public class Robot extends IterativeRobot {
     	oi = new OI("testing");
     	
     	
-    	if(toteElevator.talonSRX==bident.talonSRX){
-    		System.out.println("Yup, they're the same, what the heck");;
-    	}
-    	else{
-    		System.out.println(toteElevator.talonSRX);;
-    		System.out.println(bident.talonSRX);;
-    	}
-    	
-    	System.out.println("Bident::Ticks per inch "+bident.ticksPerInch());
+    /*	System.out.println("Bident::Ticks per inch "+bident.ticksPerInch());
     	System.out.println("Bident::Current height "+bident.getHeight());
     	System.out.println("Bident::Current Tote Position "+bident.getTotePosition());
         System.out.println("Bident:: Bottom switch state" + Robot.bident.isBottomSwitchPressed());
@@ -190,7 +182,9 @@ public class Robot extends IterativeRobot {
     	System.out.println("toteElevator::Ticks per inch "+toteElevator.ticksPerInch());
     	System.out.println("toteElevator::Current height "+toteElevator.getHeight());
         System.out.println("toteElevator:: Bottom switch state" + Robot.toteElevator.isBottomSwitchPressed());
-        System.out.println("toteElevator:: Top switch state" + Robot.toteElevator.isTopSwitchPressed());
+        System.out.println("toteElevator:: Top switch state" + Robot.toteElevator.isTopSwitchPressed());//*/
+        System.out.println("Chassis:: Raw Encoder Ticks FrontRight" + Robot.chassis.frontRightEncoder.get());
+        System.out.println("Chassis:: Raw Encoder Ticks BackLeft" + Robot.chassis.backLeftEncoder.get());
         System.out.println("");
         
     	
@@ -236,7 +230,7 @@ public class Robot extends IterativeRobot {
         
         //print lifter status
         toteElevator.disable();
-        logger.setChannel("TALON", true);
+        logger.setChannel("TALON", false);
         toteElevator.printStatus();
         logger.setChannel("TALON", false);
         

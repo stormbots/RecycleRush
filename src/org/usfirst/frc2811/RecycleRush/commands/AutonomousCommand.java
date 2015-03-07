@@ -49,7 +49,8 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new BidentSetVelocity(200));
     	addSequential(new WaitCommand(1.5));
     	addSequential(new BidentSetVelocity(0));
-    	addSequential(new AutoDrive(0, -.6, 0, 1.5));
+    	addSequential(new AutoDriveStraightUntil(48),4);//FIXME test timeout.
+    	addSequential(new AutoDriveStraightUntil(90),4);
     	//addSequential(new AutoDrive(0, 0, .6, .5));
     	//addSequential(new BidentOpen());
 
