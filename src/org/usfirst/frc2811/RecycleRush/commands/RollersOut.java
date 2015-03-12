@@ -11,7 +11,7 @@ public class RollersOut extends Command {
 	
 	public RollersOut() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.toteIntake);
     }
 
     // Called just before this Command runs the first time
@@ -21,11 +21,12 @@ public class RollersOut extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.toteIntake.rollerState()!=1){
-    		Robot.toteIntake.rollersOut();
-    	} else {
+    	
+    	if(Robot.toteIntake.rollerState() == 1){
     		Robot.toteIntake.rollersOff();
-    	}
+    	}else{
+    		Robot.toteIntake.rollersOut();    	
+	   	}
     	
     }
 

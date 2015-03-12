@@ -32,8 +32,8 @@ public class  ToteSetTotes extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.toteElevator.setTotes(totes);
-    	System.out.println("Moving to " + totes + "totes");
+    	//Robot.toteElevator.setTotePosition(totes);
+    	System.out.println("ERROR::ToteSetTotes::Not yet implimented");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,12 +43,12 @@ public class  ToteSetTotes extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.toteElevator.onTarget();
+        return Robot.toteElevator.isOnTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("ON TARGET!!");
+    	System.out.println("toteElevator::toteSetTotes::OnTarget");
     }
 
     // Called when another command which requires one or more of the same
