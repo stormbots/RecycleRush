@@ -29,7 +29,7 @@ public class ToteIntake extends Subsystem {
     Solenoid toteSolenoidL = RobotMap.intakeSolenoidL;
     Solenoid toteSolenoidR = RobotMap.intakeSolenoidR;
     
-    private double defaultSpeed = .4;
+    private double defaultSpeed = 0.4;
 
     //TODO these true and false for open/close functions may change
     private boolean open = true;
@@ -95,7 +95,30 @@ public class ToteIntake extends Subsystem {
     	return Robot.toteElevator.switchIsPressed();
     	//TODO Make sure this is the correct reading for have a tote
     }
+    public void rollersInToggle (){
+    	if( rollerState() == 0){
+    		rollersIn();   
+    		} 
+    		
+    	else{
+    		rollersOff();
+    }
+    }
 
+    	
+    
+    public void rollersOutToggle(){
+    	if( rollerState() == 0){
+    		rollersOut();    	
+    		System.out.println("Rollers Out Toggle");
 
+    		}
+    	else{
+    		rollersOff();
+    		System.out.println("Rollers Out Toggle");
+
+    }
+    }
+    
 }
 

@@ -21,11 +21,46 @@ public class AutonomousCommand extends CommandGroup {
     public  AutonomousCommand() {
         // Add Commands here:
     	//FIXME: Make these parallel and wait for all to quit
-    	addSequential(new BidentOpen(),2);
+    	
+    	double moveduration=1;
+    	double holdduration=1;
+
+    	//* TEST ONE: Move up and down a short bit, just to test things
+    	/*double testvelocity=100;
+    	addSequential(new BidentSetVelocity(0));
+    	addSequential(new WaitCommand(holdduration));
+    	
+    	//Moves practice bot bident upward
+    	addSequential(new BidentSetVelocity(testvelocity));
+    	addSequential(new WaitCommand(moveduration));
+    	
+    	addSequential(new BidentSetVelocity(0));
+    	addSequential(new WaitCommand(holdduration));
+    	
+    	//Moves practice bot bident downward
+    	addSequential(new BidentSetVelocity(-testvelocity));
+    	addSequential(new WaitCommand(moveduration));
+    	
+    	addSequential(new BidentSetVelocity(0),1);
+    	*/
+    	addSequential(new BidentOpen());
+    	addSequential(new BidentClose());
+    	addSequential(new WaitCommand(1));
+    	addSequential(new BidentSetVelocity(200));
+    	addSequential(new WaitCommand(1.5));
+    	addSequential(new BidentSetVelocity(0));
+    	addSequential(new AutoDriveStraightUntil(30),4);//FIXME test timeout.
+    	addSequential(new AutoDriveRotateUntil(90),1.6);
+    	//addSequential(new AutoDrive(0, 0, .6, .5));
+    	//addSequential(new BidentOpen());
 
     	
+    	
+    	/*
+    	addSequential(new BidentOpen(),2);
+    	
     	addSequential(new BidentStop());
-        addSequential(new BidentHoming(),2);
+        addSequential(new BidentHome(),2);
         addSequential(new BidentStop());
         addSequential(new BidentSetTotes(1));
     	
@@ -35,7 +70,7 @@ public class AutonomousCommand extends CommandGroup {
         addSequential(new ToteStop());
         addSequential(new ToteSetTotes(1));
         addSequential (new ToteStack());
-       
+       	*/
         
         /*
         addSequential (new RollersInUntil(6)); //TODO tune this value
@@ -44,21 +79,7 @@ public class AutonomousCommand extends CommandGroup {
      	addSequential (new ToteSetTotes(1));
         */
      
-     	/*
-     	addSequential(new BidentStop());
-        addSequential(new BidentHoming(),2);
-        addSequential(new BidentStop());
-        addSequential(new BidentSet(25));
-        */
-            
-    	/*
-     	addSequential(new ToteStop());
-        addSequential(new ToteElevatorHoming(),2);
-        addSequential(new ToteStop());
-        addSequential(new ToteSet(25));
-        */
-        
-    	/*        
+     	/*        
     	addSequential(new BidentOpen(),2);
     	addSequential(new BidentClose(),2);
         addSequential(new BidentSet(7));

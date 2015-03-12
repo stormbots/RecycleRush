@@ -16,6 +16,7 @@ public class ToteDownManual extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.toteElevator.disable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,10 +31,12 @@ public class ToteDownManual extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.toteElevator.enable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.toteElevator.enable();
     }
 }

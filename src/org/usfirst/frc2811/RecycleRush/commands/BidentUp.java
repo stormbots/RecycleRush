@@ -21,10 +21,10 @@ public class BidentUp extends Command {
 	protected void initialize() {
 		Robot.logger.setDebug(true);
 		Robot.logger.debug("bident tote up init");
-		Robot.logger.debug(""+Robot.bident.getTotes());
-	    Robot.bident.setOneToteUp();
-	    System.out.println(Robot.bident.getTotes());
-	   Robot.logger.debug(""+Robot.bident.getTotes());
+		Robot.logger.debug(""+Robot.bident.getTotePosition());
+	    Robot.bident.goUpOneTote();
+	    System.out.println(Robot.bident.getTotePosition());
+	   Robot.logger.debug(""+Robot.bident.getTotePosition());
 	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -33,12 +33,12 @@ public class BidentUp extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.bident.onTarget();
+        return Robot.bident.isOnTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println(Robot.bident.getTotes());
+    	System.out.println(Robot.bident.getTotePosition());
     }
 
     // Called when another command which requires one or more of the same

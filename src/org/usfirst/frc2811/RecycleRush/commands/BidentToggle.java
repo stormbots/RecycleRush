@@ -20,10 +20,12 @@ public class BidentToggle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.bident.solenoidOpen()!=Robot.bident.open){
+    	if(Robot.bident.bidentState!=Robot.bident.open){
     		Robot.bident.open();
+    		Robot.bident.bidentState=!Robot.bident.bidentState;
     	} else {
     		Robot.bident.close();
+    		Robot.bident.bidentState=!Robot.bident.bidentState;
     	}
     }
 
