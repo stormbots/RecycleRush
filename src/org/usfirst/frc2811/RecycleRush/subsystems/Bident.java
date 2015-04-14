@@ -26,7 +26,7 @@ public class Bident extends TalonSRXPIDBase {
     
 	private static Solenoid bidentSolenoidA = new Solenoid(0);
 	private static Solenoid bidentSolenoidB = new Solenoid(1);
-    public boolean open = true;
+    public boolean open = false;
     public boolean closed = !open;
     public boolean bidentState = closed;
     private Ultrasonic bidentSonarIntake = new Ultrasonic(10,11);
