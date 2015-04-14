@@ -29,7 +29,7 @@ public class ToteIntake extends Subsystem {
     Solenoid toteSolenoidL = RobotMap.intakeSolenoidL;
     Solenoid toteSolenoidR = RobotMap.intakeSolenoidR;
     
-    private double defaultSpeed = 0.4;
+    private double defaultSpeed = 0.7;
 
     //TODO these true and false for open/close functions may change
     private boolean open = true;
@@ -79,7 +79,7 @@ public class ToteIntake extends Subsystem {
     }
     
     public void rollersOut(){
-    	rollersOut(defaultSpeed);
+    	rollersOut(defaultSpeed/2);
     }
     
     public void rollersOut(double speed){
